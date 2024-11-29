@@ -1,8 +1,8 @@
-package src.Engines;
+package Engines;
 import ContentControl.Movie;
 import ContentControl.Content;
-import src.AccountControl.*;
-import src.ContentControl.*;
+import AccountControl.*;
+import ContentControl.*;
 
 public class RecommendationEngine {
     private User user;

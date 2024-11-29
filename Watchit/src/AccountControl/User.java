@@ -1,4 +1,4 @@
-package src.AccountControl;
+package AccountControl;
 
 import Subscription.CreditCard;
 import Subscription.Subscription;
