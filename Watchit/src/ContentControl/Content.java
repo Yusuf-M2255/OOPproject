@@ -52,7 +52,7 @@ abstract public class Content {
         RateCounter--;
         rating[UserID] = 0;
     }
-    public float GetRate(){
+    public float TotalRate(){
         return (Rate_Sum/RateCounter);
     }
     abstract void AddCast();
