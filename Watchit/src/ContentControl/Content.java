@@ -40,7 +40,9 @@ abstract public class Content {
     }
 
     public void AddRate(int UserID, float rate){
+        Rate_Sum -= rating[UserID];
         rating[UserID] = rate;
+        Rate_Sum += rate;
         if(rating[UserID] == 0)
             RateCounter++;
     }
