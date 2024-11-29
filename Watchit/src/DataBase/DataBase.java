@@ -17,13 +17,13 @@ public class DataBase {
             "Musical", "Crime", "Historical", "War", "Western"
     };
     public AdminsData adminsData= null;
-    public User CurrentUser = null;
-    public List<Account> accounts = null;
+    public Account CurrentUser = null;
+    public AccountsData accountsData= null;
     public MoviesData moviesData = null;
     public UsersData usersData = null;
     public WatchRecordData watchRecordData = null;
     public SeriesData seriesData = null;
-    public List<Content> contents = null;
+    public ContentsData contentsData = null;
     public DirctorsData DirectorsData = null;
     public CastMembersData castMembersData = null;
     private DataBase() {
@@ -34,12 +34,8 @@ public class DataBase {
         watchRecordData = new WatchRecordData();
         DirectorsData = new DirctorsData();
         castMembersData = new CastMembersData();
-        accounts = new ArrayList<>();
-        contents = new ArrayList<>();
-        //contents.addAll(moviesData.getDataAsList());
-        //contents.addAll(seriesData.getDataAsList());
-        accounts.addAll(usersData.getDataAsList());
-        //accounts.addAll(adminsData.getDataAsList())
+        accountsData = new AccountsData();
+        contentsData = new ContentsData();
     }
     public static DataBase getInstance() {
         if(dataBase == null)
@@ -64,7 +60,7 @@ public class DataBase {
         Email = sc.next();
         System.out.print("Enter your password: ");
         Password = sc.next();
-        User user = DataBase.getInstance().usersData.getDataByEmail(Email);
+        Account user = DataBase.getInstance().accountsData.getDataByEmail(Email);
         if(user==null){
             System.out.println("!!!Email is not Found");
         }else{
@@ -90,7 +86,7 @@ public class DataBase {
         UserName = input.nextLine();
         System.out.print("Enter Email: ");
         Email = input.nextLine();
-        while(DataBase.getInstance().usersData.getDataByEmail(Email)!=null){
+        while(DataBase.getInstance().accountsData.getDataByEmail(Email)!=null){
             System.out.println("User already exists if you want back enter y");
             char c = input.nextLine().charAt(0);
             if(c=='y'){
@@ -124,6 +120,7 @@ public class DataBase {
         }while(j!=-1);
         DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,new ArrayList<>(),new ArrayList<>()));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
+        accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));
         return true;
     }
 }
