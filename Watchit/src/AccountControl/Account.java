@@ -1,4 +1,4 @@
-package AccountControl;
+package src.AccountControl;
 
 public class Account {
     private String userName,firstName,lastName,email,password;
