@@ -1,4 +1,4 @@
 package ContentControl;
 
-public class Record {
+public class WatchRecord {
 }
