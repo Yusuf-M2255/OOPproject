@@ -18,7 +18,7 @@ public class DataBase {
     private List<Admin> admins = null;
     private List<Account> accounts = null;
     private MoviesData moviesData = null;
-    private UsersData usersData = null;
+    public UsersData usersData = null;
     private SeriesData seriesData = null;
     private List<Content> contents = null;
     private List<WatchRecord> Records = null;
@@ -34,8 +34,7 @@ public class DataBase {
         CastMembers = new ArrayList<>();
         accounts = new ArrayList<>();
         contents = new ArrayList<>();
-        dataBase = new DataBase();
-        Load();
+        //Load();
     }
     public void ContentLoad(){
 //        contents.addAll(moviesData.getDataAsList());
@@ -43,7 +42,7 @@ public class DataBase {
     }
     public static DataBase getInstance() {
         if(dataBase == null)
-            return new DataBase();
+            return dataBase = new DataBase();
         return dataBase;
     }
 

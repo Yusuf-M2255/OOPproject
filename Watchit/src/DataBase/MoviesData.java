@@ -13,8 +13,9 @@ public class MoviesData implements Data<Movie>{
     private List<Movie> movies =null ;
     public MoviesData(){
         movies = new ArrayList<>();
-        LoadData();
+        //LoadData();
     }
+
     /**
      * get Data of movies from files
      * its throws messages when files not founded or any other error
@@ -83,7 +84,10 @@ public class MoviesData implements Data<Movie>{
         return movies.toArray(new Movie[0]);
     }
 
-    @Override
+    /**
+     * function that return all movies in application as List
+     * @return List<Movie>
+     */
     public List<Movie> getDataAsList() {
         return movies;
     }

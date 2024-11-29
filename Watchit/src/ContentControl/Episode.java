@@ -1,5 +1,7 @@
 package ContentControl;
 
+import java.util.Date;
+
 public class Episode {
   // Variables
   private int episodeNumber;

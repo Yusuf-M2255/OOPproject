@@ -2,10 +2,13 @@ package DataBase;
 
 import AccountControl.User;
 import ContentControl.Series;
+import Subscription.CreditCard;
+import Subscription.Subscription;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,9 +24,33 @@ public class UsersData implements Data<User> {
      * its throws messages when files not founded or any other error
      */
     public void LoadData(){
-        File seriesFile = new File("/users.txt");
+        File userFile = new File("users.txt");
         try {
-            Scanner scanner = new Scanner(seriesFile);
+            Scanner scanner = new Scanner(userFile);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+                String Username = data[0];
+                String Password = data[1];
+                String Email = data[2];
+                String FirstName = data[3];
+                String LastName = data[4];
+                Long size = Long.parseLong(data[5]);
+                List<String>history = new ArrayList<>(),fav = new ArrayList<>(),watchLater = new ArrayList<>();
+                int j = 6;
+                for (int i = 0; i < size; i++) {
+                    history.add(data[j++]);
+                }
+                size = Long.parseLong(data[j++]);
+                for (int i = 0; i < size; i++) {
+                    fav.add(data[j++]);
+                }
+                size = Long.parseLong(data[j++]);
+                for (int i = 0; i < size; i++) {
+                    watchLater.add(data[j++]);
+                }
+                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,watchLater,history));
+            }
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -38,9 +65,41 @@ public class UsersData implements Data<User> {
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File seriesFile = new File("/series.txt");
+        File userFile = new File("users.txt");
         try {
-            FileOutputStream fos = new FileOutputStream(seriesFile);
+            userFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(userFile);
+            for (User user : users) {
+                fos.write(user.getUserName().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(user.getPassword().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(user.getEmail().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(user.getFirstName().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(user.getLastName().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(Integer.valueOf(user.getHistory().size()).toString().getBytes());
+                fos.write(" ".getBytes());
+                for (String history : user.getHistory()) {
+                    fos.write(history.getBytes());
+                    fos.write(" ".getBytes());
+                }
+                fos.write(Integer.valueOf(user.getFavoriteGenres().size()).toString().getBytes());
+                fos.write(" ".getBytes());
+                for (String favoriteGenre : user.getFavoriteGenres()) {
+                    fos.write(favoriteGenre.getBytes());
+                    fos.write(" ".getBytes());
+                }
+                fos.write(Integer.valueOf(user.getWatchLater().size()).toString().getBytes());
+                fos.write(" ".getBytes());
+                for (String watchLater : user.getWatchLater()) {
+                    fos.write(watchLater.getBytes());
+                    fos.write(" ".getBytes());
+                }
+                fos.write(System.lineSeparator().getBytes());
+            }
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -84,7 +143,10 @@ public class UsersData implements Data<User> {
         return users.toArray(new User[0]);
     }
 
-    @Override
+    /**
+     * function that return all Users in application as List
+     * @return List<User>
+     */
     public List<User> getDataAsList() {
         return users;
     }

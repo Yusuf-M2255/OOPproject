@@ -19,12 +19,12 @@ public class CastMember {
         this.socialMediaLink = socialMediaLink;
     }
    public void joinMovie(String movie){
-    String[] newMoviesArray = new String[movies.length + 1];
-    for (int i = 0; i < movies.length; i++) {
-        newMoviesArray[i] = movies[i];
-    }
-    newMoviesArray[movies.length] = movie;
-    movies = newMoviesArray;
+        String[] newMoviesArray = new String[movies.length + 1];
+        for (int i = 0; i < movies.length; i++) {
+            newMoviesArray[i] = movies[i];
+        }
+        newMoviesArray[movies.length] = movie;
+        movies = newMoviesArray;
    }
-    
+
 }

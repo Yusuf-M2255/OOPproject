@@ -2,8 +2,8 @@ package AccountControl;
 
 public class Account {
     private String userName,firstName,lastName,email,password;
-    private long ID;
-    private static long cnt=1;
+    private Long ID;
+    private static Long cnt=(long)1;
     public Account(String userName,String firstName,String lastName,String email,String password) {
         this.userName = userName;
         this.firstName = firstName;
@@ -28,10 +28,10 @@ public class Account {
     public String getPassword() {
         return password;
     }
-    public long getID() {
+    public Long getID() {
         return ID;
     }
     void Reset(){
-        cnt = 0;
+        cnt = (long) 0;
     }
 }

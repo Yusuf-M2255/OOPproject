@@ -1,22 +1,22 @@
 package Cast;
 
 import java.util.Date;
-
+import ContentControl.Content;
 public class Director {
     public String firstName;
     public String lastName;
     public Date dateOfBirth;
     public String gender;
-    public Movie [] movies;
+    public String[] Contents;
     public String nationality;
     public String socialMediaLink;
 
-    public Director(String firstName, String lastName, Date dateOfBirth, String gender, Movie[] movies, String nationality, String socialMediaLink) {
+    public Director(String firstName, String lastName, Date dateOfBirth, String gender, String[] Contents, String nationality, String socialMediaLink) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.movies = movies;
+        this.Contents = Contents;
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
     }

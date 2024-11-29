@@ -1,18 +1,18 @@
 package DataBase;
 
-import ContentControl.Series;
+import ContentControl.WatchRecord;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import java.util.Scanner;
 
-public class SeriesData implements Data<Series> {
-    List<Series>series = null;
-    public SeriesData() {
-        series = new ArrayList<>();
+public class WatchRecordData implements Data<WatchRecord> {
+    List<WatchRecord> watchRecords = null;
+    public  WatchRecordData(){
+        watchRecords = new ArrayList<>();
         //LoadData();
     }
     /**
@@ -20,9 +20,9 @@ public class SeriesData implements Data<Series> {
      * its throws messages when files not founded or any other error
      */
     public void LoadData(){
-        File seriesFile = new File("/series.txt");
+        File watchRecordFile = new File("/watchRecord.txt");
         try {
-            Scanner scanner = new Scanner(seriesFile);
+            Scanner scanner = new Scanner(watchRecordFile);
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -37,9 +37,9 @@ public class SeriesData implements Data<Series> {
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File seriesFile = new File("/series.txt");
+        File watchRecordFile = new File("/watchRecord.txt");
         try {
-            FileOutputStream fos = new FileOutputStream(seriesFile);
+            FileOutputStream fos = new FileOutputStream(watchRecordFile);
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -53,10 +53,10 @@ public class SeriesData implements Data<Series> {
      * @param name name of Series you want to get it
      * @return Series
      */
-    public Series getDataByName(String name){
-        for (Series seriesInstance : series) {
-            //if(serie.getName().equals(name))
-            return seriesInstance;
+    public WatchRecord getDataByName(String name){
+        for (WatchRecord watchRecord : watchRecords) {
+            //if(watchRecord.getName().equals(name))
+            return watchRecord;
         }
         return null;
     }
@@ -66,45 +66,41 @@ public class SeriesData implements Data<Series> {
      * @param searchText is the substring of series you search
      * @return Series[]
      */
-    public Series[] getDataThatContains(String searchText){
-        List<Series> Searched = new ArrayList<Series>();
-        for (Series seriesInstance : series) {
+    public WatchRecord[] getDataThatContains(String searchText){
+        List<WatchRecord> Searched = new ArrayList<>();
+        for (WatchRecord watchRecord : watchRecords) {
             //if(movie.getName().contains(searchText))
-            Searched.add(seriesInstance);
+            Searched.add(watchRecord);
         }
-        return Searched.toArray(new Series[0]);
+        return Searched.toArray(new WatchRecord[0]);
     }
 
     /**
      * function that return all series in application
      * @return Series[]
      */
-    public Series[] getData() {
-        return series.toArray(new Series[0]);
+    public WatchRecord[] getData() {
+        return watchRecords.toArray(new WatchRecord[0]);
     }
 
-    /**
-     * function that return all Series in application as List
-     * @return List<Series>
-     */
-    public List<Series> getDataAsList() {
-        return series;
+    @Override
+    public List<WatchRecord> getDataAsList() {
+        return watchRecords;
     }
 
     /**
      * function that add new series to application
-     * @param seriesInstance the series that will be added
+     * @param watchRecord the series that will be added
      */
-    public void addData(Series seriesInstance){
-        series.add(seriesInstance);
+    public void addData(WatchRecord watchRecord){
+        watchRecords.add(watchRecord);
     }
 
     /**
      * function that remove series from application
-     * @param seriesInstance name of series that will be removed
+     * @param watchRecord name of watchRecord that will be removed
      */
-    public void removeData(String seriesInstance){
-        series.remove(getDataByName(seriesInstance));
+    public void removeData(String watchRecord){
+        watchRecords.remove(getDataByName(watchRecord));
     }
-
 }
