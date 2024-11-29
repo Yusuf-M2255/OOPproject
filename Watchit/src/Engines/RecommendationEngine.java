@@ -1,16 +1,23 @@
 package src.Engines;
 import ContentControl.Movie;
+import ContentControl.Content;
 import src.AccountControl.*;
 import src.ContentControl.*;
 
 public class RecommendationEngine {
     private User user;
-    private Movie[] movies;
+    private Content[] content;
 
-    RecommendationEngine(User user, ContentControl.Movie[] movies) {
+    RecommendationEngine(User user, Content[] content) {
         this.user = user;
-        this.movies = movies;
+        this.content = content;
     }
 
-    
+    public Content[] getContentBasedRecommendations() {
+        return content;
+    }
+
+    public Content[] getTrendingRecommendations() {
+        return content;
+    }
 }
