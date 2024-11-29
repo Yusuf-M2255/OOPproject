@@ -12,8 +12,7 @@ public class Director {
     public String nationality;
     public String socialMediaLink;
 
-    public Director(String firstName, String lastName, Date dateOfBirth, String gender, String[] Contents, String nationality, String socialMediaLink) {
-        DirectorWorksNumber++;
+    public Director(String firstName, String lastName, Date dateOfBirth, String gender, String[] Contents, String nationality, String socialMediaLink, int DirectorWorksNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -21,5 +20,6 @@ public class Director {
         this.Contents = Contents;
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
+        this.DirectorWorksNumber = DirectorWorksNumber;
     }
 }
