@@ -1,4 +1,4 @@
-package src.AccountControl;
+package AccountControl;
 
 public class Admin {
 }

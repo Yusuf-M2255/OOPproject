@@ -1,14 +1,12 @@
 package DataBase;
 
 import AccountControl.User;
-import ContentControl.Series;
 import Subscription.CreditCard;
 import Subscription.Subscription;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
