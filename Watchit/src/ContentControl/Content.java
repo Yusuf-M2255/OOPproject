@@ -1,5 +1,8 @@
 package ContentControl;
 
+import Cast.CastMember;
+import Cast.Director;
+
 import java.awt.*;
 import java.util.Date;
 
@@ -7,7 +10,7 @@ public class Content {
     public String contentID;
     public String contentTitle;
     public Date Date;
-    public CastMember [] cast;
+    public CastMember[] cast;
     public Director director;
     public String genres;
     public String language;

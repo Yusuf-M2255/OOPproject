@@ -15,31 +15,33 @@ import java.util.Scanner;
 
 public class DataBase {
     private static DataBase dataBase;
-    private List<Admin> admins = null;
+    public AdminsData adminsData= null;
     private List<Account> accounts = null;
     private MoviesData moviesData = null;
     public UsersData usersData = null;
+    public WatchRecordData watchRecordData = null;
     private SeriesData seriesData = null;
     private List<Content> contents = null;
-    private List<WatchRecord> Records = null;
-    private List<Director> Directors = null;
-    private List<CastMember> CastMembers = null;
+    public DirctorsData DirectorsData = null;
+    public CastMembersData castMembersData = null;
     private DataBase() {
         usersData = new UsersData();
-        admins = new ArrayList<>();
+        adminsData = new AdminsData();
         moviesData = new MoviesData();
         seriesData = new SeriesData();
-        Records = new ArrayList<>();
-        Directors = new ArrayList<>();
-        CastMembers = new ArrayList<>();
+        watchRecordData = new WatchRecordData();
+        DirectorsData = new DirctorsData();
+        castMembersData = new CastMembersData();
         accounts = new ArrayList<>();
         contents = new ArrayList<>();
-        //Load();
     }
     public void ContentLoad(){
-//        contents.addAll(moviesData.getDataAsList());
-//        contents.addAll(seriesData.getDataAsList());
+        contents.addAll(moviesData.getDataAsList());
+        //contents.addAll(seriesData.getDataAsList());
+        accounts.addAll(usersData.getDataAsList());
+        //accounts.addAll(adminsData.getDataAsList())
     }
+
     public static DataBase getInstance() {
         if(dataBase == null)
             return dataBase = new DataBase();
@@ -47,8 +49,6 @@ public class DataBase {
     }
 
     public void Load(){
-        moviesData.LoadData();
-        seriesData.LoadData();
         ContentLoad();
     }
 

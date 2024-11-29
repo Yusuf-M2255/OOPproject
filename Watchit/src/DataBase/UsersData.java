@@ -115,8 +115,24 @@ public class UsersData implements Data<User> {
      */
     public User getDataByName(String name){
         for (User user : users) {
-            //if(user.getName().equals(name))
-            return user;
+            if(user.getUserName().equals(name))
+                return user;
+        }
+        return null;
+    }
+
+    public User getDataByEmail(String Email){
+        for (User user : users) {
+            if(user.getEmail().equals(Email))
+                return user;
+        }
+        return null;
+    }
+
+    public User getDataById(Long id){
+        for (User user : users) {
+            if(user.getID().equals(id))
+                return user;
         }
         return null;
     }
@@ -129,8 +145,8 @@ public class UsersData implements Data<User> {
     public User[] getDataThatContains(String searchText){
         List<User> Searched = new ArrayList<User>();
         for (User user : users) {
-            //if(user.getName().contains(searchText))
-            Searched.add(user);
+            if(user.getUserName().contains(searchText))
+                Searched.add(user);
         }
         return Searched.toArray(new User[0]);
     }
