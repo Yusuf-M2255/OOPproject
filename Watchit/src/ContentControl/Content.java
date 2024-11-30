@@ -36,17 +36,11 @@ abstract public class Content {
         this.budget = budget;
         this.revenue = revenue;
         this.image = image;
-        this.rating = new float[5000];
         Rate_Sum = 0;
     }
 
     public void AddRate(int UserID, float rate){
         DataBase.getInstance().watchRecordData.addData(new WatchRecord((long)UserID,contentTitle,new Date(),rate));
-        Rate_Sum -= rating[UserID];
-        rating[UserID] = rate;
-        Rate_Sum += rate;
-        if(rating[UserID] == 0)
-            RateCounter++;
     }
 
     public void RemoveRate(int UserID){

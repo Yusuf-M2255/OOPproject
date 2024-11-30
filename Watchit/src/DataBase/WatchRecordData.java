@@ -90,6 +90,15 @@ public class WatchRecordData implements Data<WatchRecord> {
         return null;
     }
 
+    public WatchRecord[] getAllDataByName(String name){
+        List<WatchRecord> records = new ArrayList<>();
+        for (WatchRecord watchRecord : watchRecords) {
+            if(watchRecord.Content.equals(name))
+                records.add(watchRecord);
+        }
+        return records.toArray(new WatchRecord[0]);
+    }
+
     public WatchRecord getDataByName(String name,Long UserId){
         for (WatchRecord watchRecord : watchRecords) {
             if(watchRecord.Content.equals(name)&&watchRecord.UserId.equals(UserId))
@@ -98,12 +107,13 @@ public class WatchRecordData implements Data<WatchRecord> {
         return null;
     }
 
-    public WatchRecord getDataById(Long UserId){
+    public WatchRecord[] getDataById(Long UserId){
+        List<WatchRecord> records = new ArrayList<>();
         for (WatchRecord watchRecord : watchRecords) {
             if(watchRecord.UserId.equals(UserId))
-                return watchRecord;
+                records.add(watchRecord);
         }
-        return null;
+        return records.toArray(new WatchRecord[0]);
     }
 
     /**
