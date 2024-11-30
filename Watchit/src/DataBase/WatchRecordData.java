@@ -167,7 +167,9 @@ public class WatchRecordData implements Data<WatchRecord> {
         }
     }
 
-    public void removeData(String ContentName,Long UserId){
+    public WatchRecord removeData(String ContentName,Long UserId){
+        WatchRecord temp = getDataByName(ContentName,UserId);
         watchRecords.remove(getDataByName(ContentName,UserId));
+        return temp;
     }
 }

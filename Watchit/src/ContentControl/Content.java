@@ -39,10 +39,9 @@ abstract public class Content {
         Rate_Sum = 0;
     }
 
-    public void AddRate(int UserID, float rate){
-        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long)UserID,contentTitle,new Date(),rate));
+    public void AddRate(int UserID, float rate) {
+        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long) UserID, contentTitle, new Date(), rate));
     }
-
     public void RemoveRate(int UserID){
         DataBase.getInstance().watchRecordData.removeData(contentTitle,(long)UserID);
         Rate_Sum -= rating[UserID];
