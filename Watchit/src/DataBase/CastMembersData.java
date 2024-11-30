@@ -68,7 +68,7 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File CastMembersFile = new File("/CastMembers.txt");
+        File CastMembersFile = new File("./CastMembers.txt");
         try {
             if(!CastMembersFile.exists()){
                 CastMembersFile.createNewFile();
@@ -188,4 +188,9 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
         CastMembers.remove(getDataByName(CastMember));
     }
 
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            CastMembers.remove(getDataById(Id));
+        }
+    }
 }

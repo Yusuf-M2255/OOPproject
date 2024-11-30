@@ -66,7 +66,7 @@ public class DirectorsData implements Data<Director>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File DirectorsFile = new File("/Directors.txt");
+        File DirectorsFile = new File("./Directors.txt");
         try {
             if(!DirectorsFile.exists()){
                 DirectorsFile.createNewFile();
@@ -184,6 +184,11 @@ public class DirectorsData implements Data<Director>,ReadableClass{
      */
     public void removeData(String Director){
         Directors.remove(getDataByName(Director));
+    }
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            Directors.remove(getDataById(Id));
+        }
     }
 
 }

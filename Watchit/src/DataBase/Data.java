@@ -10,4 +10,5 @@ public interface Data <T> {
     public T  getDataById(Long Id);
     public void addData(T data);
     public void removeData(String name);
+    public void removeData(long Id);
 }

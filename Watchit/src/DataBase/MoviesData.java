@@ -38,7 +38,7 @@ public class MoviesData implements Data<Movie>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File moviesFile = new File("/movies.txt");
+        File moviesFile = new File("./movies.txt");
         try {
             FileOutputStream fos = new FileOutputStream(moviesFile);
         }catch (FileNotFoundException e){
@@ -49,6 +49,11 @@ public class MoviesData implements Data<Movie>,ReadableClass{
         }
     }
 
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            movies.remove(getDataById(Id));
+        }
+    }
     /**
      * function that used to get the Movie by its name
      * @param name name of Movie you want to get it

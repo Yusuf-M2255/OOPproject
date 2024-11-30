@@ -7,7 +7,6 @@ import Subscription.Subscription;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -188,9 +187,14 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * function that remove user from application
      * @param user name of user that will be removed
      */
+    public void removeData(long user){
+        users.remove(getDataById(user));
+    }
+
     public void removeData(String user){
         users.remove(getDataByName(user));
     }
+
 
     public void Display(User[] Users){
         DisplayHeadLine();
@@ -216,12 +220,10 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
 
     public void DisplayHeadLine(){
         String Line = "|    ID     |    UserName     |    FirstName    |    LastName    |    Email    |    Password    |";
-
         for (int i = 0;i<Line.length();i++){
             System.out.print('-');
         }
         System.out.print("\n");
         System.out.println(Line);
     }
-
 }
