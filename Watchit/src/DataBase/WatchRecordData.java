@@ -1,10 +1,13 @@
 package DataBase;
 
+import Cast.CastMember;
 import ContentControl.WatchRecord;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.io.File;
 import java.util.Scanner;
@@ -22,7 +25,21 @@ public class WatchRecordData implements Data<WatchRecord> {
     public void LoadData(){
         File watchRecordFile = new File("/watchRecord.txt");
         try {
+            if(!watchRecordFile.exists()){
+                watchRecordFile.createNewFile();
+            }
             Scanner scanner = new Scanner(watchRecordFile);
+            while (scanner.hasNextLine()) {
+                String lineScanner = scanner.nextLine();
+                Long UserID = Long.parseLong(lineScanner);
+                lineScanner = scanner.nextLine();
+                Date dateOfWatching = DateFormat.getInstance().parse(lineScanner);
+                lineScanner = scanner.nextLine();
+                String[] data = lineScanner.split(" ");
+                String ContentName = data[0];
+                Float Rating = Float.parseFloat(data[1]);
+                watchRecords.add(new WatchRecord(UserID,ContentName,dateOfWatching,Rating));
+            }
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -39,7 +56,20 @@ public class WatchRecordData implements Data<WatchRecord> {
     public void SaveData(){
         File watchRecordFile = new File("/watchRecord.txt");
         try {
+            if(!watchRecordFile.exists()){
+                watchRecordFile.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(watchRecordFile);
+            for (WatchRecord record : watchRecords){
+                fos.write(record.UserId.toString().getBytes());
+                fos.write(System.lineSeparator().getBytes());
+                fos.write(record.DateOfWatching.toString().getBytes());
+                fos.write(System.lineSeparator().getBytes());
+                fos.write(record.Content.getBytes());
+                fos.write(" ".getBytes());
+                fos.write(record.Rating.toString().getBytes());
+                fos.write(System.lineSeparator().getBytes());
+            }
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
