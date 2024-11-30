@@ -55,7 +55,6 @@ abstract public class Content {
     public float TotalRate(){
         return (Rate_Sum/RateCounter);
     }
-    abstract void AddCast();
 
 }
 
