@@ -44,6 +44,9 @@ public class MoviesData implements Data<Movie>,ReadableClass{
     public void SaveData(){
         File moviesFile = new File("./movies.txt");
         try {
+            if(!moviesFile.exists()){
+                moviesFile.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(moviesFile);
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
