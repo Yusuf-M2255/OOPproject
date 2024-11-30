@@ -23,7 +23,6 @@ abstract public class Content {
 
     public Content(String contentID, String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
         director.Contents.add(contentTitle);
-        director.DirectorWorksNumber++;
         this.contentID = contentID;
         this.contentTitle = contentTitle;
         Date = date;
