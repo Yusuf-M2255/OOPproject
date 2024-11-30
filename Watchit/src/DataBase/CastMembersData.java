@@ -26,7 +26,7 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void LoadData() {
-        File CastMembersFile = new File("CastMembers.txt");
+        File CastMembersFile = new File("./CastMembers.txt");
         try {
             if(!CastMembersFile.exists()){
                 CastMembersFile.createNewFile();

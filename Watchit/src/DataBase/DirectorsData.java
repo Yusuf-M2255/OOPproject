@@ -24,7 +24,7 @@ public class DirectorsData implements Data<Director>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void LoadData() {
-        File DirectorsFile = new File("Directors.txt");
+        File DirectorsFile = new File("./Directors.txt");
         try {
             if(!DirectorsFile.exists()){
                 DirectorsFile.createNewFile();
