@@ -19,7 +19,6 @@ abstract public class Content {
     public int budget;
     public int revenue;
     public Image image;
-    public float [] rating;
     public int RateCounter;
     public float Rate_Sum;
 
