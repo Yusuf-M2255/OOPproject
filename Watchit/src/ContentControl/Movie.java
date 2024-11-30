@@ -1,6 +1,6 @@
 package ContentControl;
 
-public class Movie  {
+public class Movie extends Content {
   // Variables
   private int duration;
 

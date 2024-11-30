@@ -213,7 +213,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
         }
         System.out.print("\n");
     }
-    
+
     public void DisplayHeadLine(){
         String Line = "|    ID     |    UserName     |    FirstName    |    LastName    |    Email    |    Password    |";
 
