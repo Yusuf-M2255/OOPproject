@@ -35,11 +35,10 @@ abstract public class Content {
         this.revenue = revenue;
         this.image = image;
         Rate_Sum = 0;
-        
         for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
             Rate_Sum += Record.Rating;
+            RateCounter++;
         }
-
     }
 
     public void AddRate(int UserID, float rate) {
