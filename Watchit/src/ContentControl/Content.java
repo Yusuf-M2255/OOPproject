@@ -38,6 +38,7 @@ abstract public class Content {
         
         for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
             Rate_Sum += Record.Rating;
+            RateCounter++;
         }
 
     }
