@@ -40,7 +40,7 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
                 watchRecords.add(new WatchRecord(UserID,ContentName,dateOfWatching,Rating));
             }
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File WatchRecords.txt is not found");
         }
         catch (Exception e){
             System.out.println("error while opening");
@@ -70,10 +70,10 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
                 fos.write(System.lineSeparator().getBytes());
             }
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File WatchRecords.txt is not found");
         }
         catch (Exception e){
-            System.out.println("Save movies.txt failed");
+            System.out.println("Save WatchRecords.txt failed");
         }
     }
 

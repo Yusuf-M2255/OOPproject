@@ -22,7 +22,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * its throws messages when files not founded or any other error
      */
     public void LoadData(){
-        File userFile = new File("users.txt");
+        File userFile = new File("./users.txt");
         try {
             if(!userFile.exists()){
                 userFile.createNewFile();
@@ -69,7 +69,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File userFile = new File("users.txt");
+        File userFile = new File("./users.txt");
         try {
             userFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(userFile);
@@ -106,10 +106,10 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
                 fos.write(System.lineSeparator().getBytes());
             }
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File users.txt is not found");
         }
         catch (Exception e){
-            System.out.println("Save movies.txt failed");
+            System.out.println("Save users.txt failed");
         }
     }
 

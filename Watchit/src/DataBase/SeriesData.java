@@ -28,7 +28,7 @@ public class SeriesData implements Data<Series>,ReadableClass {
         try {
             Scanner scanner = new Scanner(seriesFile);
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File seires .txt is not found");
         }
         catch (Exception e){
             System.out.println("error while opening");
@@ -48,10 +48,10 @@ public class SeriesData implements Data<Series>,ReadableClass {
             }
             FileOutputStream fos = new FileOutputStream(seriesFile);
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File seires.txt is not found");
         }
         catch (Exception e){
-            System.out.println("Save movies.txt failed");
+            System.out.println("Save seires .txt failed");
         }
     }
 
