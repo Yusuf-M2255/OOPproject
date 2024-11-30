@@ -24,7 +24,6 @@ abstract public class Content {
     public float Rate_Sum;
 
     public Content(String contentID, String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
-        director.Contents.add(contentTitle);
         this.contentID = contentID;
         this.contentTitle = contentTitle;
         Date = date;
@@ -37,16 +36,25 @@ abstract public class Content {
         this.revenue = revenue;
         this.image = image;
         Rate_Sum = 0;
+        
+        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
+            Rate_Sum += Record.Rating;
+        }
+
     }
 
     public void AddRate(int UserID, float rate) {
         DataBase.getInstance().watchRecordData.addData(new WatchRecord((long) UserID, contentTitle, new Date(), rate));
+        RateCounter++;
+        Rate_Sum += rate;
     }
-    public void RemoveRate(int UserID){
-        DataBase.getInstance().watchRecordData.removeData(contentTitle,(long)UserID);
-        Rate_Sum -= rating[UserID];
-        RateCounter--;
-        rating[UserID] = 0;
+
+    public void EditRate(int UserID, String contentTitle, float rate){
+        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle,(long)UserID);
+        Rate_Sum -= WatchRecordTemp.Rating;
+        WatchRecordTemp.Rating = rate;
+        Rate_Sum += rate;
+        DataBase.getInstance().watchRecordData.addData(WatchRecordTemp);
     }
     public float TotalRate(){
         return (Rate_Sum/RateCounter);
