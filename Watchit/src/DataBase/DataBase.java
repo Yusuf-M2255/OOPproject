@@ -85,7 +85,7 @@ public class DataBase {
         Subscription SubscriptionPlan = new Subscription();
         CreditCard creditCard=new CreditCard();
         List<String> fav = new ArrayList<String>();
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in), sc = new Scanner(System.in);
         System.out.print("Enter First Name: ");
         FirstName = input.nextLine();
         System.out.print("Enter Last Name: ");
@@ -122,6 +122,17 @@ public class DataBase {
                 }
             }else
                 break;
+            do {
+                System.out.println("User already exists if you want to go back enter Y, else if you want to try again enter N.");
+                c = sc.next().charAt(0);
+                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                    break;
+                else
+                    System.out.println("Sorry, Invalid Input, Try Again");
+            }while (true);
+            if(c=='y' || c == 'Y'){
+                return false;
+            }
             System.out.print("Enter Email: ");
             Email = input.nextLine();
         }
@@ -146,11 +157,12 @@ public class DataBase {
         }
         System.out.print("reEnter Password: ");
         String Password1 = input.nextLine();
+        char c;
         while(!Password.equals(Password1)){
-            System.out.println("Passwords doesn't match if you want back enter y");
-            char c;
             do {
                 c = input.nextLine().charAt(0);
+                System.out.println("Passwords doesn't match if you want to go back enter Y, else if you want to try again enter N.");
+                c = sc.next().charAt(0);
                 if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
                     break;
                 else
