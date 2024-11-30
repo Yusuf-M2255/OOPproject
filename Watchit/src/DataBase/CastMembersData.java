@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class CastMembersData implements Data<CastMember>{
+public class CastMembersData implements Data<CastMember>,ReadableClass{
     private List<CastMember> CastMembers =null ;
     public CastMembersData(){
         CastMembers = new ArrayList<>();

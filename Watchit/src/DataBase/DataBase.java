@@ -58,32 +58,22 @@ public class DataBase {
 
     public void Login(){
         String Email,Password;
+        System.out.print("Enter your email: ");
         Scanner sc = new Scanner(System.in);
-        Account user;
-        while(true) {
-            System.out.print("Enter your email: ");
-            Email = sc.next();
-            user = DataBase.getInstance().accountsData.getDataByEmail(Email);
-            if (user == null) {
-                System.out.println("!!!Email is not Found");
-                System.out.print("would you want try again y/n");
-                char ch = sc.nextLine().charAt(0);
-                if (ch == 'n') {
-                    return;
-                }
-            }else
-                break;
-        }
+        Email = sc.next();
         System.out.print("Enter your password: ");
         Password = sc.next();
-
+        Account user = DataBase.getInstance().accountsData.getDataByEmail(Email);
+        if(user==null){
+            System.out.println("!!!Email is not Found");
+        }else{
             if(user.getPassword().equals(Password)){
                 System.out.println("Login Successful");
                 DataBase.getInstance().CurrentUser = user;
             }else{
                 System.out.println("!!!Wrong Password");
             }
-
+        }
     }
     public boolean Register() {
         String FirstName, LastName, UserName, Email, Password;
@@ -113,12 +103,12 @@ public class DataBase {
         System.out.print("reEnter Password: ");
         String Password1 = input.nextLine();
         while(!Password.equals(Password1)){
-            System.out.println("User already exists if you want back enter y");
-            char c = input.next().charAt(0);
+            System.out.println("Passwords doesn't match");
+            System.out.println("if you want back enter y");
+            char c = input.nextLine().charAt(0);
             if(c=='y'){
                 return false;
             }
-            System.out.println("Passwords doesn't match");
             System.out.print("reEnter Password: ");
             Password1 = input.nextLine();
         }
@@ -131,7 +121,9 @@ public class DataBase {
             if(j<genres.length&&j>=0)
                 fav.add(genres[j]);
         }while(j!=-1);
-        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,new ArrayList<>(),new ArrayList<>()));
+        System.out.print("Enter your Favorite Name : ");
+        String FavoriteName = input.next();
+        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
         accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));
         return true;

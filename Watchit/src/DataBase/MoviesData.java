@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MoviesData implements Data<Movie>{
+public class MoviesData implements Data<Movie>,ReadableClass{
     private List<Movie> movies =null ;
     public MoviesData(){
         movies = new ArrayList<>();
@@ -61,7 +61,9 @@ public class MoviesData implements Data<Movie>{
         }
         return null;
     }
-
+    public Movie getDataById(Long id){
+        return null;
+    }
     /**
      * function that used to get the Movies that contains searchText
      * @param searchText is the substring of movies you search

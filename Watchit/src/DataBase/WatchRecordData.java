@@ -11,7 +11,7 @@ import java.util.List;
 import java.io.File;
 import java.util.Scanner;
 
-public class WatchRecordData implements Data<WatchRecord> {
+public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
     List<WatchRecord> watchRecords = null;
     public  WatchRecordData(){
         watchRecords = new ArrayList<>();
@@ -107,7 +107,15 @@ public class WatchRecordData implements Data<WatchRecord> {
         return null;
     }
 
-    public WatchRecord[] getDataById(Long UserId){
+    public WatchRecord getDataById(Long UserId){
+        for (WatchRecord watchRecord : watchRecords) {
+            if(watchRecord.UserId.equals(UserId))
+               return watchRecord;
+        }
+        return null;
+    }
+
+    public WatchRecord[] getAllDataById(Long UserId){
         List<WatchRecord> records = new ArrayList<>();
         for (WatchRecord watchRecord : watchRecords) {
             if(watchRecord.UserId.equals(UserId))
@@ -115,7 +123,6 @@ public class WatchRecordData implements Data<WatchRecord> {
         }
         return records.toArray(new WatchRecord[0]);
     }
-
     /**
      * function that used to get the series that contains searchText
      * @param searchText is the substring of series you search

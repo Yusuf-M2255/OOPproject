@@ -1,6 +1,7 @@
 package DataBase;
 
 import AccountControl.Admin;
+import ContentControl.Movie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdminsData implements Data<Admin>{
+public class AdminsData implements Data<Admin>,ReadableClass{
     private List<Admin> admins =null ;
     public AdminsData(){
         admins = new ArrayList<>();
@@ -47,6 +48,10 @@ public class AdminsData implements Data<Admin>{
         catch (Exception e){
             System.out.println("Save admins.txt failed");
         }
+    }
+
+    public Admin getDataById(Long id){
+        return null;
     }
 
     /**

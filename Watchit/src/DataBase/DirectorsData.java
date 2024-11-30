@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class DirectorsData implements Data<Director>{
+public class DirectorsData implements Data<Director>,ReadableClass{
     private List<Director> Directors =null ;
     public DirectorsData(){
         Directors = new ArrayList<>();

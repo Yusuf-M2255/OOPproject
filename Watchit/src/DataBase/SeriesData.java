@@ -1,5 +1,6 @@
 package DataBase;
 
+import ContentControl.Movie;
 import ContentControl.Series;
 
 import java.io.File;
@@ -9,11 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SeriesData implements Data<Series> {
+public class SeriesData implements Data<Series>,ReadableClass {
     List<Series>series = null;
     public SeriesData() {
         series = new ArrayList<>();
         //LoadData();
+    }
+    public Series getDataById(Long id){
+        return null;
     }
     /**
      * get Data of Series from files

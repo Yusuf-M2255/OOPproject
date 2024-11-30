@@ -7,11 +7,12 @@ import Subscription.Subscription;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsersData implements Data<User> {
+public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> {
     List<User> users = null;
     public UsersData() {
         users = new ArrayList<>();
@@ -47,14 +48,16 @@ public class UsersData implements Data<User> {
                 for (int i = 0; i < size; i++) {
                     watchLater.add(data[j++]);
                 }
-                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,watchLater,history));
+
+                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,watchLater,history,data[j++]));
             }
 
         }catch (FileNotFoundException e){
-            System.out.println("File movies.txt is not found");
+            System.out.println("File users.txt is not found");
         }
         catch (Exception e){
-            System.out.println("error while opening");
+            e.printStackTrace();
+            System.out.println("error while opening users.txt file ");
         }
     }
 
@@ -97,6 +100,7 @@ public class UsersData implements Data<User> {
                     fos.write(watchLater.getBytes());
                     fos.write(" ".getBytes());
                 }
+                fos.write(user.getFavoriteName().getBytes());
                 fos.write(System.lineSeparator().getBytes());
             }
         }catch (FileNotFoundException e){
@@ -188,7 +192,14 @@ public class UsersData implements Data<User> {
         users.remove(getDataByName(user));
     }
 
-    public void displayData(@org.jetbrains.annotations.NotNull User user){
+    public void Display(User[] Users){
+        DisplayHeadLine();
+        for (User user : Users) {
+            DisplayLine(user);
+        }
+    }
+
+    public void DisplayLine(User user){
         String Line = "|    "+user.getID()+ "    |    "+user.getUserName()+ "    |    "+user.getFirstName()+ "    |    "+
                 user.getLastName()+ "    |    "+user.getEmail()+ "    |    "+user.getPassword()+
                 "    |";
@@ -202,7 +213,8 @@ public class UsersData implements Data<User> {
         }
         System.out.print("\n");
     }
-    public void PrintHeadline(){
+    
+    public void DisplayHeadLine(){
         String Line = "|    ID     |    UserName     |    FirstName    |    LastName    |    Email    |    Password    |";
 
         for (int i = 0;i<Line.length();i++){

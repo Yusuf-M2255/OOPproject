@@ -5,7 +5,7 @@ import ContentControl.Content;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentsData {
+public class ContentsData implements  Data<Content>{
     List<Content> contents;
     public ContentsData() {
         this.contents = new ArrayList<>();

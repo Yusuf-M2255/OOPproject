@@ -8,8 +8,8 @@ public class User extends Account {
     private CreditCard creditCard;
     private List<String> FavoriteGenres,WatchLater,History;
     private Subscription subscriptionPlan;
-    public User(String userName,String firstName,String lastName,String email,String password,CreditCard creditCard,Subscription subscriptionPlan,List<String> FavoriteGenres,List<String> WatchLater,List<String> History){
-        super(userName,firstName,lastName,email,password);
+    public User(String userName,String firstName,String lastName,String email,String password,CreditCard creditCard,Subscription subscriptionPlan,List<String> FavoriteGenres,List<String> WatchLater,List<String> History,String FavoriteName){
+        super(userName,firstName,lastName,email,password,FavoriteName);
         this.creditCard = creditCard;
         this.subscriptionPlan = subscriptionPlan;
         this.WatchLater = WatchLater;

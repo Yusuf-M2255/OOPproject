@@ -6,7 +6,7 @@ import AccountControl.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountsData {
+public class AccountsData implements Data<Account> {
     List<Account> accounts;
     public AccountsData() {
         this.accounts = new ArrayList<>();
