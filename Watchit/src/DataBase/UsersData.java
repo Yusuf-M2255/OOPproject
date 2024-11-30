@@ -49,6 +49,7 @@ public class UsersData implements Data<User> {
                 }
                 users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,watchLater,history));
             }
+
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
@@ -180,4 +181,29 @@ public class UsersData implements Data<User> {
     public void removeData(String user){
         users.remove(getDataByName(user));
     }
+
+    public void displayData(@org.jetbrains.annotations.NotNull User user){
+        String Line = "|    "+user.getID()+ "    |    "+user.getUserName()+ "    |    "+user.getFirstName()+ "    |    "+
+                user.getLastName()+ "    |    "+user.getEmail()+ "    |    "+user.getPassword()+
+                "    |";
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
+        System.out.println(Line);
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
+    }
+    public void PrintHeadline(){
+        String Line = "|    ID     |    UserName     |    FirstName    |    LastName    |    Email    |    Password    |";
+
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
+        System.out.println(Line);
+    }
+
 }

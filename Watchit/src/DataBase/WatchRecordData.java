@@ -1,6 +1,5 @@
 package DataBase;
 
-import Cast.CastMember;
 import ContentControl.WatchRecord;
 
 import java.io.FileNotFoundException;
@@ -85,8 +84,24 @@ public class WatchRecordData implements Data<WatchRecord> {
      */
     public WatchRecord getDataByName(String name){
         for (WatchRecord watchRecord : watchRecords) {
-            //if(watchRecord.getName().equals(name))
-            return watchRecord;
+            if(watchRecord.Content.equals(name))
+                return watchRecord;
+        }
+        return null;
+    }
+
+    public WatchRecord getDataByName(String name,Long UserId){
+        for (WatchRecord watchRecord : watchRecords) {
+            if(watchRecord.Content.equals(name)&&watchRecord.UserId.equals(UserId))
+                return watchRecord;
+        }
+        return null;
+    }
+
+    public WatchRecord getDataById(Long UserId){
+        for (WatchRecord watchRecord : watchRecords) {
+            if(watchRecord.UserId.equals(UserId))
+                return watchRecord;
         }
         return null;
     }
@@ -99,8 +114,8 @@ public class WatchRecordData implements Data<WatchRecord> {
     public WatchRecord[] getDataThatContains(String searchText){
         List<WatchRecord> Searched = new ArrayList<>();
         for (WatchRecord watchRecord : watchRecords) {
-            //if(movie.getName().contains(searchText))
-            Searched.add(watchRecord);
+            if(watchRecord.Content.contains(searchText))
+                Searched.add(watchRecord);
         }
         return Searched.toArray(new WatchRecord[0]);
     }
@@ -128,9 +143,21 @@ public class WatchRecordData implements Data<WatchRecord> {
 
     /**
      * function that remove series from application
-     * @param watchRecord name of watchRecord that will be removed
+     * @param ContentName name of watchRecord that will be removed
      */
-    public void removeData(String watchRecord){
-        watchRecords.remove(getDataByName(watchRecord));
+    public void removeData(String ContentName){
+        while(getDataByName(ContentName)!=null) {
+            watchRecords.remove(getDataByName(ContentName));
+        }
+    }
+
+    public void removeDataById(long Id){
+        while(getDataById(Id)!=null) {
+            watchRecords.remove(getDataById(Id));
+        }
+    }
+
+    public void removeData(String ContentName,Long UserId){
+        watchRecords.remove(getDataByName(ContentName,UserId));
     }
 }

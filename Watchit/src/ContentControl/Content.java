@@ -2,6 +2,8 @@ package ContentControl;
 
 import Cast.CastMember;
 import Cast.Director;
+import DataBase.DataBase;
+
 import java.awt.*;
 import java.util.Date;
 
@@ -23,7 +25,6 @@ abstract public class Content {
 
     public Content(String contentID, String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
         director.Contents.add(contentTitle);
-        director.DirectorWorksNumber++;
         this.contentID = contentID;
         this.contentTitle = contentTitle;
         Date = date;
@@ -40,6 +41,7 @@ abstract public class Content {
     }
 
     public void AddRate(int UserID, float rate){
+        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long)UserID,contentTitle,new Date(),rate));
         Rate_Sum -= rating[UserID];
         rating[UserID] = rate;
         Rate_Sum += rate;
@@ -48,6 +50,7 @@ abstract public class Content {
     }
 
     public void RemoveRate(int UserID){
+        DataBase.getInstance().watchRecordData.removeData(contentTitle,(long)UserID);
         Rate_Sum -= rating[UserID];
         RateCounter--;
         rating[UserID] = 0;

@@ -18,13 +18,13 @@ public class DataBase {
     };
     public AdminsData adminsData= null;
     public Account CurrentUser = null;
-    public AccountsData accountsData= null;
+    public static AccountsData accountsData= null;
     public MoviesData moviesData = null;
     public UsersData usersData = null;
     public WatchRecordData watchRecordData = null;
     public SeriesData seriesData = null;
-    public ContentsData contentsData = null;
-    public DirctorsData DirectorsData = null;
+    public static ContentsData contentsData = null;
+    public DirectorsData DirectorsData = null;
     public CastMembersData castMembersData = null;
     private DataBase() {
         usersData = new UsersData();
@@ -32,14 +32,17 @@ public class DataBase {
         moviesData = new MoviesData();
         seriesData = new SeriesData();
         watchRecordData = new WatchRecordData();
-        DirectorsData = new DirctorsData();
+        DirectorsData = new DirectorsData();
         castMembersData = new CastMembersData();
-        accountsData = new AccountsData();
-        contentsData = new ContentsData();
+
     }
     public static DataBase getInstance() {
-        if(dataBase == null)
-            return dataBase = new DataBase();
+        if(dataBase == null) {
+            dataBase = new DataBase();
+            accountsData = new AccountsData();
+            contentsData = new ContentsData();
+            return dataBase;
+        }
         return dataBase;
     }
 
@@ -55,22 +58,32 @@ public class DataBase {
 
     public void Login(){
         String Email,Password;
-        System.out.print("Enter your email: ");
         Scanner sc = new Scanner(System.in);
-        Email = sc.next();
+        Account user;
+        while(true) {
+            System.out.print("Enter your email: ");
+            Email = sc.next();
+            user = DataBase.getInstance().accountsData.getDataByEmail(Email);
+            if (user == null) {
+                System.out.println("!!!Email is not Found");
+                System.out.print("would you want try again y/n");
+                char ch = sc.nextLine().charAt(0);
+                if (ch == 'n') {
+                    return;
+                }
+            }else
+                break;
+        }
         System.out.print("Enter your password: ");
         Password = sc.next();
-        Account user = DataBase.getInstance().accountsData.getDataByEmail(Email);
-        if(user==null){
-            System.out.println("!!!Email is not Found");
-        }else{
+
             if(user.getPassword().equals(Password)){
                 System.out.println("Login Successful");
                 DataBase.getInstance().CurrentUser = user;
             }else{
                 System.out.println("!!!Wrong Password");
             }
-        }
+
     }
     public boolean Register() {
         String FirstName, LastName, UserName, Email, Password;

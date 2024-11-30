@@ -113,12 +113,34 @@ public class CastMembersData implements Data<CastMember>{
      */
     public CastMember getDataByName(String name){
         for (CastMember CastMember : CastMembers) {
-            //if(CastMember.getName().equals(name))
-            return CastMember;
+            if(CastMember.firstName.equals(name))
+                return CastMember;
         }
         return null;
     }
 
+    public CastMember getDataById(Long Id){
+        int l = 0,r = CastMembers.size()-1;
+        while (l<=r){
+            int m = (l+r)/2;
+            if(CastMembers.get(m).CastMemberId>Id){
+                r = m-1;
+            }else if(CastMembers.get(m).CastMemberId<Id){
+                l = m+1;
+            }else
+                return CastMembers.get(m);
+        }
+        return null;
+    }
+
+    public CastMember[] getAllDataByName(String name){
+        List<CastMember>castMembers=new ArrayList<>();
+        for (CastMember CastMember : CastMembers) {
+            if(CastMember.firstName.equals(name))
+                castMembers.add(CastMember);
+        }
+        return castMembers.toArray(new CastMember[0]);
+    }
     /**
      * function that used to get the CastMembers that contains searchText
      * @param searchText is the substring of CastMembers you search
@@ -127,11 +149,12 @@ public class CastMembersData implements Data<CastMember>{
     public CastMember[] getDataThatContains(String searchText){
         List<CastMember> Searched = new ArrayList<CastMember>();
         for (CastMember CastMember : CastMembers) {
-            //if(CastMember.getName().contains(searchText))
-            Searched.add(CastMember);
+            if(CastMember.firstName.contains(searchText))
+                Searched.add(CastMember);
         }
         return Searched.toArray(new CastMember[0]);
     }
+
 
     /**
      * function that return all CastMembers in application

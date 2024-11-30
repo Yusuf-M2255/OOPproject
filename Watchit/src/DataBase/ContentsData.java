@@ -8,7 +8,7 @@ public class ContentsData {
     List<Content> contents;
     public ContentsData() {
         this.contents = new ArrayList<>();
-        contents.addAll(DataBase.getInstance().moviesData.getDataAsList());
+        //contents.addAll(DataBase.getInstance().moviesData.getDataAsList());
         //contents.addAll(DataBase.getInstance().seriesData.getDataAsList());
     }
     /**
