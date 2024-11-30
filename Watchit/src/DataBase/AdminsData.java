@@ -24,6 +24,9 @@ public class AdminsData implements Data<Admin>,ReadableClass{
     public void LoadData(){
         File adminsFile = new File("./admins.txt");
         try {
+            if(!adminsFile.exists()){
+                adminsFile.createNewFile();
+            }
             Scanner scanner = new Scanner(adminsFile);
         }catch (FileNotFoundException e){
             System.out.println("File admins.txt is not found");

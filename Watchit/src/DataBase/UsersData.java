@@ -24,6 +24,9 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
     public void LoadData(){
         File userFile = new File("users.txt");
         try {
+            if(!userFile.exists()){
+                userFile.createNewFile();
+            }
             Scanner scanner = new Scanner(userFile);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

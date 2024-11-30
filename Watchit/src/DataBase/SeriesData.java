@@ -43,6 +43,9 @@ public class SeriesData implements Data<Series>,ReadableClass {
     public void SaveData(){
         File seriesFile = new File("./series.txt");
         try {
+            if(!seriesFile.exists()){
+                seriesFile.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(seriesFile);
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
