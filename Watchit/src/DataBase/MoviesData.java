@@ -21,8 +21,12 @@ public class MoviesData implements Data<Movie>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void LoadData(){
-        File moviesFile = new File("/movies.txt");
+
+        File moviesFile = new File("./movies.txt");
         try {
+            if(!moviesFile.exists()){
+                moviesFile.createNewFile();
+            }
             Scanner scanner = new Scanner(moviesFile);
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
