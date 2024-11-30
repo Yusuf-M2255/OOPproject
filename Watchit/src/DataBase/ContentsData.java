@@ -85,5 +85,10 @@ public class ContentsData implements  Data<Content>{
         contents.remove(getDataByName(content));
     }
 
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            contents.remove(getDataById(Id));
+        }
+    }
 
 }

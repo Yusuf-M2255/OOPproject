@@ -22,7 +22,7 @@ public class AdminsData implements Data<Admin>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void LoadData(){
-        File adminsFile = new File("/admins.txt");
+        File adminsFile = new File("./admins.txt");
         try {
             Scanner scanner = new Scanner(adminsFile);
         }catch (FileNotFoundException e){
@@ -39,8 +39,11 @@ public class AdminsData implements Data<Admin>,ReadableClass{
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File adminsFile = new File("/admins.txt");
+        File adminsFile = new File("./admins.txt");
         try {
+            if(!adminsFile.exists()){
+                adminsFile.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(adminsFile);
         }catch (FileNotFoundException e){
             System.out.println("File admins.txt is not found");
@@ -113,4 +116,9 @@ public class AdminsData implements Data<Admin>,ReadableClass{
         admins.remove(getDataByName(admin));
     }
 
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            admins.remove(getDataById(Id));
+        }
+    }
 }

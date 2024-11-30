@@ -53,7 +53,7 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File watchRecordFile = new File("/watchRecord.txt");
+        File watchRecordFile = new File("./watchRecord.txt");
         try {
             if(!watchRecordFile.exists()){
                 watchRecordFile.createNewFile();
@@ -168,7 +168,7 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
         }
     }
 
-    public void removeDataById(long Id){
+    public void removeData(long Id){
         while(getDataById(Id)!=null) {
             watchRecords.remove(getDataById(Id));
         }

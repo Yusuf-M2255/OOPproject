@@ -41,7 +41,7 @@ public class SeriesData implements Data<Series>,ReadableClass {
      * its throws messages when files not founded or any other error
      */
     public void SaveData(){
-        File seriesFile = new File("/series.txt");
+        File seriesFile = new File("./series.txt");
         try {
             FileOutputStream fos = new FileOutputStream(seriesFile);
         }catch (FileNotFoundException e){
@@ -63,6 +63,12 @@ public class SeriesData implements Data<Series>,ReadableClass {
             return seriesInstance;
         }
         return null;
+    }
+
+    public void removeData(long Id){
+        while(getDataById(Id)!=null) {
+            series.remove(getDataById(Id));
+        }
     }
 
     /**
