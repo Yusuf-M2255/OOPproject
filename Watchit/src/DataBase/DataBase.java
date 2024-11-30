@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class DataBase {
     private static DataBase dataBase;
+    final String EmailRegex = "[\\w-]+@(gmail|yahoo|outlook)\\.(com|org|io|net)",
+            PasswordRegex="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\\W)(?=.\\S+$).{8,}$";
     String[] genres = {
             "Action", "Adventure", "Comedy", "Drama", "Horror",
             "Romance", "Science Fiction", "Fantasy", "Mystery",
@@ -63,7 +65,7 @@ public class DataBase {
         Email = sc.next();
         System.out.print("Enter your password: ");
         Password = sc.next();
-        Account user = DataBase.getInstance().accountsData.getDataByEmail(Email);
+        Account user = accountsData.getDataByEmail(Email);
         if(user==null){
             System.out.println("!!!Email is not Found");
         }else{
@@ -89,10 +91,17 @@ public class DataBase {
         UserName = input.nextLine();
         System.out.print("Enter Email: ");
         Email = input.nextLine();
-        while(DataBase.getInstance().accountsData.getDataByEmail(Email)!=null){
-            System.out.println("User already exists if you want back enter y");
+        while(true){
+            if(accountsData.getDataByEmail(Email)!=null)
+                System.out.println("User already exists if you want back enter y");
+            else if(!Email.matches(EmailRegex)){
+                System.out.println("Email is not Valid");
+            }
+            else
+                break;
+            System.out.println("wanna continue ? (Y/N)");
             char c = input.nextLine().charAt(0);
-            if(c=='y'){
+            if(c=='N'){
                 return false;
             }
             System.out.print("Enter Email: ");
@@ -100,6 +109,20 @@ public class DataBase {
         }
         System.out.print("Enter Password: ");
         Password = input.nextLine();
+        while(true){
+            if(!Password.matches(PasswordRegex)){
+                System.out.println("Password is not Valid");
+            }
+            else
+                break;
+            System.out.println("wanna continue ? (Y/N)");
+            char c = input.nextLine().charAt(0);
+            if(c=='N'){
+                return false;
+            }
+            System.out.print("Enter Password: ");
+            Password = input.nextLine();
+        }
         System.out.print("reEnter Password: ");
         String Password1 = input.nextLine();
         while(!Password.equals(Password1)){
