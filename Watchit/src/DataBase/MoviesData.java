@@ -5,6 +5,7 @@ import ContentControl.Movie;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,7 +52,8 @@ public class MoviesData implements Data<Movie>,ReadableClass{
         }catch (FileNotFoundException e){
             System.out.println("File movies.txt is not found");
         }
-        catch (Exception e){
+        catch (IOException e){
+            e.printStackTrace();
             System.out.println("Save movies.txt failed");
         }
     }
