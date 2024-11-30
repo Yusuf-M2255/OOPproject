@@ -1,12 +1,12 @@
 package ContentControl;
 
-public class Movie extends Content {
+public class Movie {
   // Variables
   private int duration;
 
   // Constructor
   public Movie(int duration){
-    super();
+    //super();
     this.duration = duration;
   }
 }

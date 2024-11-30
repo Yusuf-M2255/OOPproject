@@ -21,13 +21,13 @@ public class Episode {
   public int getepisodeNumber(){
     return this.episodeNumber;
   }
-  public int getepisodeTitle(){
+  public String getepisodeTitle(){
     return this.episodeTitle;
   }
   public int getduration(){
     return this.duration;
   }
-  public int getreleaseDate(){
+  public Date getreleaseDate(){
     return this.releaseDate;
   }
 
