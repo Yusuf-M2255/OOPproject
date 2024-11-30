@@ -8,9 +8,10 @@ import java.awt.*;
 import java.util.Date;
 
 abstract public class Content {
-    public String contentID;
+    public Long contentID;
     public String contentTitle;
     public Date Date;
+    public static Long cnt = (long)1;
     public CastMember[] cast;
     public Director director;
     public String genres;
@@ -22,8 +23,8 @@ abstract public class Content {
     public int RateCounter;
     public float Rate_Sum;
 
-    public Content(String contentID, String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
-        this.contentID = contentID;
+    public Content(String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
+        this.contentID = cnt++;
         this.contentTitle = contentTitle;
         Date = date;
         this.cast = new CastMember[SizeOfCast];

@@ -128,10 +128,16 @@ public class UsersData implements Data<User> {
         return null;
     }
 
-    public User getDataById(Long id){
-        for (User user : users) {
-            if(user.getID().equals(id))
-                return user;
+    public User getDataById(Long Id){
+        int l = 0,r = users.size()-1;
+        while (l<=r){
+            int m = (l+r)/2;
+            if(users.get(m).getID()>Id){
+                r = m-1;
+            }else if(users.get(m).getID()<Id){
+                l = m+1;
+            }else
+                return users.get(m);
         }
         return null;
     }

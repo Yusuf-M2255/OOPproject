@@ -1,5 +1,6 @@
 package DataBase;
 
+import AccountControl.User;
 import ContentControl.Content;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,22 @@ public class ContentsData {
      */
     public Content getDataByName(String name){
         for (Content content : contents) {
-            //if(content.getName().equals(name))
-            return content;
+            if(content.contentTitle.equals(name))
+                return content;
+        }
+        return null;
+    }
+
+    public Content getDataById(Long Id){
+        int l = 0,r = contents.size()-1;
+        while (l<=r){
+            int m = (l+r)/2;
+            if(contents.get(m).contentID>Id){
+                r = m-1;
+            }else if(contents.get(m).contentID<Id){
+                l = m+1;
+            }else
+                return contents.get(m);
         }
         return null;
     }
@@ -32,8 +47,8 @@ public class ContentsData {
     public Content[] getDataThatContains(String searchText){
         List<Content> Searched = new ArrayList<Content>();
         for (Content content : contents) {
-            //if(content.getName().contains(searchText))
-            Searched.add(content);
+            if(content.contentTitle.contains(searchText))
+                Searched.add(content);
         }
         return Searched.toArray(new Content[0]);
     }
