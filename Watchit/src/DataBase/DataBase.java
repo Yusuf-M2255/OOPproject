@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class DataBase {
     private static DataBase dataBase;
+    final String EmailRegex = "[\\w-]+@(gmail|yahoo|outlook)\\.(com|org|io|net)",
+            PasswordRegex="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\\W)(?=.\\S+$).{8,}$";
     String[] genres = {
             "Action", "Adventure", "Comedy", "Drama", "Horror",
             "Romance", "Science Fiction", "Fantasy", "Mystery",
@@ -92,24 +94,56 @@ public class DataBase {
         UserName = input.nextLine();
         System.out.print("Enter Email: ");
         Email = input.nextLine();
-        while(DataBase.getInstance().accountsData.getDataByEmail(Email)!=null){
+        while(true){
             char c;
-            do {
-                System.out.println("User already exists if you want to go back enter y, else if you want to try again enter n.");
-                c = input.next().charAt(0);
-                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
-                    break;
-                else
-                    System.out.println("Sorry, Invalid Input, Try Again");
-            }while (true);
-            if(c=='y' || c == 'Y'){
-                return false;
-            }
+            if(accountsData.getDataByEmail(Email)!=null) {
+                do {
+                    System.out.println("User already exists if you want to go back enter y, else if you want to try again enter n.");
+                    c = input.nextLine().charAt(0);
+                    if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                        break;
+                    else
+                        System.out.println("Sorry, Invalid Input, Try Again");
+                } while (true);
+                if(c=='y' || c == 'Y'){
+                    return false;
+                }
+            }else if(!Email.matches(EmailRegex)){
+                do {
+                    System.out.println("Email Invalid. if you want to go back enter y, else if you want to try again enter n.");
+                    c = input.nextLine().charAt(0);
+                    if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                        break;
+                    else
+                        System.out.println("Sorry, Invalid Input, Try Again");
+                } while (true);
+                if(c=='y' || c == 'Y'){
+                    return false;
+                }
+            }else
+                break;
             System.out.print("Enter Email: ");
             Email = input.nextLine();
         }
         System.out.print("Enter Password: ");
         Password = input.nextLine();
+        while (!Password.matches(PasswordRegex)){
+            char c;
+            do {
+                System.out.println("Password is Invalid");
+                System.out.println("if you want to go back enter y, else if you want to try again enter n.");
+                c = input.nextLine().charAt(0);
+                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                    break;
+                else
+                    System.out.println("Sorry, Invalid Input, Try Again");
+            } while (true);
+            if(c=='y' || c == 'Y'){
+                return false;
+            }
+            System.out.print("Enter Password: ");
+            Password = input.nextLine();
+        }
         System.out.print("reEnter Password: ");
         String Password1 = input.nextLine();
         while(!Password.equals(Password1)){
@@ -117,7 +151,6 @@ public class DataBase {
             char c;
             do {
                 c = input.nextLine().charAt(0);
-                c = input.next().charAt(0);
                 if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
                     break;
                 else
