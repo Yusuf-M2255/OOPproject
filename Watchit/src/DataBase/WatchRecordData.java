@@ -30,13 +30,13 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
             Scanner scanner = new Scanner(watchRecordFile);
             while (scanner.hasNextLine()) {
                 String lineScanner = scanner.nextLine();
-                Long UserID = Long.parseLong(lineScanner);
+                Long UserID = (Long) Long.parseLong(lineScanner);
                 lineScanner = scanner.nextLine();
                 Date dateOfWatching = DateFormat.getInstance().parse(lineScanner);
                 lineScanner = scanner.nextLine();
                 String[] data = lineScanner.split(" ");
                 String ContentName = data[0];
-                Float Rating = Float.parseFloat(data[1]);
+                Float Rating = (Float) Float.parseFloat(data[1]);
                 watchRecords.add(new WatchRecord(UserID,ContentName,dateOfWatching,Rating));
             }
         }catch (FileNotFoundException e){
@@ -169,8 +169,8 @@ public class WatchRecordData implements Data<WatchRecord>,ReadableClass {
     }
 
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            watchRecords.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            watchRecords.remove(getDataById(Long.valueOf(Id)));
         }
     }
 
