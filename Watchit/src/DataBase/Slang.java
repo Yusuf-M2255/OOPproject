@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class ElarabyLanguage {
+public class Slang {
     public List<Float> floats;
     public List<String> strings;
     public List<Long> longs;
@@ -22,7 +22,7 @@ public class ElarabyLanguage {
     Integer i = 0;
     Long size;
     ReturnedData returnedData;
-    public ElarabyLanguage(File file, String Code) {
+    public Slang(File file, String Code) {
         this.floats = new ArrayList<>();
         this.strings = new ArrayList<>();
         this.longs = new ArrayList<>();

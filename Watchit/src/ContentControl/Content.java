@@ -2,14 +2,14 @@ package ContentControl;
 
 import Cast.CastMember;
 import Cast.Director;
-import DataBase.DataBase;
+import DataBase.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Content {
+public class Content extends DataObject {
     public Long contentID;
     public String contentTitle;
     public Date Date;
@@ -24,7 +24,7 @@ public class Content {
     public int RateCounter;
     public float Rate_Sum;
 
-    public Content(String contentTitle,List<String> genres,List<String>CastMembers, String language, String country, int budget, int revenue,Date date,Director director) {
+    public Content(String contentTitle,String language, String country,int budget, int revenue,List<String> genres,List<String>CastMembers,Director director,Date date){
         this.contentID = (Long) cnt++;
         this.contentTitle = contentTitle;
         Date = date;
@@ -43,13 +43,13 @@ public class Content {
     }
 
     public void AddRate(int UserID, float rate) {
-        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long) UserID, contentTitle, new Date(), rate));
+        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long) UserID,rate, contentTitle, new Date()));
         RateCounter++;
         Rate_Sum += rate;
     }
 
     public void EditRate(int UserID, String contentTitle, float rate){
-        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle, Long.valueOf((long)UserID));
+        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+" "+Long.valueOf((long)UserID).toString());
         Rate_Sum -= WatchRecordTemp.Rating;
         WatchRecordTemp.Rating = (Float) rate;
         Rate_Sum += rate;

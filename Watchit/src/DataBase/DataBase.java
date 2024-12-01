@@ -1,15 +1,22 @@
 package DataBase;
 
 import AccountControl.*;
+import Cast.CastMember;
+import Cast.Director;
 import ContentControl.*;
 import Subscription.*;
+import com.sun.source.tree.TryTree;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class DataBase {
     private static DataBase dataBase;
+    File castMemberFile,watchRecordFile,usersFile,adminsFile,DirctorsFile;
     final String EmailRegex = "[\\w-]+@(gmail|yahoo|outlook)\\.(com|org|io|net)",
             PasswordRegex="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\\W)(?=.\\S+$).{8,}$";
     String[] genres = {
@@ -18,27 +25,71 @@ public class DataBase {
             "Thriller", "Documentary", "Animation", "Family",
             "Musical", "Crime", "Historical", "War", "Western"
     };
-    public AdminsData adminsData= null;
+    public DataObjectController<Admin> adminsData= null;
     public Account CurrentUser = null;
     public static AccountsData accountsData= null;
     public MoviesData moviesData = null;
-    public UsersData usersData = null;
-    public WatchRecordData watchRecordData = null;
+    public DataObjectController<User>usersData =null;
+    public DataObjectController<WatchRecord>watchRecordData = null;
     public SeriesData seriesData = null;
     public static ContentsData contentsData = null;
-    public DirectorsData DirectorsData = null;
-    public CastMembersData castMembersData = null;
+    public DataObjectController<Director> DirectorsData = null;
+    public DataObjectController<CastMember>castMemberData = null;
     private DataBase() {
+        Init();
         accountsData = new AccountsData();
-        usersData = new UsersData();
-        adminsData = new AdminsData();
+        usersData = new DataObjectController<User>(usersFile,"nslw5SWw3oSWSiw2ndW",'U');
+        castMemberData = new DataObjectController<CastMember>(DirctorsFile,"nslw5SWoSnd",'D');
+        adminsData = new DataObjectController<Admin>(adminsFile,"nslw6SW",'A');
         moviesData = new MoviesData();
+        castMemberData = new DataObjectController<CastMember>(castMemberFile,"nslw5SWoSnd",'C');
         seriesData = new SeriesData();
-        watchRecordData = new WatchRecordData();
-        DirectorsData = new DirectorsData();
-        castMembersData = new CastMembersData();
-
+        watchRecordData = new DataObjectController<WatchRecord>(watchRecordFile,"nslfSnd",'W');
     }
+
+    public void Init(){
+        castMemberFile= new File("./CastMembers.txt");
+        if (castMemberFile.exists()) {
+            try {
+                castMemberFile.createNewFile();
+            }catch (IOException e){
+                System.out.println("Error while creating cast members file");
+            }
+        }
+        DirctorsFile = new File("./Directors.txt");
+        if (DirctorsFile.exists()) {
+            try {
+                DirctorsFile.createNewFile();
+            }catch (IOException e){
+                System.out.println("Error while creating Director file");
+            }
+        }
+        adminsFile= new File("./admins.txt");
+        if (adminsFile.exists()) {
+            try {
+                adminsFile.createNewFile();
+            }catch (IOException e){
+                System.out.println("Error while creating cast members file");
+            }
+        }
+        watchRecordFile= new File("./watchRecord.txt");
+        if (watchRecordFile.exists()) {
+            try {
+                watchRecordFile.createNewFile();
+            }catch (IOException e){
+                System.out.println("Error while creating watch records file");
+            }
+        }
+        usersFile= new File("./users.txt");
+        if (watchRecordFile.exists()) {
+            try {
+                usersFile.createNewFile();
+            }catch (IOException e){
+                System.out.println("Error while creating watch users file");
+            }
+        }
+    }
+
     public static DataBase getInstance() {
         if(dataBase == null) {
             dataBase = new DataBase();
@@ -51,11 +102,11 @@ public class DataBase {
     public void Save(){
         moviesData.SaveData();
         seriesData.SaveData();
-        watchRecordData.SaveData();
-        DirectorsData.SaveData();
-        castMembersData.SaveData();
-        adminsData.SaveData();
-        usersData.SaveData();
+        watchRecordData.Write();
+        DirectorsData.Write();
+        adminsData.Write();
+        usersData.Write();
+        castMemberData.Write();
     }
 
     public boolean Login(){

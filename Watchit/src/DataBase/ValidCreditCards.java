@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class ValidCreditCards implements ReadableClass {
+public class ValidCreditCards {
     private List<CreditCard> CreditCards =null ;
     public ValidCreditCards(){
         CreditCards = new ArrayList<>();

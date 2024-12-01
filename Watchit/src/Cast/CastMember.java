@@ -1,9 +1,11 @@
 package Cast;
+import DataBase.DataObject;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class CastMember {
+public class CastMember extends DataObject {
     public String firstName;
     public String lastName;
     public static long cnt = (long) 1;
@@ -51,4 +53,16 @@ public class CastMember {
         sb.append(System.lineSeparator());
         return sb.toString();
    }
+    @Override
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
+    @Override
+    public String getName(){
+        return this.firstName;
+    }
+    @Override
+    public Long getId(){
+        return this.CastMemberId;
+    }
 }

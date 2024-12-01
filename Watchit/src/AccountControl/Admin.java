@@ -12,12 +12,12 @@ public class Admin extends Account {
         super(userName,firstName,lastName,email,password,FavoriteName,Id);
     }
     public void editUser(long userID , User user){
-        UsersData data = DataBase.getInstance().usersData;
+        DataObjectController<User>data=DataBase.getInstance().usersData;
         data.removeData(userID);
         data.addData(user);
     }
     public void deleteUser(long userID){
-        UsersData data = DataBase.getInstance().usersData;
+        DataObjectController<User>data=DataBase.getInstance().usersData;
         data.removeData(userID);
     }
     public void addMovie(Movie movie){
@@ -38,7 +38,7 @@ public class Admin extends Account {
     }
     // episode is not done yet
     public long calculateRevenue(){
-        UsersData data = new UsersData();
+        DataObjectController<User>data=DataBase.getInstance().usersData;
         long revenue = 0, numOfBasic = 0 , numOfStandard = 0, numOfPremium = 0;
         for (User user : data.getData()){
             String plan = user.getSubscriptionPlan().getPlan();
@@ -50,7 +50,7 @@ public class Admin extends Account {
         return revenue;
     }
     public String plansAnalysis(){
-        UsersData data = new UsersData();
+        DataObjectController<User>data=DataBase.getInstance().usersData;
         long numOfBasic = 0 , numOfStandard = 0, numOfPremium = 0;
         for (User user : data.getData()){
             String plan = user.getSubscriptionPlan().getPlan();
@@ -67,9 +67,8 @@ public class Admin extends Account {
 
     @Override
     public String toString(){
-        String Ret = ID.toString() + " " + userName + " " + firstName + " " + lastName + " " + email
+        return  ID.toString() + " " + userName + " " + firstName + " " + lastName + " " + email
                 + ' ' + password + " " + FavoriteName + System.lineSeparator();
-        return Ret;
     }
     @Override
     public boolean equals(Object obj){

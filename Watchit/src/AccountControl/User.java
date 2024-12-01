@@ -10,6 +10,7 @@ import java.util.List;
 public class User extends Account {
     private List<String> FavoriteGenres,WatchLater,History;
     protected Subscription subscriptionPlan;
+    public User() {}
     public User(String userName,String firstName,String lastName,String email,String password,Subscription subscriptionPlan,List<String> FavoriteGenres,List<String> WatchLater,List<String> History,String FavoriteName){
         super(userName,firstName,lastName,email,password,FavoriteName);
         this.subscriptionPlan = subscriptionPlan;
@@ -78,5 +79,31 @@ public class User extends Account {
             return ID.equals(user.ID);
         }
         return false;
+    }
+    @Override
+    public final void DisplayHeadLine(){
+        String Line = "|    ID     |    UserName     |    FirstName    |    LastName    |    Email    |    Password    |";
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
+        System.out.println(Line);
+    }
+
+    @Override
+    public void DisplayLine(){
+        String Line =
+                "|    "+getID()+ "    |    "+getUserName()+ "    |    "
+                +getFirstName()+ "    |    "+ getLastName()+ "    |    "+getEmail()
+                + "    |    "+getPassword()+ "    |";
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
+        System.out.println(Line);
+        for (int i = 0;i<Line.length();i++){
+            System.out.print('-');
+        }
+        System.out.print("\n");
     }
 }

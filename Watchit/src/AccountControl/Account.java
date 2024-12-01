@@ -1,9 +1,19 @@
 package AccountControl;
 
-public class Account {
+import DataBase.DataObject;
+
+public class Account extends DataObject {
     protected final String userName,firstName,lastName,email,password,FavoriteName;
     protected Long ID;
     public static long cnt= (long) 1;
+    public Account(){
+        userName = null;
+        firstName = null;
+        lastName = null;
+        email = null;
+        password = null;
+        FavoriteName = null;
+    }
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
         this.userName = userName;
         this.firstName = firstName;
@@ -29,9 +39,6 @@ public class Account {
     public String getLastName() {
         return lastName;
     }
-    public String getEmail() {
-        return email;
-    }
     public String getPassword() {
         return password;
     }
@@ -45,5 +52,17 @@ public class Account {
             return a.getID().equals(this.getID());
         }
         return false;
+    }
+    @Override
+    public String getName(){
+        return this.userName;
+    }
+    @Override
+    public String getEmail(){
+        return this.email;
+    }
+    @Override
+    public Long getId(){
+        return this.ID;
     }
 }

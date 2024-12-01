@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MoviesData implements Data<Movie>,ReadableClass{
+public class MoviesData implements Data<Movie>{
     private List<Movie> movies =null ;
     public MoviesData(){
         movies = new ArrayList<>();
