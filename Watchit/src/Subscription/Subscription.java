@@ -12,7 +12,6 @@ public class Subscription {
     public final static String[] Plans = {"Basic","Standard","Premium"};
     public final static Long[] Prices = {(long)1000,(long)1750,(long)3000};
     public final static String[] Descriptions = {"1 Screen / Ads","3 Screen / Ads","3 Screen / No Ads"};
-
     // constructors
 
     //for Yusuf (I don't know why you use default constructor)

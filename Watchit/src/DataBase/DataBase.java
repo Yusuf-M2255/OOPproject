@@ -188,7 +188,7 @@ public class DataBase {
             System.out.println((i+1)+"- "+Subscription.Plans[i] +"   |   "+Subscription.Prices[i]+"EGP/Year   |   "+ Subscription.Descriptions[i]);
         }
         Integer Type = sc.nextInt() - 1;
-        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
+        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
         accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));
         return true;

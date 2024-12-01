@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class CreditCard {
     //attributes
-    private String cardNumber;
-    private Date expiryDate;
-    private String cvv;
-    private float balance;
+    private final String cardNumber;
+    private final Date expiryDate;
+    private final String cvv;
+    private Float balance;
 
     //constructors
 
@@ -24,19 +24,14 @@ public class CreditCard {
         this.cvv = cvv;
         this.balance = balance;
     }
-    //setters
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    void Pay(Float amount) {
+        balance-=amount;
     }
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
+
+    void addMoney(Float amount) {
+        balance+=amount;
     }
-    public void setCvv(String cvv) {
-        this.cvv = cvv;
-    }
-    public void setBalance(float balance) {
-        this.balance = balance;
-    }
+
     //getters
     public String getCardNumber() {
         return cardNumber;
@@ -49,5 +44,14 @@ public class CreditCard {
     }
     public float getBalance() {
         return balance;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CreditCard) {
+            CreditCard other = (CreditCard) obj;
+            return other.balance.equals(balance)&&other.expiryDate.equals(expiryDate)&&other.cardNumber.equals(cardNumber);
+        }
+        return false;
     }
 }

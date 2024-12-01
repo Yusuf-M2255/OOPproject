@@ -57,7 +57,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
                 Integer subscriptionType = Integer.parseInt(data[j++]);
                 Date StartDate = DateFormat.getInstance().parse(scanner.nextLine());
                 Date EndDate = DateFormat.getInstance().parse(scanner.nextLine());
-                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(userId,subscriptionType,StartDate,EndDate),fav,watchLater,history,Fav));
+                users.add(new User(Username,FirstName,LastName,Email,Password,new Subscription(userId,subscriptionType,StartDate,EndDate),fav,watchLater,history,Fav));
             }
 
         }catch (FileNotFoundException e){
