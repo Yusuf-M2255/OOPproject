@@ -29,6 +29,7 @@ public class DataBase {
     public DirectorsData DirectorsData = null;
     public CastMembersData castMembersData = null;
     private DataBase() {
+        accountsData = new AccountsData();
         usersData = new UsersData();
         adminsData = new AdminsData();
         moviesData = new MoviesData();
@@ -41,7 +42,6 @@ public class DataBase {
     public static DataBase getInstance() {
         if(dataBase == null) {
             dataBase = new DataBase();
-            accountsData = new AccountsData();
             contentsData = new ContentsData();
             return dataBase;
         }

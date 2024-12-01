@@ -1,5 +1,6 @@
 package Subscription;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,4 +41,9 @@ public class Subscription {
     }
     public Date getEndDate() {return endDate;}
     public String getDescription() {return Descriptions[Type];}
+
+    @Override
+    public String toString() {
+        return Type+System.lineSeparator()+ DateFormat.getInstance().format(startDate) +System.lineSeparator()+DateFormat.getInstance().format(endDate);
+    }
 }

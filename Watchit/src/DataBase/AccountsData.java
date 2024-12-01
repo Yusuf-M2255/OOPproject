@@ -10,8 +10,6 @@ public class AccountsData implements Data<Account> {
     List<Account> accounts;
     public AccountsData() {
         this.accounts = new ArrayList<>();
-        accounts.addAll(DataBase.getInstance().usersData.getDataAsList());
-        //accounts.addAll(DataBase.getInstance().adminsData.getDataAsList());
     }
 
     public Account getDataByEmail(String Email){

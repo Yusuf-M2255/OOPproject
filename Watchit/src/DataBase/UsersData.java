@@ -23,43 +23,18 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * get Data of users from files
      * its throws messages when files not founded or any other error
      */
+
     public void LoadData(){
         File userFile = new File("./users.txt");
         try {
             if(!userFile.exists()){
                 userFile.createNewFile();
             }
-            Scanner scanner = new Scanner(userFile);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                int j = 0;
-                String[] data = line.split(" ");
-                Long userId = Long.parseLong(data[j++]);
-                String Username = data[j++];
-                String Password = data[j++];
-                String Email = data[j++];
-                String FirstName = data[j++];
-                String LastName = data[j++];
-                Long size = (Long) Long.parseLong(data[j++]);
-                List<String>history = new ArrayList<>(),fav = new ArrayList<>(),watchLater = new ArrayList<>();
-                for (int i = 0; i < size; i++) {
-                    history.add(data[j++]);
-                }
-                size = (Long) Long.parseLong(data[j++]);
-                for (int i = 0; i < size; i++) {
-                    fav.add(data[j++]);
-                }
-                size = (Long) Long.parseLong(data[j++]);
-                for (int i = 0; i < size; i++) {
-                    watchLater.add(data[j++]);
-                }
-                String Fav = data[j++];
-                Integer subscriptionType = Integer.parseInt(data[j++]);
-                Date StartDate = DateFormat.getInstance().parse(scanner.nextLine());
-                Date EndDate = DateFormat.getInstance().parse(scanner.nextLine());
-                users.add(new User(Username,FirstName,LastName,Email,Password,new Subscription(userId,subscriptionType,StartDate,EndDate),fav,watchLater,history,Fav));
+            ElarabyLanguage UserL = new ElarabyLanguage(userFile,"nslw5SWw3oSWSiw2ndW");
+            while (UserL.notNull()) {
+                ReturnedData re = UserL.Run(UserL.Code);
+                addData(new User(re.longs.get(0), re.strings.get(0), re.strings.get(3), re.strings.get(4), re.strings.get(2), re.strings.get(1), new Subscription(re.longs.get(0), re.integers.get(0), re.dates.get(0), re.dates.get(1)), re.stringLists.get(1), re.stringLists.get(2), re.stringLists.get(0), re.strings.get(5)));
             }
-
         }catch (FileNotFoundException e){
             System.out.println("File users.txt is not found");
         }
@@ -80,44 +55,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
             userFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(userFile);
             for (User user : users) {
-                fos.write(user.getID().toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getUserName().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getPassword().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getEmail().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getFirstName().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getLastName().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(Integer.valueOf(user.getHistory().size()).toString().getBytes());
-                fos.write(" ".getBytes());
-                for (String history : user.getHistory()) {
-                    fos.write(history.getBytes());
-                    fos.write(" ".getBytes());
-                }
-                fos.write(Integer.valueOf(user.getFavoriteGenres().size()).toString().getBytes());
-                fos.write(" ".getBytes());
-                for (String favoriteGenre : user.getFavoriteGenres()) {
-                    fos.write(favoriteGenre.getBytes());
-                    fos.write(" ".getBytes());
-                }
-                fos.write(Integer.valueOf(user.getWatchLater().size()).toString().getBytes());
-                fos.write(" ".getBytes());
-                for (String watchLater : user.getWatchLater()) {
-                    fos.write(watchLater.getBytes());
-                    fos.write(" ".getBytes());
-                }
-                fos.write(user.getFavoriteName().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(user.getSubscriptionPlan().Type.toString().getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(DateFormat.getInstance().format(user.getSubscriptionPlan().getStartDate()).getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(DateFormat.getInstance().format(user.getSubscriptionPlan().getEndDate()).getBytes());
-                fos.write(System.lineSeparator().getBytes());
+                fos.write(user.toString().getBytes());
             }
         }catch (FileNotFoundException e){
             System.out.println("File users.txt is not found");
@@ -168,7 +106,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * @return User[]
      */
     public User[] getDataThatContains(String searchText){
-        List<User> Searched = new ArrayList<User>();
+        List<User> Searched = new ArrayList<>();
         for (User user : users) {
             if(user.getUserName().contains(searchText))
                 Searched.add(user);
@@ -198,6 +136,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      */
     public void addData(User user){
         users.add(user);
+        DataBase.accountsData.addData(user);
     }
 
     /**
