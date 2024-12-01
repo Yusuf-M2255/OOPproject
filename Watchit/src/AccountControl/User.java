@@ -9,7 +9,7 @@ import java.util.List;
 
 public class User extends Account {
     private List<String> FavoriteGenres,WatchLater,History;
-    private Subscription subscriptionPlan;
+    protected Subscription subscriptionPlan;
     public User(String userName,String firstName,String lastName,String email,String password,Subscription subscriptionPlan,List<String> FavoriteGenres,List<String> WatchLater,List<String> History,String FavoriteName){
         super(userName,firstName,lastName,email,password,FavoriteName);
         this.subscriptionPlan = subscriptionPlan;
