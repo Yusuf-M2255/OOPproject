@@ -7,7 +7,9 @@ import Subscription.Subscription;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,15 +32,16 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
             Scanner scanner = new Scanner(userFile);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+                int j = 0;
                 String[] data = line.split(" ");
-                String Username = data[0];
-                String Password = data[1];
-                String Email = data[2];
-                String FirstName = data[3];
-                String LastName = data[4];
-                Long size = (Long) Long.parseLong(data[5]);
+                Long userId = Long.parseLong(data[j++]);
+                String Username = data[j++];
+                String Password = data[j++];
+                String Email = data[j++];
+                String FirstName = data[j++];
+                String LastName = data[j++];
+                Long size = (Long) Long.parseLong(data[j++]);
                 List<String>history = new ArrayList<>(),fav = new ArrayList<>(),watchLater = new ArrayList<>();
-                int j = 6;
                 for (int i = 0; i < size; i++) {
                     history.add(data[j++]);
                 }
@@ -50,8 +53,11 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
                 for (int i = 0; i < size; i++) {
                     watchLater.add(data[j++]);
                 }
-
-                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,watchLater,history,data[j++]));
+                String Fav = data[j++];
+                Integer subscriptionType = Integer.parseInt(data[j++]);
+                Date StartDate = DateFormat.getInstance().parse(scanner.nextLine());
+                Date EndDate = DateFormat.getInstance().parse(scanner.nextLine());
+                users.add(new User(Username,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(userId,subscriptionType,StartDate,EndDate),fav,watchLater,history,Fav));
             }
 
         }catch (FileNotFoundException e){
@@ -74,6 +80,8 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
             userFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(userFile);
             for (User user : users) {
+                fos.write(user.getID().toString().getBytes());
+                fos.write(" ".getBytes());
                 fos.write(user.getUserName().getBytes());
                 fos.write(" ".getBytes());
                 fos.write(user.getPassword().getBytes());
@@ -103,6 +111,12 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
                     fos.write(" ".getBytes());
                 }
                 fos.write(user.getFavoriteName().getBytes());
+                fos.write(" ".getBytes());
+                fos.write(user.getSubscriptionPlan().Type.toString().getBytes());
+                fos.write(System.lineSeparator().getBytes());
+                fos.write(DateFormat.getInstance().format(user.getSubscriptionPlan().getStartDate()).getBytes());
+                fos.write(System.lineSeparator().getBytes());
+                fos.write(DateFormat.getInstance().format(user.getSubscriptionPlan().getEndDate()).getBytes());
                 fos.write(System.lineSeparator().getBytes());
             }
         }catch (FileNotFoundException e){

@@ -1,9 +1,9 @@
 package AccountControl;
 
 public class Account {
-    private String userName,firstName,lastName,email,password,FavoriteName;
+    private final String userName,firstName,lastName,email,password,FavoriteName;
     private Long ID;
-    protected static long cnt= (long) 1;
+    public static long cnt= (long) 1;
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
         this.userName = userName;
         this.firstName = firstName;
@@ -13,6 +13,11 @@ public class Account {
         this.FavoriteName = FavoriteName;
         this.ID = (Long) cnt;
         cnt++;
+    }
+    public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName,Long id) {
+        this(userName, firstName, lastName, email, password, FavoriteName);
+        ID=id;
+        cnt = id;
     }
     public String getFavoriteName(){ return this.FavoriteName;}
     public String getUserName() {

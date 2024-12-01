@@ -65,7 +65,7 @@ public class DataBase {
         Email = sc.next();
         System.out.print("Enter your password: ");
         Password = sc.next();
-        Account user = DataBase.getInstance().accountsData.getDataByEmail(Email);
+        Account user =accountsData.getDataByEmail(Email);
         if(user==null){
             System.out.println("Email is not Found!");
             return false;
@@ -82,9 +82,7 @@ public class DataBase {
     }
     public boolean Register() {
         String FirstName, LastName, UserName, Email, Password;
-        Subscription SubscriptionPlan = new Subscription();
-        CreditCard creditCard=new CreditCard();
-        List<String> fav = new ArrayList<String>();
+        List<String> fav = new ArrayList<>();
         Scanner input = new Scanner(System.in), sc = new Scanner(System.in);
         System.out.print("Enter First Name: ");
         FirstName = input.nextLine();
@@ -185,7 +183,12 @@ public class DataBase {
         }while(j!=-1);
         System.out.print("Enter your Favorite Name : ");
         String FavoriteName = input.next();
-        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
+        System.out.println("Choose your Plan : ");
+        for (i = 0 ;i<3;i++){
+            System.out.println((i+1)+"- "+Subscription.Plans[i] +"   |   "+Subscription.Prices[i]+"EGP/Year   |   "+ Subscription.Descriptions[i]);
+        }
+        Integer Type = sc.nextInt() - 1;
+        DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new CreditCard(),new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
         accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));
         return true;

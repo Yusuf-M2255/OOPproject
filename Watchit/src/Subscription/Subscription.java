@@ -1,58 +1,44 @@
 package Subscription;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Subscription {
     //attributes
-    private long userID;
-    private String plan;
-    private int price;
-    private Date startDate;
-    private Date endDate;
+    private final long userID;
+    private  final Date startDate;
+    private final Date endDate;
+    public final Integer Type;
+    public final static String[] Plans = {"Basic","Standard","Premium"};
+    public final static Long[] Prices = {(long)1000,(long)1750,(long)3000};
+    public final static String[] Descriptions = {"1 Screen / Ads","3 Screen / Ads","3 Screen / No Ads"};
+
     // constructors
 
     //for Yusuf (I don't know why you use default constructor)
-    public Subscription() {
-        userID = 0;
-        plan = "";
-        price = 0;
-        startDate = new Date();
-        endDate = new Date();
-    }
-    public Subscription(long userID, String plan, int price, Date startDate, Date endDate){
+    public Subscription(long userID, Integer Type, Date startDate, Date endDate){
         this.userID = userID;
-        this.plan = plan;
-        this.price = price;
+        this.Type = Type;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    //setters
-    public void setUserID(long userID) {
+    public Subscription(long userID, Integer Type){
         this.userID = userID;
+        this.Type = Type;
+        this.startDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.YEAR, 1);
+        this.endDate = new Date(calendar.getTime().getTime());
     }
-    public void setPlan(String plan) {
-        this.plan = plan;
-    }
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-    //getters
-    public long getUserID() {
+    public Long getUserID() {
         return userID;
     }
-    public String getPlan() {
-        return plan;
-    }
-    public int getPrice() {
-        return price;
-    }
+    public String getPlan() {return Plans[Type];}
+    public Long getPrice() { return Prices[Type];}
     public Date getStartDate() {
         return startDate;
     }
+    public Date getEndDate() {return endDate;}
+    public String getDescription() {return Descriptions[Type];}
 }
