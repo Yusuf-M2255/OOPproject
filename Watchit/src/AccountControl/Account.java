@@ -38,4 +38,12 @@ public class Account {
     public Long getID() {
         return ID;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Account) {
+            Account a = (Account) obj;
+            return a.getID().equals(this.getID());
+        }
+        return false;
+    }
 }

@@ -6,6 +6,7 @@ import ContentControl.Movie;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class AdminsData implements Data<Admin>,ReadableClass{
     private List<Admin> admins =null ;
     public AdminsData(){
         admins = new ArrayList<>();
-        //LoadData();
+        LoadData();
     }
 
     /**
@@ -27,7 +28,11 @@ public class AdminsData implements Data<Admin>,ReadableClass{
             if(!adminsFile.exists()){
                 adminsFile.createNewFile();
             }
-            Scanner scanner = new Scanner(adminsFile);
+            ElarabyLanguage AdminL = new ElarabyLanguage(adminsFile,"nslw6SW");
+            while(AdminL.notNull()){
+                ReturnedData re = AdminL.Run(AdminL.Code);
+                addData(new Admin(re.longs.get(0),re.strings.get(0),re.strings.get(1),re.strings.get(2),re.strings.get(3),re.strings.get(4),re.strings.get(5)));
+            }
         }catch (FileNotFoundException e){
             System.out.println("File admins.txt is not found");
         }
@@ -48,6 +53,9 @@ public class AdminsData implements Data<Admin>,ReadableClass{
                 adminsFile.createNewFile();
             }
             FileOutputStream fos = new FileOutputStream(adminsFile);
+            for(Admin admin : admins){
+                fos.write(admin.toString().getBytes());
+            }
         }catch (FileNotFoundException e){
             System.out.println("File admins.txt is not found");
         }
@@ -56,7 +64,17 @@ public class AdminsData implements Data<Admin>,ReadableClass{
         }
     }
 
-    public Admin getDataById(Long id){
+    public Admin getDataById(Long Id){
+        int l = 0,r = admins.size()-1;
+        while (l<=r){
+            int m = (l+r)/2;
+            if(admins.get(m).getID()>Id){
+                r = m-1;
+            }else if(admins.get(m).getID()<Id){
+                l = m+1;
+            }else
+                return admins.get(m);
+        }
         return null;
     }
 
@@ -109,6 +127,7 @@ public class AdminsData implements Data<Admin>,ReadableClass{
      */
     public void addData(Admin admin){
         admins.add(admin);
+        DataBase.accountsData.addData(admin);
     }
 
     /**

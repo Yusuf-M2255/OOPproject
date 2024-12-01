@@ -58,25 +58,7 @@ public class DirectorsData implements Data<Director>,ReadableClass{
             }
             FileOutputStream fos = new FileOutputStream(DirectorsFile);
             for (Director director : Directors){
-                fos.write(director.firstName.getBytes());
-                fos.write(" ".getBytes());
-                fos.write(director.lastName.getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(director.dateOfBirth.toString().getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(director.gender.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(director.nationality.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(director.socialMediaLink.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(director.Contents.size());
-                fos.write(" ".getBytes());
-                for (String content : director.Contents){
-                    fos.write(content.getBytes());
-                    fos.write(" ".getBytes());
-                }
-                fos.write(System.lineSeparator().getBytes());
+                fos.write(director.toString().getBytes());
             }
         }catch (FileNotFoundException e){
             System.out.println("File Directors.txt is not found");

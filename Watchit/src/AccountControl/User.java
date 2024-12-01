@@ -71,4 +71,12 @@ public class User extends Account {
         s.append(System.lineSeparator());
         return s.toString();
     }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof User){
+            User user = (User) obj;
+            return ID.equals(user.ID);
+        }
+        return false;
+    }
 }

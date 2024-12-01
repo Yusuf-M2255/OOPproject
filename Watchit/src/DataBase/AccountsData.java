@@ -1,8 +1,8 @@
 package DataBase;
 
 import AccountControl.Account;
+import AccountControl.Admin;
 import AccountControl.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +20,31 @@ public class AccountsData implements Data<Account> {
         return null;
     }
 
-    public boolean GetType(Account account){
+    public boolean isUser(Account account){
         for (User ac : DataBase.getInstance().usersData.getDataAsList()) {
-            if(ac.getEmail().equals(account.getEmail()))
+            if(ac.equals(account))
                 return true;
         }
         return false;
     }
 
-    public Account getDataById(Long id){
-        for (Account account : accounts) {
-            if(account.getID().equals(id))
-                return account;
+    public boolean isAdmin(Account account){
+        for (Admin ac : DataBase.getInstance().adminsData.getDataAsList()) {
+            if(ac.equals(account))
+                return true;
+        }
+        return false;
+    }
+    public Account getDataById(Long Id){
+        int l = 0,r = accounts.size()-1;
+        while (l<=r){
+            int m = (l+r)/2;
+            if(accounts.get(m).getID()>Id){
+                r = m-1;
+            }else if(accounts.get(m).getID()<Id){
+                l = m+1;
+            }else
+                return accounts.get(m);
         }
         return null;
     }
@@ -42,8 +55,8 @@ public class AccountsData implements Data<Account> {
      */
     public Account getDataByName(String name){
         for (Account account : accounts) {
-            //if(account.getName().equals(name))
-            return account;
+            if(account.getUserName().equals(name))
+                return account;
         }
         return null;
     }
@@ -56,8 +69,8 @@ public class AccountsData implements Data<Account> {
     public Account[] getDataThatContains(String searchText){
         List<Account> Searched = new ArrayList<Account>();
         for (Account account : accounts) {
-            //if(account.getName().contains(searchText))
-            Searched.add(account);
+            if(account.getUserName().contains(searchText))
+                Searched.add(account);
         }
         return Searched.toArray(new Account[0]);
     }
@@ -94,9 +107,7 @@ public class AccountsData implements Data<Account> {
         accounts.remove(getDataByName(account));
     }
 
-    public void removeData(long Id){
-        while(getDataById(Long.valueOf(Id))!=null) {
-            accounts.remove(getDataById(Long.valueOf(Id)));
-        }
+    public void removeData(long Id) {
+        accounts.remove(getDataById(Id));
     }
 }
