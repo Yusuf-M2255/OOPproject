@@ -36,17 +36,17 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
                 String Email = data[2];
                 String FirstName = data[3];
                 String LastName = data[4];
-                Long size = Long.parseLong(data[5]);
+                Long size = (Long) Long.parseLong(data[5]);
                 List<String>history = new ArrayList<>(),fav = new ArrayList<>(),watchLater = new ArrayList<>();
                 int j = 6;
                 for (int i = 0; i < size; i++) {
                     history.add(data[j++]);
                 }
-                size = Long.parseLong(data[j++]);
+                size = (Long) Long.parseLong(data[j++]);
                 for (int i = 0; i < size; i++) {
                     fav.add(data[j++]);
                 }
-                size = Long.parseLong(data[j++]);
+                size = (Long) Long.parseLong(data[j++]);
                 for (int i = 0; i < size; i++) {
                     watchLater.add(data[j++]);
                 }
@@ -191,7 +191,7 @@ public class UsersData implements Data<User>,ReadableClass,ConsoleDisplay<User> 
      * @param user name of user that will be removed
      */
     public void removeData(long user){
-        users.remove(getDataById(user));
+        users.remove(getDataById(Long.valueOf(user)));
     }
 
     public void removeData(String user){

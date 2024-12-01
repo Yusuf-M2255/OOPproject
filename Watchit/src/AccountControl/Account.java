@@ -3,7 +3,7 @@ package AccountControl;
 public class Account {
     private String userName,firstName,lastName,email,password,FavoriteName;
     private Long ID;
-    private static Long cnt=(long)1;
+    private static long cnt= (long) 1;
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
         this.userName = userName;
         this.firstName = firstName;
@@ -11,7 +11,7 @@ public class Account {
         this.email = email;
         this.password = password;
         this.FavoriteName = FavoriteName;
-        this.ID = cnt;
+        this.ID = (Long) cnt;
         cnt++;
     }
     public String getFavoriteName(){ return this.FavoriteName;}

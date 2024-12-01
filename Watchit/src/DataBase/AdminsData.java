@@ -120,8 +120,8 @@ public class AdminsData implements Data<Admin>,ReadableClass{
     }
 
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            admins.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            admins.remove(getDataById(Long.valueOf(Id)));
         }
     }
 }

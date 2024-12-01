@@ -59,8 +59,8 @@ public class MoviesData implements Data<Movie>,ReadableClass{
     }
 
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            movies.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            movies.remove(getDataById(Long.valueOf(Id)));
         }
     }
     /**

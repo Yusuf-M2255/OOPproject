@@ -8,9 +8,9 @@ public class WatchRecord {
     public String Content;
     public Long UserId;
     public WatchRecord(long UserId, String Content,Date DateOfWatching, float Rating) {
-        this.Rating = Rating;
+        this.Rating = (Float) Rating;
         this.DateOfWatching = DateOfWatching;
         this.Content = Content;
-        this.UserId = UserId;
+        this.UserId = (Long) UserId;
     }
 }

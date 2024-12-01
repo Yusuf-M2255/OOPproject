@@ -69,8 +69,8 @@ public class SeriesData implements Data<Series>,ReadableClass {
     }
 
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            series.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            series.remove(getDataById(Long.valueOf(Id)));
         }
     }
 

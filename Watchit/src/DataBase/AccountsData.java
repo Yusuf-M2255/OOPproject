@@ -97,8 +97,8 @@ public class AccountsData implements Data<Account> {
     }
 
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            accounts.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            accounts.remove(getDataById(Long.valueOf(Id)));
         }
     }
 }

@@ -42,7 +42,7 @@ public class DirectorsData implements Data<Director>,ReadableClass{
                 String gender = data[0];
                 String nationality = data[1];
                 String socialMediaLink = data[2];
-                Long size = Long.parseLong(data[3]);
+                Long size = (Long) Long.parseLong(data[3]);
                 List<String>contents=new ArrayList<>();
                 for (int i = 0;i<size;i++){
                     contents.add(data[4+i]);
@@ -186,8 +186,8 @@ public class DirectorsData implements Data<Director>,ReadableClass{
         Directors.remove(getDataByName(Director));
     }
     public void removeData(long Id){
-        while(getDataById(Id)!=null) {
-            Directors.remove(getDataById(Id));
+        while(getDataById(Long.valueOf(Id))!=null) {
+            Directors.remove(getDataById(Long.valueOf(Id)));
         }
     }
 

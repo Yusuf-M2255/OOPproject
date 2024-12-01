@@ -5,7 +5,7 @@ import java.util.List;
 public class CastMember {
     public String firstName;
     public String lastName;
-    public static Long cnt = (long)1;
+    public static long cnt = (long) 1;
     public Long CastMemberId;
     public Date dateOfBirth;  
     public String gender;
@@ -20,7 +20,7 @@ public class CastMember {
         this.Contents = Contents;
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
-        CastMemberId = cnt++;
+        CastMemberId = (Long) cnt++;
     }
    public void joinContent(String Content){
         Contents.add(Content);
