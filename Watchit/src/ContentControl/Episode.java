@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Episode {
   // Variables
-  private int episodeNumber;
-  private String episodeTitle;
-  private int duration;
-  private Date releaseDate;
+  private final int episodeNumber;
+  private final String episodeTitle;
+  private final int duration;
+  private final Date releaseDate;
 
   // Constructors
   public Episode(int episodeNumber, String episodeTitle, int duration, Date releaseDate) {
@@ -17,7 +17,7 @@ public class Episode {
     this.releaseDate = releaseDate;
   }
 
-  // getters
+  // Getters & Setters
   public int getepisodeNumber(){
     return this.episodeNumber;
   }
