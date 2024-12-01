@@ -18,7 +18,7 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
     private List<CastMember> CastMembers =null ;
     public CastMembersData(){
         CastMembers = new ArrayList<>();
-        //LoadData();
+        LoadData();
     }
 
     /**
@@ -31,25 +31,10 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
             if(!CastMembersFile.exists()){
                 CastMembersFile.createNewFile();
             }
-            Scanner scanner = new Scanner(CastMembersFile);
-            while (scanner.hasNextLine()) {
-                String lineScanner = scanner.nextLine();
-                String[] data = lineScanner.split(" ");
-                String firstname = data[0];
-                String lastname = data[1];
-                lineScanner = scanner.nextLine();
-                String date = lineScanner;
-                lineScanner = scanner.nextLine();
-                data = lineScanner.split(" ");
-                String gender = data[0];
-                String nationality = data[1];
-                String socialMediaLink = data[2];
-                Long size = (Long) Long.parseLong(data[3]);
-                List<String>contents=new ArrayList<>();
-                for (int i = 0;i<size;i++){
-                    contents.add(data[4+i]);
-                }
-                CastMembers.add(new CastMember(firstname,lastname, DateFormat.getDateInstance().parse(date),gender,contents,nationality,socialMediaLink));
+            ElarabyLanguage CastMemberL = new ElarabyLanguage(CastMembersFile,"nslw5SWoSnd");
+            while (CastMemberL.notNull()) {
+                ReturnedData re = CastMemberL.Run(CastMemberL.Code);
+                CastMembers.add(new CastMember(re.longs.get(0),re.strings.get(0),re.strings.get(1), re.strings.get(2),re.strings.get(3),re.strings.get(4),re.stringLists.get(0),re.dates.get(0)));
             }
         }catch (FileNotFoundException e){
             System.out.println("File CastMembers.txt is not found");
@@ -75,25 +60,7 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
             }
             FileOutputStream fos = new FileOutputStream(CastMembersFile);
             for (CastMember castMember : CastMembers){
-                fos.write(castMember.firstName.getBytes());
-                fos.write(" ".getBytes());
-                fos.write(castMember.lastName.getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(castMember.dateOfBirth.toString().getBytes());
-                fos.write(System.lineSeparator().getBytes());
-                fos.write(castMember.gender.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(castMember.nationality.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(castMember.socialMediaLink.toString().getBytes());
-                fos.write(" ".getBytes());
-                fos.write(castMember.Contents.size());
-                fos.write(" ".getBytes());
-                for (String content : castMember.Contents){
-                    fos.write(content.getBytes());
-                    fos.write(" ".getBytes());
-                }
-                fos.write(System.lineSeparator().getBytes());
+                fos.write(castMember.toString().getBytes());
             }
         }catch (FileNotFoundException e){
             System.out.println("File CastMembers.txt is not found");
@@ -102,6 +69,7 @@ public class CastMembersData implements Data<CastMember>,ReadableClass{
             System.out.println("creating file CastMembers.txt failed");
         }
         catch (Exception e){
+            e.printStackTrace();
             System.out.println("Save CastMembers.txt failed");
         }
     }

@@ -5,36 +5,36 @@ import Cast.Director;
 import DataBase.DataBase;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-abstract public class Content {
+public class Content {
     public Long contentID;
     public String contentTitle;
     public Date Date;
     public static long cnt = (long)1;
-    public CastMember[] cast;
+    public List<String> cast;
     public Director director;
-    public String genres;
+    public List<String>genres;
     public String language;
     public String country;
     public int budget;
     public int revenue;
-    public Image image;
     public int RateCounter;
     public float Rate_Sum;
 
-    public Content(String contentTitle, java.util.Date date, int SizeOfCast, Director director, String genres, String language, String country, int budget, int revenue, Image image) {
+    public Content(String contentTitle,List<String> genres,List<String>CastMembers, String language, String country, int budget, int revenue,Date date,Director director) {
         this.contentID = (Long) cnt++;
         this.contentTitle = contentTitle;
         Date = date;
-        this.cast = new CastMember[SizeOfCast];
+        this.cast = CastMembers;
         this.director = director;
         this.genres = genres;
         this.language = language;
         this.country = country;
         this.budget = budget;
         this.revenue = revenue;
-        this.image = image;
         Rate_Sum = 0;
         for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
             Rate_Sum += Record.Rating;

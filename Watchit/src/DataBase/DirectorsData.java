@@ -29,25 +29,10 @@ public class DirectorsData implements Data<Director>,ReadableClass{
             if(!DirectorsFile.exists()){
                 DirectorsFile.createNewFile();
             }
-            Scanner scanner = new Scanner(DirectorsFile);
-            while (scanner.hasNextLine()) {
-                String lineScanner = scanner.nextLine();
-                String[] data = lineScanner.split(" ");
-                String firstname = data[0];
-                String lastname = data[1];
-                lineScanner = scanner.nextLine();
-                Date date = DateFormat.getDateTimeInstance().parse(lineScanner);
-                lineScanner = scanner.nextLine();
-                data = lineScanner.split(" ");
-                String gender = data[0];
-                String nationality = data[1];
-                String socialMediaLink = data[2];
-                Long size = (Long) Long.parseLong(data[3]);
-                List<String>contents=new ArrayList<>();
-                for (int i = 0;i<size;i++){
-                    contents.add(data[4+i]);
-                }
-                Directors.add(new Director(firstname,lastname,date,gender,nationality,socialMediaLink,contents));
+            ElarabyLanguage DirectorL = new ElarabyLanguage(DirectorsFile,"nsw5SWoSnd");
+            while (DirectorL.notNull()) {
+                ReturnedData re = DirectorL.Run(DirectorL.Code);
+                Directors.add(new Director(re.strings.get(0),re.strings.get(1), re.strings.get(2),re.strings.get(3),re.strings.get(4),re.stringLists.get(0),re.dates.get(0)));
             }
         }catch (FileNotFoundException e){
             System.out.println("File Directors.txt is not found");
