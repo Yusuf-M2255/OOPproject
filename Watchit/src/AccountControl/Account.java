@@ -3,7 +3,7 @@ package AccountControl;
 public class Account {
     private final String userName,firstName,lastName,email,password,FavoriteName;
     private Long ID;
-    public static long cnt= (long) 1;
+    protected static long cnt= (long) 1;
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
         this.userName = userName;
         this.firstName = firstName;
