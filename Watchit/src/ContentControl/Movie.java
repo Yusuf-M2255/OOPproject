@@ -21,6 +21,8 @@ public class Movie extends Content{
   public int getDuration() {
     return duration;
   }
+
+  //--------------------------------------DataBase Methods-----------------------------------------//
   @Override
   public String toString() {
     return super.toString() + Integer.valueOf(duration).toString() +System.lineSeparator();

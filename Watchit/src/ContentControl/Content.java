@@ -73,6 +73,7 @@ public class Content extends DataObject {
     public float TotalRate(){
         return (Rate_Sum/RateCounter);
     }
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public Long getId(){
         return contentID;
@@ -81,7 +82,6 @@ public class Content extends DataObject {
     public String getName(){
         return contentTitle;
     }
-
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

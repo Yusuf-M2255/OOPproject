@@ -1,7 +1,5 @@
 package ContentControl;
 
-import Cast.Director;
-
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +44,7 @@ public class Series extends Content{
         this.onGoing = onGoing;
     }
 
-    //DataBase override methods
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
         return super.toString()+numberOfEpisodes+" "+onGoing+System.lineSeparator()+ DateFormat.getInstance().format(lastAireDate) +System.lineSeparator();

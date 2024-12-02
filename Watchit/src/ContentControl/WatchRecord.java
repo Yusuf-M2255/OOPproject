@@ -16,6 +16,7 @@ public class WatchRecord extends DataObject {
         this.Content = Content;
         this.UserId = (Long) UserId;
     }
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
         return UserId.toString()+" "+Rating.toString()+" "+ Content+System.lineSeparator()+

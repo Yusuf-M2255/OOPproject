@@ -49,6 +49,7 @@ public class User extends Account {
     public void addGenre(String Genre) {
         FavoriteGenres.add(Genre);
     }
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder(ID.toString() + " " + userName + " " + password + " " + email + " " + firstName

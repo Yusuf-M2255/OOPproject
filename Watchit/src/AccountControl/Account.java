@@ -45,6 +45,7 @@ public class Account extends DataObject {
     public Long getID() {
         return ID;
     }
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Account) {

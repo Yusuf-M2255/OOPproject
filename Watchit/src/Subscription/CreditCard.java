@@ -47,7 +47,7 @@ public class CreditCard extends DataObject {
     public float getBalance() {
         return balance;
     }
-
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof CreditCard) {
@@ -61,6 +61,7 @@ public class CreditCard extends DataObject {
     public String toString() {
         return cardNumber + " "+ cvv +" "+ balance.toString() + System.lineSeparator()+ DateFormat.getInstance().format(expiryDate) +System.lineSeparator();
     }
+    
     @Override
     public Date getDate(){
         return expiryDate;

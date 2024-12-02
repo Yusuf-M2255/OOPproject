@@ -39,6 +39,7 @@ public class CastMember extends DataObject {
    public void joinContent(String Content){
         Contents.add(Content);
    }
+   //--------------------------------------DataBase Methods-----------------------------------------//
    @Override
    public String toString() {
         StringBuilder sb = new StringBuilder();

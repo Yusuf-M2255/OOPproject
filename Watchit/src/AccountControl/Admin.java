@@ -64,7 +64,7 @@ public class Admin extends Account {
                 + "\n The Number of Users in Premium Plan is: " + Long.toString(numOfPremium)+'\n';
         return analysis;
     }
-
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString(){
         return super.toString();

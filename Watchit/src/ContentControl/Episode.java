@@ -35,7 +35,6 @@ public class Episode extends DataObject {
   }
 
   // Getters & Setters
-  public Long getId() { return Id; }
   public String getSeriesName() { return SeriesName; }
   public int getepisodeNumber(){
     return this.episodeNumber;
@@ -49,5 +48,19 @@ public class Episode extends DataObject {
   public Date getreleaseDate(){
     return this.releaseDate;
   }
-
+  //--------------------------------------DataBase Methods-----------------------------------------//
+  @Override
+  public String toString() {
+    return null;
+  }
+  @Override
+  public boolean equals(Object o) {
+    return false;
+  }
+  @Override
+  public Long getId() { return Id; }
+  @Override
+  public String getName(){return this.SeriesName;}
+  @Override
+  public String getFullName(){return this.SeriesName+" "+this.episodeTitle;}
 }

@@ -41,7 +41,7 @@ public class Subscription {
     }
     public Date getEndDate() {return endDate;}
     public String getDescription() {return Descriptions[Type];}
-
+    //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
         return Type+System.lineSeparator()+ DateFormat.getInstance().format(startDate) +System.lineSeparator()+DateFormat.getInstance().format(endDate);
