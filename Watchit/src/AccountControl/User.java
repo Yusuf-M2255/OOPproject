@@ -1,10 +1,5 @@
 package AccountControl;
-
-import Subscription.CreditCard;
 import Subscription.Subscription;
-
-import java.sql.Date;
-import java.text.DateFormat;
 import java.util.List;
 
 public class User extends Account {
@@ -94,7 +89,7 @@ public class User extends Account {
     @Override
     public void DisplayLine(){
         String Line =
-                "|    "+getID()+ "    |    "+getUserName()+ "    |    "
+                "|    "+getId(0)+ "    |    "+getUserName()+ "    |    "
                 +getFirstName()+ "    |    "+ getLastName()+ "    |    "+getEmail()
                 + "    |    "+getPassword()+ "    |";
         for (int i = 0;i<Line.length();i++){

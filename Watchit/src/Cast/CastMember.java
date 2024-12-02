@@ -55,15 +55,17 @@ public class CastMember extends DataObject {
         return sb.toString();
    }
     @Override
-    public String getFullName(){
-        return this.firstName + " " + this.lastName;
+    public String getName(int op){
+        if(op==0)
+            return this.firstName;
+        if(op==1)
+            return this.lastName;
+        if(op==2)
+            return this.firstName+" "+this.lastName;
+        return null;
     }
     @Override
-    public String getName(){
-        return this.firstName;
-    }
-    @Override
-    public Long getId(){
+    public Long getId(int op){
         return this.CastMemberId;
     }
 }

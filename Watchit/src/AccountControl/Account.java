@@ -42,28 +42,31 @@ public class Account extends DataObject {
     public String getPassword() {
         return password;
     }
-    public Long getID() {
-        return ID;
-    }
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Account) {
             Account a = (Account) obj;
-            return a.getID().equals(this.getID());
+            return a.ID.equals(this.ID);
         }
         return false;
     }
     @Override
-    public String getName(){
-        return this.userName;
+    public String getName(int op){
+        if(op==0)
+            return this.userName;
+        if(op==1)
+            return this.firstName;
+        if(op==2)
+            return this.lastName;
+        return null;
     }
     @Override
     public String getEmail(){
         return this.email;
     }
     @Override
-    public Long getId(){
+    public Long getId(int op){
         return this.ID;
     }
     @Override

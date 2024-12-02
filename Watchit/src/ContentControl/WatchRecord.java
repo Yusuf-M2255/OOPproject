@@ -8,30 +8,27 @@ import java.util.Date;
 public class WatchRecord extends DataObject {
     public Float Rating;
     public Date DateOfWatching;
-    public String Content;
+    public String ContentTitle;
     public Long UserId;
     public WatchRecord(long UserId, float Rating, String Content,Date DateOfWatching) {
         this.Rating = (Float) Rating;
         this.DateOfWatching = DateOfWatching;
-        this.Content = Content;
+        this.ContentTitle = Content;
         this.UserId = (Long) UserId;
     }
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
-        return UserId.toString()+" "+Rating.toString()+" "+ Content+System.lineSeparator()+
+        return UserId.toString()+" "+Rating.toString()+" "+ ContentTitle+System.lineSeparator()+
                 DateFormat.getInstance().format(DateOfWatching.toString())+System.lineSeparator();
     }
     @Override
-    public String getFullName(){
-        return UserId.toString()+" "+ Content;
-    }
-    @Override
-    public String getName(){
-        return Content;
-    }
-    @Override
-    public Long getId(){
+    public Long getId(int op){
         return UserId;
+    }
+    public String getName(int op){
+        if(op==0)
+            return ContentTitle;
+        return ContentTitle+" "+UserId.toString();
     }
 }

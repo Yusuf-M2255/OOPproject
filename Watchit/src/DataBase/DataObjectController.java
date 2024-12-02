@@ -70,12 +70,10 @@ public class DataObjectController <T> {
         }
     }
 
-    public T getDataByName(String name){
-        return data.stream().filter(item -> ((DataObject)item).getName().equals(name)).findFirst().orElse(null);
-    }
-
-    public T getDataByFullName(String name){
-        return data.stream().filter(item -> ((DataObject)item).getFullName().equals(name)).findFirst().orElse(null);
+    public List<T> getDataByName(String name,int op){
+        List<T>SearchedData = new ArrayList<>();
+        data.stream().filter(item -> ((DataObject)item).getName(op).equals(name)).forEach(SearchedData::add);
+        return SearchedData;
     }
 
     public T getDataByEmail(String Email){
@@ -90,9 +88,9 @@ public class DataObjectController <T> {
         int l = 0,r = data.size()-1;
         while (l<=r){
             int m = (l+r)/2;
-            if(((DataObject)(data.get(m))).getId()>Id){
+            if(((DataObject)(data.get(m))).getId(0)>Id){
                 r = m-1;
-            }else if(((DataObject)(data.get(m))).getId()<Id){
+            }else if(((DataObject)(data.get(m))).getId(0)<Id){
                 l = m+1;
             }else
                 return data.get(m);
@@ -100,14 +98,19 @@ public class DataObjectController <T> {
         return null;
     }
 
+    public List<T> getUnsortedDataById(Long Id,int op){
+        List<T>SearchedData = new ArrayList<>();
+        data.stream().filter(item -> ((DataObject)item).getId(op).equals(Id)).forEach(SearchedData::add);
+        return SearchedData;
+    }
     /**
      * function that used to get the users that contains searchText
      * @param searchText is the substring of user you search
      * @return User[]
      */
-    public List<T> getDataThatContains(String searchText){
+    public List<T> getDataThatContains(String searchText,int op){
         List<T>ret=new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getName().contains(searchText)).forEach(ret::add);
+        data.stream().filter(item -> ((DataObject)item).getName(op).contains(searchText)).forEach(ret::add);
         return ret;
     }
 
@@ -135,45 +138,35 @@ public class DataObjectController <T> {
         data.add(item);
     }
 
-    public List<T> getAllDataByName(String name){
-        List<T> Searched = new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getName().equals(name)).forEach(Searched::add);
-        return Searched;
-    }
 
-    public List<T> getAllDataById(Long Id){
-        List<T> Searched = new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getId().equals(Id)).forEach(Searched::add);
-        return Searched;
-    }
+    public List<T> removeData(String name,int op){
+        List<T> item = getDataByName(name,op);
+        for (T item1 : item) {
+            data.remove(item1);
+            if(type=='U'||type=='A')
+                DataBase.accountsData.removeData(((DataObject)item1).getId(0),0);
+            else if(type=='S'||type=='M')
+                DataBase.contentsData.removeData(((DataObject)item1).getId(0),0);
+        }
 
-    public T removeData(String name){
-        T item = getDataByName(name);
-        data.remove(getDataByName(name));
-        if(type=='U'||type=='A')
-            DataBase.accountsData.removeData(name);
-        else if(type=='S'||type=='M')
-            DataBase.contentsData.removeData(name);
         return item;
     }
 
-    public T removeDataFullName(String name){
-        T item = getDataByFullName(name);
-        data.remove(getDataByFullName(name));
-        if(type=='U'||type=='A')
-            DataBase.accountsData.removeData(name);
-        else if(type=='S'||type=='M')
-            DataBase.contentsData.removeData(name);
-        return item;
+    public void removeData(long Id,int op){
+        if(op == 0) {
+            data.remove(getDataById(Id));
+            if (type == 'U' || type == 'A')
+                DataBase.accountsData.removeData(Id,0);
+            else if (type == 'S' || type == 'M')
+                DataBase.contentsData.removeData(Id,0);
+        }else{
+            List<T> item = getUnsortedDataById(Id,op);
+            for (T item1 : item) {
+                data.remove(item1);
+            }
+        }
     }
 
-    public void removeData(long Id){
-        data.remove(getDataById(Id));
-        if(type=='U'||type=='A')
-            DataBase.accountsData.removeData(Id);
-        else if(type=='S'||type=='M')
-            DataBase.contentsData.removeData(Id);
-    }
     public void removeAllExpired(){
         Date newDate = new Date();
         int i = 0;

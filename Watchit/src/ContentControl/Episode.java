@@ -58,9 +58,7 @@ public class Episode extends DataObject {
     return false;
   }
   @Override
-  public Long getId() { return Id; }
+  public Long getId(int op) { return Id; }
   @Override
-  public String getName(){return this.SeriesName;}
-  @Override
-  public String getFullName(){return this.SeriesName+" "+this.episodeTitle;}
+  public String getName(int op){return this.SeriesName;}
 }

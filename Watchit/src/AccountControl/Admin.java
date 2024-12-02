@@ -13,12 +13,12 @@ public class Admin extends Account {
     }
     public void editUser(long userID , User user){
         DataObjectController<User>data=DataBase.getInstance().usersData;
-        data.removeData(userID);
+        data.removeData(userID,0);
         data.addData(user);
     }
     public void deleteUser(long userID){
         DataObjectController<User>data=DataBase.getInstance().usersData;
-        data.removeData(userID);
+        data.removeData(userID,0);
     }
     public void addMovie(Movie movie){
         DataObjectController<Movie> data = DataBase.getInstance().moviesData;
@@ -30,11 +30,11 @@ public class Admin extends Account {
     }
     public void deleteMovie(String movie){
         DataObjectController<Movie> data = DataBase.getInstance().moviesData;
-        data.removeData(movie);
+        data.removeData(movie,0);
     }
     public void deleteSeries(String series){
         DataObjectController<Series> data = DataBase.getInstance().seriesData;
-        data.removeData(series);
+        data.removeData(series,0);
     }
     // episode is not done yet
     public long calculateRevenue(){
@@ -73,7 +73,7 @@ public class Admin extends Account {
     public boolean equals(Object obj){
         if(obj instanceof Admin){
             Admin other = (Admin)obj;
-            return other.getID().equals(this.getID());
+            return other.getId(0).equals(this.getId(0));
         }
         return false;
     }

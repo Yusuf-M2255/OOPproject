@@ -68,7 +68,7 @@ public class DataBase {
         DirectorsData = new DataObjectController<Director>("./Directors.txt","nslw5SWoSnd",'D');
         castMemberData = new DataObjectController<CastMember>("./CastMembers.txt","nslw5SWoSnd",'C');
         //Loading Watch Record
-        watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslfSnd",'W');
+        watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslflnd",'W');
         // Loading Credit Cards
         creditData = new DataObjectController<CreditCard>("./creditCard.txt","nsSSfnd",'R');
     }
