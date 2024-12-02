@@ -126,12 +126,13 @@ public class DataBase {
                 DataBase.getInstance().CurrentUser = user;
                 return true;
             }
-            else if (Password.equals('f') || Password.equals('F'))
+            else if (Password.equals("f") || Password.equals("F"))
             {
-                System.out.println("Enter Your Favourite Name: ");
+                System.out.print("Enter Your Favourite Name: ");
                 String name = sc.next();
                 if (user.getFavoriteName().equals(name))
                 {
+                    System.out.println("Your Password Is : "+ user.getPassword());
                     System.out.println("Login Successful");
                     DataBase.getInstance().CurrentUser = user;
                     return true;
