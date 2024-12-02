@@ -1,7 +1,6 @@
 package Engines;
 import ContentControl.Movie;
 import ContentControl.Content;
-import AccountControl.*;
 import ContentControl.*;
 
 import java.util.ArrayList;
@@ -47,6 +46,4 @@ public class RecommendationEngine {
 
         return seriesBasedRecommendations;
     }
-
-    
 }
