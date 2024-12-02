@@ -65,4 +65,9 @@ public class Account extends DataObject {
     public Long getId(){
         return this.ID;
     }
+    @Override
+    public String toString(){
+        return  ID.toString() + " " + userName + " " + firstName + " " + lastName + " " + email
+                + ' ' + password + " " + FavoriteName + System.lineSeparator();
+    }
 }

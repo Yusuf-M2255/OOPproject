@@ -14,101 +14,101 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * DataBase Administration Class that is built Using SingleTone Design Pattern
+ */
 public class DataBase {
+    // SingleTone Instance
     private static DataBase dataBase;
-    File castMemberFile,watchRecordFile,usersFile,adminsFile,DirctorsFile;
+
+    // Regex Strings
     final String EmailRegex = "[\\w-]+@(gmail|yahoo|outlook)\\.(com|org|io|net)",
             PasswordRegex="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\\W)(?=.\\S+$).{8,}$";
+
+    // Genre of Movies and Series
     String[] genres = {
             "Action", "Adventure", "Comedy", "Drama", "Horror",
             "Romance", "Science Fiction", "Fantasy", "Mystery",
             "Thriller", "Documentary", "Animation", "Family",
             "Musical", "Crime", "Historical", "War", "Western"
     };
+
+    //Accounts Data
     public DataObjectController<Admin> adminsData= null;
-    public Account CurrentUser = null;
-    public static AccountsData accountsData= null;
-    public MoviesData moviesData = null;
     public DataObjectController<User>usersData =null;
-    public DataObjectController<WatchRecord>watchRecordData = null;
-    public SeriesData seriesData = null;
-    public static ContentsData contentsData = null;
+    public static DataObjectController<Account>accountsData =new DataObjectController<Account>();
+    public Account CurrentUser = null;
+
+    //Content Data
+    public DataObjectController<Movie> moviesData = null;
+    public DataObjectController<Series> seriesData = null;
+    public static DataObjectController<Content> contentsData = new DataObjectController<Content>();
+
+    //Cast Data
     public DataObjectController<Director> DirectorsData = null;
     public DataObjectController<CastMember>castMemberData = null;
+
+    //Watch Data
+    public DataObjectController<WatchRecord>watchRecordData = null;
+
+    //Credit Card Data
+    public DataObjectController<CreditCard> creditData = null;
+
+    /**
+     * Non-Parameterized Constructor that init all Data Objects and Loading Data From Files
+     */
     private DataBase() {
-        Init();
-        accountsData = new AccountsData();
-        usersData = new DataObjectController<User>(usersFile,"nslw5SWw3oSWSiw2ndW",'U');
-        castMemberData = new DataObjectController<CastMember>(DirctorsFile,"nslw5SWoSnd",'D');
-        adminsData = new DataObjectController<Admin>(adminsFile,"nslw6SW",'A');
-        moviesData = new MoviesData();
-        castMemberData = new DataObjectController<CastMember>(castMemberFile,"nslw5SWoSnd",'C');
-        seriesData = new SeriesData();
-        watchRecordData = new DataObjectController<WatchRecord>(watchRecordFile,"nslfSnd",'W');
+        // Loading Accounts
+        usersData = new DataObjectController<User>("./users.txt","nslw5SWw3oSWSiw2ndW",'U');
+        adminsData = new DataObjectController<Admin>("./admins.txt","nslw6SW",'A');
+        // Loading Contents
+        moviesData = new DataObjectController<Movie>("./movies.txt","nslw4SWiioSoSndni",'M');
+        seriesData = new DataObjectController<Series>("./series.txt","nslw4SWiioSoSndnsiind",'S');
+        // Loading Cast
+        DirectorsData = new DataObjectController<Director>("./Directors.txt","nslw5SWoSnd",'D');
+        castMemberData = new DataObjectController<CastMember>("./CastMembers.txt","nslw5SWoSnd",'C');
+        //Loading Watch Record
+        watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslfSnd",'W');
+        // Loading Credit Cards
+        creditData = new DataObjectController<CreditCard>("./creditCard.txt","nsSSfnd",'R');
     }
 
-    public void Init(){
-        castMemberFile= new File("./CastMembers.txt");
-        if (castMemberFile.exists()) {
-            try {
-                castMemberFile.createNewFile();
-            }catch (IOException e){
-                System.out.println("Error while creating cast members file");
-            }
-        }
-        DirctorsFile = new File("./Directors.txt");
-        if (DirctorsFile.exists()) {
-            try {
-                DirctorsFile.createNewFile();
-            }catch (IOException e){
-                System.out.println("Error while creating Director file");
-            }
-        }
-        adminsFile= new File("./admins.txt");
-        if (adminsFile.exists()) {
-            try {
-                adminsFile.createNewFile();
-            }catch (IOException e){
-                System.out.println("Error while creating cast members file");
-            }
-        }
-        watchRecordFile= new File("./watchRecord.txt");
-        if (watchRecordFile.exists()) {
-            try {
-                watchRecordFile.createNewFile();
-            }catch (IOException e){
-                System.out.println("Error while creating watch records file");
-            }
-        }
-        usersFile= new File("./users.txt");
-        if (watchRecordFile.exists()) {
-            try {
-                usersFile.createNewFile();
-            }catch (IOException e){
-                System.out.println("Error while creating watch users file");
-            }
-        }
-    }
-
+    /**
+     * getting Instance Of DataBase to reach all Data
+     * check if dataBase instance is null then Create instance of DataBase otherwise return the same instance
+     * @return DataBase
+     */
     public static DataBase getInstance() {
         if(dataBase == null) {
             dataBase = new DataBase();
-            contentsData = new ContentsData();
             return dataBase;
         }
         return dataBase;
     }
 
+    /**
+     * Saving All Data in Files
+     */
     public void Save(){
-        moviesData.SaveData();
-        seriesData.SaveData();
-        watchRecordData.Write();
-        DirectorsData.Write();
+        // save accounts data
         adminsData.Write();
         usersData.Write();
+        // save content data
+        moviesData.Write();
+        seriesData.Write();
+        // save cast data
+        DirectorsData.Write();
         castMemberData.Write();
+        // save watch records
+        watchRecordData.Write();
+        // save valid credit cards
+        creditData.Write();
     }
 
+    /**
+     * Login Form
+     * @return boolean that describe if Login is Successful or Failed (True -> Successful / False -> Failed)
+     */
     public boolean Login(){
         String Email,Password;
         System.out.print("Enter your email: ");
@@ -131,6 +131,11 @@ public class DataBase {
             }
         }
     }
+
+    /**
+     * Register Form
+     * @return boolean that describe if Login is Successful or Failed (True -> Successful / False -> Failed)
+     */
     public boolean Register() {
         String FirstName, LastName, UserName, Email, Password;
         List<String> fav = new ArrayList<>();

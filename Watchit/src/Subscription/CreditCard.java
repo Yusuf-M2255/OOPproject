@@ -1,24 +1,25 @@
 package Subscription;
 
+import DataBase.DataObject;
+
+import java.text.DateFormat;
 import java.util.Date;
 
-public class CreditCard {
+public class CreditCard extends DataObject {
     //attributes
     private final String cardNumber;
     private final Date expiryDate;
     private final String cvv;
     private Float balance;
-
     //constructors
 
-    //for Hossam (I don't know why you use default constructor)
     public CreditCard() {
         cardNumber = "";
         expiryDate = null;
         cvv = "";
         balance = 0.F;
     }
-    public CreditCard(String cardNumber, Date expiryDate, String cvv, float balance) {
+    public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cvv = cvv;
@@ -36,6 +37,7 @@ public class CreditCard {
     public String getCardNumber() {
         return cardNumber;
     }
+
     public Date getExpiryDate() {
         return expiryDate;
     }
@@ -53,5 +55,14 @@ public class CreditCard {
             return other.balance.equals(balance)&&other.expiryDate.equals(expiryDate)&&other.cardNumber.equals(cardNumber);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return cardNumber + " "+ cvv +" "+ balance.toString() + System.lineSeparator()+ DateFormat.getInstance().format(expiryDate) +System.lineSeparator();
+    }
+    @Override
+    public Date getDate(){
+        return expiryDate;
     }
 }

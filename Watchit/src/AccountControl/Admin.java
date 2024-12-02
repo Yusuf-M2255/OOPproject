@@ -21,19 +21,19 @@ public class Admin extends Account {
         data.removeData(userID);
     }
     public void addMovie(Movie movie){
-        MoviesData data = DataBase.getInstance().moviesData;
+        DataObjectController<Movie> data = DataBase.getInstance().moviesData;
         data.addData(movie);
     }
     public void addSeries(Series series){
-        SeriesData data = DataBase.getInstance().seriesData;
+        DataObjectController<Series> data = DataBase.getInstance().seriesData;
         data.addData(series);
     }
     public void deleteMovie(String movie){
-        MoviesData data = DataBase.getInstance().moviesData;
+        DataObjectController<Movie> data = DataBase.getInstance().moviesData;
         data.removeData(movie);
     }
     public void deleteSeries(String series){
-        SeriesData data = DataBase.getInstance().seriesData;
+        DataObjectController<Series> data = DataBase.getInstance().seriesData;
         data.removeData(series);
     }
     // episode is not done yet
@@ -67,8 +67,7 @@ public class Admin extends Account {
 
     @Override
     public String toString(){
-        return  ID.toString() + " " + userName + " " + firstName + " " + lastName + " " + email
-                + ' ' + password + " " + FavoriteName + System.lineSeparator();
+        return super.toString();
     }
     @Override
     public boolean equals(Object obj){
