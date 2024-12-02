@@ -1,7 +1,6 @@
 package Engines;
 import ContentControl.Movie;
 import ContentControl.Content;
-import AccountControl.*;
 import ContentControl.*;
 
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class RecommendationEngine {
                 for (int j = 0; j < favouriteGenres.size(); j++) {
                     if (movie.genres.contains(favouriteGenres.get(j))) {
                         movieBasedRecommendations.add(movie);
+                        break;
                     }
                 }
             }
@@ -40,6 +40,7 @@ public class RecommendationEngine {
                 for (int j = 0; j < favouriteGenres.size(); j++) {
                     if (series.genres.contains(favouriteGenres.get(j))) {
                         seriesBasedRecommendations.add(series);
+                        break;
                     }
                 }
             }
@@ -47,6 +48,4 @@ public class RecommendationEngine {
 
         return seriesBasedRecommendations;
     }
-
-    
 }
