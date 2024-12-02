@@ -114,7 +114,7 @@ public class DataBase {
         System.out.print("Enter your email: ");
         Scanner sc = new Scanner(System.in);
         Email = sc.next();
-        System.out.print("Enter your password: ");
+        System.out.print("Enter your password (or inter f if you forgot your password): ");
         Password = sc.next();
         Account user =accountsData.getDataByEmail(Email);
         if(user==null){
@@ -125,7 +125,23 @@ public class DataBase {
                 System.out.println("Login Successful");
                 DataBase.getInstance().CurrentUser = user;
                 return true;
-            }else{
+            }
+            else if (Password.equals('f') || Password.equals('F'))
+            {
+                System.out.println("Enter Your Favourite Name: ");
+                String name = sc.next();
+                if (user.getFavoriteName().equals(name))
+                {
+                    System.out.println("Login Successful");
+                    DataBase.getInstance().CurrentUser = user;
+                    return true;
+                }
+                else {
+                    System.out.println("Wrong answer!");
+                    return false;
+                }
+            }
+            else{
                 System.out.println("Wrong Password!");
                 return false;
             }
