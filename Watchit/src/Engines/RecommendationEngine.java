@@ -23,6 +23,7 @@ public class RecommendationEngine {
                 for (int j = 0; j < favouriteGenres.size(); j++) {
                     if (movie.genres.contains(favouriteGenres.get(j))) {
                         movieBasedRecommendations.add(movie);
+                        break;
                     }
                 }
             }
@@ -39,6 +40,7 @@ public class RecommendationEngine {
                 for (int j = 0; j < favouriteGenres.size(); j++) {
                     if (series.genres.contains(favouriteGenres.get(j))) {
                         seriesBasedRecommendations.add(series);
+                        break;
                     }
                 }
             }
