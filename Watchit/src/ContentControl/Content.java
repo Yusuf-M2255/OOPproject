@@ -30,7 +30,7 @@ public class Content extends DataObject {
         this.budget = budget;
         this.revenue = revenue;
         Rate_Sum = 0;
-        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
+        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByName(contentTitle,0)){
             Rate_Sum += Record.Rating;
             RateCounter++;
         }
@@ -49,7 +49,7 @@ public class Content extends DataObject {
         this.budget = budget;
         this.revenue = revenue;
         Rate_Sum = 0;
-        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getAllDataByName(contentTitle)){
+        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByName(contentTitle,0)){
             Rate_Sum += Record.Rating;
             RateCounter++;
         }
@@ -62,7 +62,7 @@ public class Content extends DataObject {
     }
 
     public void EditRate(int UserID, String contentTitle, float rate){
-        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+" "+Long.valueOf((long)UserID).toString());
+        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+" "+Long.valueOf((long)UserID).toString(),1).get(0);
         Rate_Sum -= WatchRecordTemp.Rating;
         WatchRecordTemp.Rating = (Float) rate;
         Rate_Sum += rate;
@@ -73,11 +73,11 @@ public class Content extends DataObject {
     }
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
-    public Long getId(){
+    public Long getId(int op){
         return contentID;
     }
     @Override
-    public String getName(){
+    public String getName(int op){
         return contentTitle;
     }
     @Override
