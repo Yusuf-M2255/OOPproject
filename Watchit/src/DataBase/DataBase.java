@@ -9,10 +9,7 @@ import com.sun.source.tree.TryTree;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * DataBase Administration Class that is built Using SingleTone Design Pattern
@@ -114,7 +111,7 @@ public class DataBase {
         System.out.print("Enter your email: ");
         Scanner sc = new Scanner(System.in);
         Email = sc.next();
-        System.out.print("Enter your password (or inter f if you forgot your password): ");
+        System.out.print("Enter your password (or enter f if you forgot your password): ");
         Password = sc.next();
         Account user =accountsData.getDataByEmail(Email);
         if(user==null){
@@ -151,7 +148,7 @@ public class DataBase {
 
     /**
      * Register Form
-     * @return boolean that describe if Login is Successful or Failed (True -> Successful / False -> Failed)
+     * return boolean that describe if Login is Successful or Failed (True -> Successful / False -> Failed)
      */
     public boolean Register() {
         String FirstName, LastName, UserName, Email, Password;
@@ -165,44 +162,32 @@ public class DataBase {
         UserName = input.nextLine();
         System.out.print("Enter Email: ");
         Email = input.nextLine();
-        while(true){
-            char c;
+        while(accountsData.getDataByEmail(Email)!=null || !Email.matches(EmailRegex)){
+            String c;
             if(accountsData.getDataByEmail(Email)!=null) {
                 do {
                     System.out.println("User already exists if you want to go back enter y, else if you want to try again enter n.");
-                    c = input.nextLine().charAt(0);
-                    if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                    c = input.nextLine();
+                    if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
                         break;
                     else
                         System.out.println("Sorry, Invalid Input, Try Again");
                 } while (true);
-                if(c=='y' || c == 'Y'){
+                if(c.charAt(0) == 'y' || c.charAt(0) == 'Y'){
                     return false;
                 }
-            }else if(!Email.matches(EmailRegex)){
+            }else if(!Email.matches(EmailRegex)) {
                 do {
-                    System.out.println("Email Invalid. if you want to go back enter y, else if you want to try again enter n.");
-                    c = input.nextLine().charAt(0);
-                    if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                    System.out.println("Invalid Email. if you want to go back enter y, else if you want to try again enter n.");
+                    c = input.nextLine();
+                    if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
                         break;
                     else
                         System.out.println("Sorry, Invalid Input, Try Again");
                 } while (true);
-                if(c=='y' || c == 'Y'){
+                if (c.charAt(0) == 'y' || c.charAt(0) == 'Y') {
                     return false;
                 }
-            }else
-                break;
-            do {
-                System.out.println("User already exists if you want to go back enter Y, else if you want to try again enter N.");
-                c = sc.next().charAt(0);
-                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
-                    break;
-                else
-                    System.out.println("Sorry, Invalid Input, Try Again");
-            }while (true);
-            if(c=='y' || c == 'Y'){
-                return false;
             }
             System.out.print("Enter Email: ");
             Email = input.nextLine();
@@ -210,17 +195,17 @@ public class DataBase {
         System.out.print("Enter Password: ");
         Password = input.nextLine();
         while (!Password.matches(PasswordRegex)){
-            char c;
+            String c;
             do {
-                System.out.println("Password is Invalid");
+                System.out.println("Password is Invalid, it should have at least One Capital Letter, One small letter, one number, one special character, and a total of at least 8 characters");
                 System.out.println("if you want to go back enter y, else if you want to try again enter n.");
-                c = input.nextLine().charAt(0);
-                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                c = input.nextLine();
+                if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
                     break;
                 else
                     System.out.println("Sorry, Invalid Input, Try Again");
             } while (true);
-            if(c=='y' || c == 'Y'){
+            if(c.charAt(0) == 'y' || c.charAt(0) == 'Y'){
                 return false;
             }
             System.out.print("Enter Password: ");
@@ -228,39 +213,58 @@ public class DataBase {
         }
         System.out.print("reEnter Password: ");
         String Password1 = input.nextLine();
-        char c;
+        String c;
         while(!Password.equals(Password1)){
             do {
-                c = input.nextLine().charAt(0);
                 System.out.println("Passwords doesn't match if you want to go back enter Y, else if you want to try again enter N.");
-                c = sc.next().charAt(0);
-                if (c == 'y' || c == 'Y' || c == 'n' || c == 'N')
+                c = sc.nextLine();
+                if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
                     break;
                 else
                     System.out.println("Sorry, Invalid Input, Try Again");
             }while (true);
-            if(c=='y' || c =='Y'){
+            if(c.charAt(0) == 'y' || c.charAt(0) =='Y'){
                 return false;
             }
             System.out.print("reEnter Password: ");
             Password1 = input.nextLine();
         }
-        int i = 0,j;
+        int i = 0;
+        String j;
         for(String genre : genres)
             System.out.println((i++)+ "- " + genre);
         System.out.println("Enter -1 when you want stop choosing your Favorite Genres");
         do {
-            j = input.nextInt();
-            if(j<genres.length&&j>=0)
-                fav.add(genres[j]);
-        }while(j!=-1);
+            j = input.nextLine();
+            if((j.length() == 1 && j.charAt(0) - '0' >= 0 && j.charAt(0) - '0' <= 9) || (j.length() == 2 && j.charAt(0) - '0' == 1 && j.charAt(1) - '0' >= 0 && j.charAt(1) - '0' <= 7))
+            {
+                if (j.length() == 1)
+                    fav.add(genres[j.charAt(0) - '0']);
+                else
+                    fav.add(genres[10 + (j.charAt(1) - '0')]);
+            }
+            else if (!j.equals("-1"))
+                System.out.println("Sorry, " + j + " is an Invalid Input, Try Again");
+        }while(!j.equals("-1"));
         System.out.print("Enter your Favorite Name : ");
         String FavoriteName = input.next();
         System.out.println("Choose your Plan : ");
-        for (i = 0 ;i<3;i++){
-            System.out.println((i+1)+"- "+Subscription.Plans[i] +"   |   "+Subscription.Prices[i]+"EGP/Year   |   "+ Subscription.Descriptions[i]);
+        for (i = 0 ;i<3;i++) {
+            System.out.println((i + 1) + "- " + Subscription.Plans[i] + "   |   " + Subscription.Prices[i] + "EGP/Year   |   " + Subscription.Descriptions[i]);
         }
-        Integer Type = sc.nextInt() - 1;
+        Integer Type;
+        do
+        {
+            System.out.print("Enter the numbet of the subscription plan: ");
+            String s = input.nextLine();
+            if (s.length() == 1 && s.charAt(0) - '0' < 4 && s.charAt(0) - '0' > 0)
+            {
+                Type = (s.charAt(0) - '0') - 1;
+                break;
+            }
+            else
+                System.out.println("Sorry, Invalid Input, Try Again");
+        }while (true);
         DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
         accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));

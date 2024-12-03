@@ -6,18 +6,18 @@ public class tmp {
     public void LoginDisplay()
     {
         Scanner input = new Scanner(System.in);
-        char c;
+        String c;
         boolean check = false;
         do {
             do {
                 System.out.print("Do you have an account? \n (Y/N) ");
-                c = input.next().charAt(0);
-                if (c == 'Y' || c == 'y' || c == 'N' || c == 'n')
+                c = input.nextLine();
+                if ((c.charAt(0) == 'Y' || c.charAt(0) == 'y' || c.charAt(0) == 'N' || c.charAt(0) == 'n') && c.length() == 1)
                     break;
                 else
                     System.out.println("Invalid input, Please try again");
             }while (true);
-            if (c == 'Y' || c == 'y')
+            if (c.charAt(0) == 'Y' || c.charAt(0) == 'y')
                 check = DataBase.getInstance().Login();
             else
                 check = DataBase.getInstance().Register();
