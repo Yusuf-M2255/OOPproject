@@ -35,6 +35,7 @@ public class DataBase {
     //Content Data
     public DataObjectController<Movie> moviesData;
     public DataObjectController<Series> seriesData;
+    public DataObjectController<Episode> episodesData;
     public static DataObjectController<Content> contentsData = new DataObjectController<Content>();
 
     //Cast Data
@@ -57,6 +58,7 @@ public class DataBase {
         // Loading Contents
         moviesData = new DataObjectController<Movie>("./movies.txt","nslw4SWiioSoSndni",'M');
         seriesData = new DataObjectController<Series>("./series.txt","nslw4SWiioSoSndnsiind",'S');
+        episodesData = new DataObjectController<Episode>("./episodes.txt","nslSSiind",'E');
         // Loading Cast
         DirectorsData = new DataObjectController<Director>("./Directors.txt","nslw5SWoSnd",'D');
         castMemberData = new DataObjectController<CastMember>("./CastMembers.txt","nslw5SWoSnd",'C');
@@ -109,11 +111,12 @@ public class DataBase {
         Email = sc.next();
         System.out.print("Enter your password (or enter f if you forgot your password): ");
         Password = sc.next();
-        Account user =accountsData.getDataByEmail(Email);
-        if(user==null){
+        Account user;
+        if(accountsData.getDataByString(Email,4).isEmpty()){
             System.out.println("Email is not Found!");
             return false;
         }else{
+            user = accountsData.getDataByString(Email,4).get(0);
             if(user.getPassword().equals(Password)){
                 System.out.println("Login Successful");
                 DataBase.getInstance().CurrentUser = user;
@@ -158,9 +161,9 @@ public class DataBase {
         UserName = input.nextLine();
         System.out.print("Enter Email: ");
         Email = input.nextLine();
-        while(accountsData.getDataByEmail(Email)!=null || !Email.matches(EmailRegex)){
+        while(!accountsData.getDataByString(Email,4).isEmpty() || !Email.matches(EmailRegex)){
             String c;
-            if(accountsData.getDataByEmail(Email)!=null) {
+            if(!accountsData.getDataByString(Email,4).isEmpty()) {
                 do {
                     System.out.println("User already exists if you want to go back enter y, else if you want to try again enter n.");
                     c = input.nextLine();
@@ -262,8 +265,8 @@ public class DataBase {
                 System.out.println("Sorry, Invalid Input, Try Again");
         }while (true);
         DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
-        DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByEmail(Email);
-        accountsData.addData(DataBase.getInstance().usersData.getDataByEmail(Email));
+        DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByString(Email,4).get(0);
+        accountsData.addData(DataBase.getInstance().CurrentUser);
         return true;
     }
 }

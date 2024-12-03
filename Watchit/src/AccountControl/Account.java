@@ -58,7 +58,9 @@ public class Account extends DataObject {
             return this.firstName;
         if(op==2)
             return this.lastName;
-        return null;
+        if(op==3)
+            return firstName + " " + lastName;
+        return email;
     }
     @Override
     public String getEmail(){

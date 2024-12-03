@@ -2,6 +2,8 @@ package ContentControl;
 
 import DataBase.DataObject;
 
+import java.text.DateFormat;
+import java.time.Duration;
 import java.util.Date;
 
 public class Episode extends DataObject {
@@ -51,14 +53,41 @@ public class Episode extends DataObject {
   //--------------------------------------DataBase Methods-----------------------------------------//
   @Override
   public String toString() {
-    return null;
+    return Id.toString()+" "+SeriesName+" "+episodeTitle+" "+
+            Integer.valueOf(episodeNumber).toString()+Integer.valueOf(duration).toString()+
+            System.lineSeparator()+ DateFormat.getInstance().format(releaseDate) +System.lineSeparator();
   }
   @Override
   public boolean equals(Object o) {
+    if(o instanceof  Episode){
+      Episode ep = (Episode)o;
+      return ep.episodeTitle.equals(episodeTitle) && ep.episodeNumber == episodeNumber && ep.releaseDate.equals(releaseDate);
+    }
     return false;
   }
+
+  /**
+   * @param op send any Value
+   * @return Long Id
+   */
   @Override
-  public Long getId(int op) { return Id; }
+  public Long getId(int op) {
+    return Id;
+  }
+
+  /**
+   * @param op
+   * 0 -> Series Name       /
+   * 1 -> Episode Title     /
+   * 2 -> Series + " " + Episode Number
+   * @return String
+   */
   @Override
-  public String getName(int op){return this.SeriesName;}
+  public String getName(int op){
+    if(op==0)
+      return this.SeriesName;
+    if(op==1)
+      return episodeTitle;
+    return SeriesName+" "+Integer.valueOf(episodeNumber).toString();
+  }
 }

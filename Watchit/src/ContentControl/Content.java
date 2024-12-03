@@ -30,7 +30,7 @@ public class Content extends DataObject {
         this.budget = budget;
         this.revenue = revenue;
         Rate_Sum = 0;
-        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByName(contentTitle,0)){
+        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByString(contentTitle,0)){
             Rate_Sum += Record.Rating;
             RateCounter++;
         }
@@ -49,7 +49,7 @@ public class Content extends DataObject {
         this.budget = budget;
         this.revenue = revenue;
         Rate_Sum = 0;
-        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByName(contentTitle,0)){
+        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByString(contentTitle,0)){
             Rate_Sum += Record.Rating;
             RateCounter++;
         }

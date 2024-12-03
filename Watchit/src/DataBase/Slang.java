@@ -161,7 +161,7 @@ public class Slang {
                 break;
         }
     }
-    public void Compile(char[] Code){
+    public void Build(char[] Code){
         for (int j = 0;j<Code.length;j++) {
             if (Code[j] == 'o') {
                 ClearAll();
@@ -185,7 +185,7 @@ public class Slang {
                    j++;
                }
                for (int k = 0;k<sz;k++) {
-                   Compile(s.toString().toCharArray());
+                   Build(s.toString().toCharArray());
                }
             }else{
                 KeyWords(Code[j]);
@@ -196,7 +196,7 @@ public class Slang {
 
     public ReturnedData Run(char[] Code){
         Reset();
-        Compile(Code);
+        Build(Code);
         return returnedData;
     }
 }

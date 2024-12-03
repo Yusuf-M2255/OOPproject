@@ -8,19 +8,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Used to search on Data Object , Load ,Save,Add and Remove Data from it
+ * @param <T> Data Object Type
+ */
 public class DataObjectController <T> {
     List<T>data;
     final String Code;
     final File file;
     final char type;
 
+    /**
+     *  NoN-Parametrized Constructor that used to initialize object that Not saved in files
+     */
     DataObjectController() {
         data = new ArrayList<>();
         type = '\0';
         Code = null;
         file = null;
     }
-
+    /**
+     * Parametrized Constructor that used to initialize objects which is saved in files
+     * @param filePath path of file that contains data and in end of program will be saved there
+     * @param Code Slang code to Load Data
+     * @param type of T entered which is refers to Instance Creator Class
+     */
     public DataObjectController(String filePath,String Code,char type){
         data = new ArrayList<>();
         file= new File(filePath);
@@ -36,27 +48,19 @@ public class DataObjectController <T> {
         Read();
     }
 
-    public void Display(T[] da){
-        boolean ok = true;
-        for (T item : da) {
-            DataObject DO = (DataObject)item;
-            if(ok) {
-                DO.DisplayHeadLine();
-                ok = false;
-            }
-            DO.DisplayLine();
-        }
-        if(ok)
-            System.out.println("There is no Data");
-    }
-
-    public void Read(){
+    /**
+     * used to Run Slang code then make Instance by data and push it in data List
+     */
+    private void Read(){
         Slang sLangCode = new Slang(file,Code);
         while(sLangCode.notNull()){
             InstanceCreator<T>creator = new InstanceCreator<T>(sLangCode.Run(sLangCode.Code),data,type);
         }
     }
 
+    /**
+     * Saving data at the end of Program
+     */
     public void Write(){
         try {
             FileOutputStream fos = new FileOutputStream(file);
@@ -70,20 +74,31 @@ public class DataObjectController <T> {
         }
     }
 
-    public List<T> getDataByName(String name,int op){
+    /**
+     * @param name the input you search
+     * @param op check the function getId in the module (watchRecordData -> WatchRecord)
+     * @return List of module Type
+     */
+    public List<T> getDataByString(String name,int op){
         List<T>SearchedData = new ArrayList<>();
         data.stream().filter(item -> ((DataObject)item).getName(op).equals(name)).forEach(SearchedData::add);
         return SearchedData;
     }
 
-    public T getDataByEmail(String Email){
-        return data.stream().filter(item -> ((DataObject)item).getEmail().equals(Email)).findFirst().orElse(null);
-    }
-
+    /**
+     * Data By full obj
+     * @param obj the obj you search
+     * @return that Obj
+     */
     public T getDataByObject(T obj){
         return data.stream().filter(item -> (item).equals(obj)).findFirst().orElse(null);
     }
 
+    /**
+     * Search Specific Element by its ID
+     * @param Id of element
+     * @return the element its found otherwise return null
+     */
     public T getDataById(Long Id){
         int l = 0,r = data.size()-1;
         while (l<=r){
@@ -98,9 +113,14 @@ public class DataObjectController <T> {
         return null;
     }
 
-    public List<T> getUnsortedDataById(Long Id,int op){
+    /**
+     * @param Num the input you search
+     * @param op check the function getId in the module (watchRecordData -> WatchRecord)
+     * @return List of module Type
+     */
+    public List<T> getDateByNum(Long Num,int op){
         List<T>SearchedData = new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getId(op).equals(Id)).forEach(SearchedData::add);
+        data.stream().filter(item -> ((DataObject)item).getId(op).equals(Num)).forEach(SearchedData::add);
         return SearchedData;
     }
     /**
@@ -124,7 +144,7 @@ public class DataObjectController <T> {
 
     /**
      * function that return all Users in application as List
-     * @return List<User>
+     * @return List<T>
      */
     public List<T> getDataAsList() {
         return data;
@@ -138,9 +158,14 @@ public class DataObjectController <T> {
         data.add(item);
     }
 
-
+    /**
+     * remove all data that equal to Name
+     * @param name the name you search
+     * @param op go to module to understand
+     * @return List of Module Type
+     */
     public List<T> removeData(String name,int op){
-        List<T> item = getDataByName(name,op);
+        List<T> item = getDataByString(name,op);
         for (T item1 : item) {
             data.remove(item1);
             if(type=='U'||type=='A')
@@ -152,21 +177,42 @@ public class DataObjectController <T> {
         return item;
     }
 
-    public void removeData(long Id,int op){
-        if(op == 0) {
-            data.remove(getDataById(Id));
+    /**
+     * remove all data that equal to Name
+     * @param Num the name you search
+     * @param op  -> -1 if your search specific element (ID)
+     *            -> otherwise check function getId in module
+     */
+    public List<T> removeData(long Num,int op){
+        if(op == -1) {
+            List<T> items = new ArrayList<>();
+            items.add(getDataById(Num));
+            data.remove(getDataById(Num));
             if (type == 'U' || type == 'A')
-                DataBase.accountsData.removeData(Id,0);
+                DataBase.accountsData.removeData(Num,0);
             else if (type == 'S' || type == 'M')
-                DataBase.contentsData.removeData(Id,0);
+                DataBase.contentsData.removeData(Num,0);
+            return items;
         }else{
-            List<T> item = getUnsortedDataById(Id,op);
-            for (T item1 : item) {
+            List<T> items = getDateByNum(Num,op);
+            for (T item1 : items) {
                 data.remove(item1);
             }
+            return items;
         }
     }
 
+    /**
+     * remove full obj
+     * @param obj object you want to remove
+     */
+    public void removeData(T obj){
+        data.remove(obj);
+    }
+
+    /**
+     * remove all Expired Credit Card / Subscriptions
+     */
     public void removeAllExpired(){
         Date newDate = new Date();
         int i = 0;
@@ -176,5 +222,23 @@ public class DataObjectController <T> {
             else
                 i++;
         }
+    }
+
+    /**
+     * Displays Array of module Type
+     * @param displayedData data you want Display
+     */
+    public void Display(T[] displayedData){
+        boolean ok = true;
+        for (T item : displayedData) {
+            DataObject DO = (DataObject)item;
+            if(ok) {
+                DO.DisplayHeadLine();
+                ok = false;
+            }
+            DO.DisplayLine();
+        }
+        if(ok)
+            System.out.println("There is no Data");
     }
 }

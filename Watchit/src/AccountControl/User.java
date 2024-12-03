@@ -1,5 +1,7 @@
 package AccountControl;
 import Subscription.Subscription;
+
+import java.util.Date;
 import java.util.List;
 
 public class User extends Account {
@@ -100,5 +102,9 @@ public class User extends Account {
             System.out.print('-');
         }
         System.out.print("\n");
+    }
+    @Override
+    public Date getDate(){
+        return subscriptionPlan.getEndDate();
     }
 }
