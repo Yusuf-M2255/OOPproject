@@ -36,13 +36,13 @@ public class Episode extends DataObject {
 
   // Getters & Setters
   public String getSeriesName() { return SeriesName; }
-  public int getepisodeNumber(){
+  public int getEpisodeNumber(){
     return this.episodeNumber;
   }
-  public String getepisodeTitle(){
+  public String getEpisodeTitle(){
     return this.episodeTitle;
   }
-  public int getduration(){
+  public int getDuration(){
     return this.duration;
   }
   public Date getreleaseDate(){

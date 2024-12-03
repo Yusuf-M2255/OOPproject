@@ -8,7 +8,7 @@ import java.util.List;
 public class CastMember extends DataObject {
     public String firstName;
     public String lastName;
-    public static long cnt = (long) 1;
+    public static long cnt = 1;
     public Long CastMemberId;
     public Date dateOfBirth;  
     public String gender;
@@ -23,7 +23,7 @@ public class CastMember extends DataObject {
         this.Contents = Contents;
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
-        CastMemberId = (Long) cnt++;
+        CastMemberId = cnt++;
     }
     public CastMember(Long Id ,String firstName, String lastName, String gender, String nationality, String socialMediaLink,List<String>Contents, Date dateOfBirth) {
         this.firstName = firstName;

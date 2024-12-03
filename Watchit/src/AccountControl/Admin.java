@@ -59,7 +59,7 @@ public class Admin extends Account {
             else numOfPremium++;
         }
         String analysis =
-                  "The Number of Users in Basic Plan is: "+Long.toString(numOfBasic)
+                  "The Number of Users in Basic Plan is: "+ Long.toString(numOfBasic)
                 + "\n The Number of Users in Standard Plan is: " + Long.toString(numOfStandard)
                 + "\n The Number of Users in Premium Plan is: " + Long.toString(numOfPremium)+'\n';
         return analysis;
@@ -71,8 +71,7 @@ public class Admin extends Account {
     }
     @Override
     public boolean equals(Object obj){
-        if(obj instanceof Admin){
-            Admin other = (Admin)obj;
+        if(obj instanceof Admin other){
             return other.getId(0).equals(this.getId(0));
         }
         return false;

@@ -34,7 +34,7 @@ public class Series extends Content{
     public Date getLastAireDate() {
         return lastAireDate;
     }
-    public void setLastAireDate(Date lastAireDate) {
+    public void setLastAirDate(Date lastAireDate) {
         this.lastAireDate = lastAireDate;
     }
     public Integer isOnGoing() {

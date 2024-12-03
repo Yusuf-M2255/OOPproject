@@ -251,8 +251,8 @@ public class DataBase {
         int Type;
         do
         {
-            System.out.print("Enter the numbet of the subscription plan: ");
-            String s = input.nextLine();
+            System.out.print("Enter the number of the subscription plan: ");
+            String s = sc.nextLine();
             if (s.length() == 1 && s.charAt(0) - '0' < 4 && s.charAt(0) - '0' > 0)
             {
                 Type = (s.charAt(0) - '0') - 1;

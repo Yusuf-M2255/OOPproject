@@ -5,7 +5,7 @@ import DataBase.DataObject;
 public class Account extends DataObject {
     protected final String userName,firstName,lastName,email,password,FavoriteName;
     protected Long ID;
-    public static long cnt= (long) 1;
+    public static long cnt= 1;
     public Account(){
         userName = null;
         firstName = null;
@@ -21,7 +21,7 @@ public class Account extends DataObject {
         this.email = email;
         this.password = password;
         this.FavoriteName = FavoriteName;
-        this.ID = (Long) cnt++;
+        this.ID = cnt++;
 
     }
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName,Long id) {
@@ -45,8 +45,7 @@ public class Account extends DataObject {
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Account) {
-            Account a = (Account) obj;
+        if(obj instanceof Account a) {
             return a.ID.equals(this.ID);
         }
         return false;

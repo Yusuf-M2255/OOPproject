@@ -70,8 +70,7 @@ public class User extends Account {
     }
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof User){
-            User user = (User) obj;
+        if(obj instanceof User user){
             return ID.equals(user.ID);
         }
         return false;
