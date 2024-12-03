@@ -248,7 +248,7 @@ public class DataBase {
         for (i = 0 ;i<3;i++) {
             System.out.println((i + 1) + "- " + Subscription.Plans[i] + "   |   " + Subscription.Prices[i] + "EGP/Year   |   " + Subscription.Descriptions[i]);
         }
-        Integer Type;
+        int Type;
         do
         {
             System.out.print("Enter the numbet of the subscription plan: ");
