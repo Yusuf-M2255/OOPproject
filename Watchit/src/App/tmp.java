@@ -7,7 +7,7 @@ public class tmp {
     {
         Scanner input = new Scanner(System.in);
         String c;
-        boolean check = false;
+        boolean check;
         do {
             do {
                 System.out.print("Do you have an account? \n (Y/N) ");
