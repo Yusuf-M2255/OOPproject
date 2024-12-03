@@ -5,10 +5,6 @@ import Cast.CastMember;
 import Cast.Director;
 import ContentControl.*;
 import Subscription.*;
-import com.sun.source.tree.TryTree;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -31,25 +27,25 @@ public class DataBase {
     };
 
     //Accounts Data
-    public DataObjectController<Admin> adminsData= null;
-    public DataObjectController<User>usersData =null;
+    public DataObjectController<Admin> adminsData;
+    public DataObjectController<User>usersData;
     public static DataObjectController<Account>accountsData =new DataObjectController<Account>();
     public Account CurrentUser = null;
 
     //Content Data
-    public DataObjectController<Movie> moviesData = null;
-    public DataObjectController<Series> seriesData = null;
+    public DataObjectController<Movie> moviesData;
+    public DataObjectController<Series> seriesData;
     public static DataObjectController<Content> contentsData = new DataObjectController<Content>();
 
     //Cast Data
-    public DataObjectController<Director> DirectorsData = null;
-    public DataObjectController<CastMember>castMemberData = null;
+    public DataObjectController<Director> DirectorsData;
+    public DataObjectController<CastMember>castMemberData;
 
     //Watch Data
-    public DataObjectController<WatchRecord>watchRecordData = null;
+    public DataObjectController<WatchRecord>watchRecordData;
 
     //Credit Card Data
-    public DataObjectController<CreditCard> creditData = null;
+    public DataObjectController<CreditCard> creditData;
 
     /**
      * Non-Parameterized Constructor that init all Data Objects and Loading Data From Files
