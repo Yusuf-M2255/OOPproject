@@ -138,17 +138,9 @@ public class DataObjectController <T> {
 
     /**
      * function that return all users in application
-     * @return T[]
+     * @return List
      */
     public List<T> getData() {
-        return data;
-    }
-
-    /**
-     * function that return all Users in application as List
-     * @return List<T>
-     */
-    public List<T> getDataAsList() {
         return data;
     }
 
