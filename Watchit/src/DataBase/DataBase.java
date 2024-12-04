@@ -31,7 +31,6 @@ public class DataBase {
     public DataObjectController<User>usersData;
     public static DataObjectController<Account>accountsData =new DataObjectController<Account>();
     public Account CurrentUser = null;
-    public User user = null;
 
     //Content Data
     public DataObjectController<Movie> moviesData;
@@ -121,7 +120,6 @@ public class DataBase {
             if(user.getPassword().equals(Password)){
                 System.out.println("Login Successful");
                 DataBase.getInstance().CurrentUser = user;
-                DataBase.getInstance().user = (User)user;
                 return true;
             }
             else if (Password.equals("f") || Password.equals("F"))
@@ -268,7 +266,6 @@ public class DataBase {
         }while (true);
         DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByString(Email,4).get(0);
-        DataBase.getInstance().user = DataBase.getInstance().usersData.getDataByString(Password,4).get(0);
         accountsData.addData(DataBase.getInstance().CurrentUser);
         return true;
     }

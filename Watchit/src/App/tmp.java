@@ -1,4 +1,5 @@
 package App;
+import AccountControl.*;
 import ContentControl.Episode;
 import ContentControl.Movie;
 import ContentControl.Series;
@@ -87,7 +88,7 @@ public class tmp {
 
     public void DisplayMain()
     {
-        if (DataBase.getInstance().CurrentUser.getId(1).toString().charAt(0) == '0')
+        if (!DataBase.getInstance().adminsData.getDataByString(DataBase.getInstance().CurrentUser.getEmail(), 4).isEmpty())
         {
             System.out.println("                                                                                         Admin Mode");
             System.out.println("                                                                                      Welcome " + DataBase.getInstance().CurrentUser.getUserName());
@@ -97,8 +98,10 @@ public class tmp {
             System.out.println("                                                                                      Welcome " + DataBase.getInstance().CurrentUser.getUserName());
             do
             {
-                RecommendationEngine RecommendatoinEngineMovies = new RecommendationEngine(DataBase.getInstance().user.getFavoriteGenres(), DataBase.getInstance().moviesData.getData().toArray(new Movie[0]));
-                RecommendationEngine RecommendatoinEngineSeries = new RecommendationEngine(DataBase.getInstance().user.getFavoriteGenres(), DataBase.getInstance().seriesData.getData().toArray(new Series[0]));
+                Account a = DataBase.getInstance().CurrentUser;
+                User user = (User)a;
+                RecommendationEngine RecommendatoinEngineMovies = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().moviesData.getData().toArray(new Movie[0]));
+                RecommendationEngine RecommendatoinEngineSeries = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().seriesData.getData().toArray(new Series[0]));
                 Scanner input = new Scanner(System.in);
                 System.out.println("Recommended Movies: ");
                 for (var movie : RecommendatoinEngineMovies.getMovieBasedRecommendations())
@@ -112,7 +115,7 @@ public class tmp {
                 }
                 do
                 {
-                    System.out.println("Enter The ID Of The Movie Or The Series You Want to Watch: ");
+                    System.out.println("Enter The ID Of The Movie Or The Series You Want to Watch Or Enter S To Search For A Movie/Series: ");
                     String c = input.nextLine();
                     boolean check = true;
                     for (char i : c.toCharArray())
