@@ -9,8 +9,9 @@ import java.util.List;
 public class RecommendationEngine {
     private List<String> favouriteGenres;
     private Content[] content;
+    public Content[] trending;
 
-    RecommendationEngine(List<String> favouriteGenres, Content[] content) {
+    public RecommendationEngine(List<String> favouriteGenres, Content[] content) {
         this.favouriteGenres = favouriteGenres;
         this.content = content;
     }
