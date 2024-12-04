@@ -121,7 +121,7 @@ public class tmp {
                 }
                 do
                 {
-                    System.out.println("Enter W if you want to watch from the shown Movies/series, If you want to search for another movie/series enter F:");
+                    System.out.println("Enter W if you want to watch from the shown Movies/series, If you want to search for another movie/series enter S:");
                     choice = input.nextLine();
                     if (choice.equals("w") || choice.equals("W"))
                     {
@@ -158,18 +158,18 @@ public class tmp {
                                 System.out.println("Invalid input, Please try again");
                         }while (true);
                     }
-                    else if (choice.equals("f") || choice.equals("F"))
+                    else if (choice.equals("s") || choice.equals("S"))
                     {
                         System.out.println("Enter The Name Of The Movie Or The Series: ");
                         choice = input.nextLine();
-                        if (!DataBase.getInstance().moviesData.getDataThatContains(choice, 0).isEmpty())
+                        if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
                         {
-                            for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice, 0))
+                            for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0))
                                 System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                         }
-                        else if (!DataBase.getInstance().seriesData.getDataThatContains(choice, 0).isEmpty())
+                        else if (!DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
                         {
-                            for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice, 0))
+                            for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0))
                                 System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                         }
                         else
