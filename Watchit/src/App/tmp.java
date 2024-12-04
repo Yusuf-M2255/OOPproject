@@ -84,6 +84,11 @@ public class tmp {
         for (var cast : series.cast)
             System.out.print(cast + ", ");
         System.out.println();
+        System.out.println("Episodes: ");
+        for (var episode : DataBase.getInstance().episodesData.getDataByString(series.contentTitle, 0))
+        {
+            System.out.println("Name: " + episode.getEpisodeTitle() + ", ID: " + episode.getEpisodeNumber());
+        }
     }
 
     public void DisplayMain()
@@ -103,6 +108,7 @@ public class tmp {
                 RecommendationEngine RecommendatoinEngineMovies = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().moviesData.getData().toArray(new Movie[0]));
                 RecommendationEngine RecommendatoinEngineSeries = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().seriesData.getData().toArray(new Series[0]));
                 Scanner input = new Scanner(System.in);
+                String choice;
                 System.out.println("Recommended Movies: ");
                 for (var movie : RecommendatoinEngineMovies.getMovieBasedRecommendations())
                 {
@@ -115,36 +121,63 @@ public class tmp {
                 }
                 do
                 {
-                    System.out.println("Enter The ID Of The Movie Or The Series You Want to Watch Or Enter S To Search For A Movie/Series: ");
-                    String c = input.nextLine();
-                    boolean check = true;
-                    for (char i : c.toCharArray())
+                    System.out.println("Enter W if you want to watch from the shown Movies/series, If you want to search for another movie/series enter F:");
+                    choice = input.nextLine();
+                    if (choice.equals("w") || choice.equals("W"))
                     {
-                        if (i < '0' || i > '9')
+                        do
                         {
-                            check = false;
-                            break;
-                        }
+                            System.out.println("Enter The ID Of The Movie Or The Series You Want to Watch Or Enter S To Search For A Movie/Series: ");
+                            choice = input.nextLine();
+                            boolean check = true;
+                            for (char i : choice.toCharArray())
+                            {
+                                if (i < '0' || i > '9')
+                                {
+                                    check = false;
+                                    break;
+                                }
+                            }
+                            if (check)
+                            {
+                                Long l = stol(choice);
+                                if (DataBase.getInstance().moviesData.getDataById(l) != null)
+                                {
+                                    DisplayMovie(DataBase.getInstance().moviesData.getDataById(l));
+                                    break;
+                                }
+                                else if (DataBase.getInstance().seriesData.getDataById(l) != null)
+                                {
+                                    DisplaySeries(DataBase.getInstance().seriesData.getDataById(l));
+                                    break;
+                                }
+                                else
+                                    System.out.println("Invalid input, Please try again");
+                            }
+                            else
+                                System.out.println("Invalid input, Please try again");
+                        }while (true);
                     }
-                    if (check)
+                    else if (choice.equals("f") || choice.equals("F"))
                     {
-                        Long l = stol(c);
-                        if (DataBase.getInstance().moviesData.getDataById(l) != null)
+                        System.out.println("Enter The Name Of The Movie Or The Series: ");
+                        choice = input.nextLine();
+                        if (!DataBase.getInstance().moviesData.getDataThatContains(choice, 0).isEmpty())
                         {
-                            DisplayMovie(DataBase.getInstance().moviesData.getDataById(l));
-                            break;
+                            for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice, 0))
+                                System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                         }
-                        else if (DataBase.getInstance().seriesData.getDataById(l) != null)
+                        else if (!DataBase.getInstance().seriesData.getDataThatContains(choice, 0).isEmpty())
                         {
-                            DisplaySeries(DataBase.getInstance().seriesData.getDataById(l));
-                            break;
+                            for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice, 0))
+                                System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                         }
                         else
-                            System.out.println("Invalid input, Please try again");
+                            System.out.println("No Data Found");
                     }
                     else
                         System.out.println("Invalid input, Please try again");
-                }while (true);
+                }while(true);
             }while (true);
 
         }
