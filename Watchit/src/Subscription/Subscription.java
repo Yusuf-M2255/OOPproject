@@ -1,7 +1,4 @@
 package Subscription;
-
-import DataBase.DataObject;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,8 +13,6 @@ public class Subscription {
     public final static Long[] Prices = {(long)1000,(long)1750,(long)3000};
     public final static String[] Descriptions = {"1 Screen / Ads","3 Screen / Ads","3 Screen / No Ads"};
     // constructors
-
-    //for Yusuf (I don't know why you use default constructor)
     public Subscription(long userID, Integer Type, Date startDate, Date endDate){
         this.userID = userID;
         this.Type = Type;
@@ -32,6 +27,9 @@ public class Subscription {
         calendar.setTime(startDate);
         calendar.add(Calendar.YEAR, 1);
         this.endDate = new Date(calendar.getTime().getTime());
+    }
+    public boolean isExpired(){
+        return endDate.compareTo(new Date()) < 0;
     }
     public Long getUserID() {
         return userID;

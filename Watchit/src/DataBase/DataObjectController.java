@@ -27,6 +27,7 @@ public class DataObjectController <T> {
         Code = null;
         file = null;
     }
+
     /**
      * Parametrized Constructor that used to initialize objects which is saved in files
      * @param filePath path of file that contains data and in end of program will be saved there
@@ -123,6 +124,7 @@ public class DataObjectController <T> {
         data.stream().filter(item -> ((DataObject)item).getId(op).equals(Num)).forEach(SearchedData::add);
         return SearchedData;
     }
+
     /**
      * function that used to get the users that contains searchText
      * @param searchText is the substring of user you search
