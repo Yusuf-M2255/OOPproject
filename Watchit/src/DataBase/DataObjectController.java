@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Used to search on Data Object , Load ,Save,Add and Remove Data from it
@@ -144,7 +145,7 @@ public class DataObjectController <T> {
      */
     public List<T> getDataThatContains(String searchText,int op){
         List<T>ret=new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getName(op).contains(searchText)).forEach(ret::add);
+        data.stream().filter(item -> ((DataObject)item).getName(op).toLowerCase().contains(searchText)).forEach(ret::add);
         return ret;
     }
 
