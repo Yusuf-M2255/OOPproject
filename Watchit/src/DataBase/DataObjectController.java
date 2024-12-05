@@ -1,5 +1,8 @@
 package DataBase;
 
+import AccountControl.Account;
+import ContentControl.Content;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -163,6 +166,12 @@ public class DataObjectController <T> {
      */
     public void addData(T item){
         data.add(item);
+        if(type=='U'||type=='A'){
+            DataBase.accountsData.addData((Account)item);
+        }
+        else if(type=='M'||type=='S'){
+            DataBase.contentsData.addData((Content) item);
+        }
     }
 
     /**
@@ -204,6 +213,10 @@ public class DataObjectController <T> {
             List<T> items = getDateByNum(Num,op);
             for (T item1 : items) {
                 data.remove(item1);
+                if (type == 'U' || type == 'A')
+                    DataBase.accountsData.removeData((Account) item1);
+                else if (type == 'S' || type == 'M')
+                    DataBase.contentsData.removeData((Content) item1);
             }
             return items;
         }
@@ -215,6 +228,10 @@ public class DataObjectController <T> {
      */
     public void removeData(T obj){
         data.remove(obj);
+        if (type == 'U' || type == 'A')
+            DataBase.accountsData.removeData((Account) obj);
+        else if (type == 'S' || type == 'M')
+            DataBase.contentsData.removeData((Content) obj);
     }
 
     /**
