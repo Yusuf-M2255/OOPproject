@@ -47,6 +47,6 @@ public class Series extends Content{
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
-        return super.toString()+numberOfEpisodes+" "+onGoing+System.lineSeparator()+ DateFormat.getInstance().format(lastAireDate) +System.lineSeparator();
+        return super.toString()+numberOfEpisodes+","+onGoing+System.lineSeparator()+ DateFormat.getInstance().format(lastAireDate) +System.lineSeparator();
     }
 }

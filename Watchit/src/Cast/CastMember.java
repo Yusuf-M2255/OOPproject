@@ -54,11 +54,11 @@ public class CastMember extends DataObject {
    @Override
    public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CastMemberId.toString()).append(" ").append(firstName).append(" ").append(lastName).append(" ").append(gender).append(" ").append(nationality).append(" ").append(socialMediaLink).append(" ");
-        sb.append(Integer.valueOf(Contents.size()).toString()).append(" ");
+        sb.append(CastMemberId.toString()).append(",").append(firstName).append(",").append(lastName).append(",").append(gender).append(",").append(nationality).append(",").append(socialMediaLink).append(",");
+        sb.append(Integer.valueOf(Contents.size()).toString()).append(",");
         for (var item : Contents) {
             sb.append(item);
-            sb.append(" ");
+            sb.append(",");
         }
         sb.deleteCharAt(sb.length()-1);
         sb.append(System.lineSeparator());

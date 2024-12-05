@@ -72,7 +72,7 @@ public class Account extends DataObject {
     }
     @Override
     public String toString(){
-        return  ID.toString() + " " + userName + " " + firstName + " " + lastName + " " + email
-                + ' ' + password + " " + FavoriteName + System.lineSeparator();
+        return  ID.toString() + "," + userName + "," + firstName + "," + lastName + "," + email
+                + "," + password + "," + FavoriteName + System.lineSeparator();
     }
 }

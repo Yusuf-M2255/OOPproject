@@ -62,7 +62,7 @@ public class Content extends DataObject {
     }
 
     public void EditRate(int UserID, String contentTitle, float rate){
-        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+" "+Long.valueOf((long)UserID).toString(),1).get(0);
+        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+","+Long.valueOf((long)UserID).toString(),1).get(0);
         Rate_Sum -= WatchRecordTemp.Rating;
         WatchRecordTemp.Rating = (Float) rate;
         Rate_Sum += rate;
@@ -84,31 +84,31 @@ public class Content extends DataObject {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(contentID.toString());
-        sb.append(" ");
+        sb.append(",");
         sb.append(contentTitle);
-        sb.append(" ");
+        sb.append(",");
         sb.append(language);
-        sb.append(" ");
+        sb.append(",");
         sb.append(country);
-        sb.append(" ");
+        sb.append(",");
         sb.append(director);
-        sb.append(" ");
+        sb.append(",");
         sb.append(Integer.valueOf(budget).toString());
-        sb.append(" ");
+        sb.append(",");
         sb.append(Integer.valueOf(revenue).toString());
-        sb.append(" ");
+        sb.append(",");
         sb.append(Integer.valueOf(genres.size()).toString());
-        sb.append(" ");
+        sb.append(",");
         for (String s : genres)
         {
             sb.append(s);
-            sb.append(" ");
+            sb.append(",");
         }
         sb.append(Integer.valueOf(cast.size()).toString());
-        sb.append(" ");
+        sb.append(",");
         for (String s : cast){
             sb.append(s);
-            sb.append(" ");
+            sb.append(",");
         }
         sb.deleteCharAt(sb.length()-1);
         sb.append(System.lineSeparator());

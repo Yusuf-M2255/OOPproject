@@ -59,7 +59,7 @@ public class CreditCard extends DataObject {
 
     @Override
     public String toString() {
-        return cardNumber + " "+ cvv +" "+ balance.toString() + System.lineSeparator()+ DateFormat.getInstance().format(expiryDate) +System.lineSeparator();
+        return cardNumber + ","+ cvv +","+ balance.toString() + System.lineSeparator()+ DateFormat.getInstance().format(expiryDate) +System.lineSeparator();
     }
 
     @Override

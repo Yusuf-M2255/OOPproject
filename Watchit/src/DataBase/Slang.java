@@ -43,7 +43,7 @@ public class Slang {
     }
     public void SplitLine(){
         data.clear();
-        String[] da = Line.split(" ");
+        String[] da = Line.split(",");
         for(String line : da){
             data.add(line);
         }

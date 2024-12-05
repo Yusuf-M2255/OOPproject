@@ -49,23 +49,23 @@ public class User extends Account {
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder(ID.toString() + " " + userName + " " + password + " " + email + " " + firstName
-                + ' ' + lastName + " ");
-        s.append(Integer.valueOf(History.size()).toString()).append(" ");
+        StringBuilder s = new StringBuilder(ID.toString() + "," + userName + "," + password + "," + email + "," + firstName
+                + "," + lastName + ",");
+        s.append(Integer.valueOf(History.size()).toString()).append(",");
         for (String history : History) {
-            s.append(history).append(" ");
+            s.append(history).append(",");
         }
 
-        s.append(Integer.valueOf(FavoriteGenres.size()).toString()).append(" ");
+        s.append(Integer.valueOf(FavoriteGenres.size()).toString()).append(",");
         for (String Genre : FavoriteGenres) {
-            s.append(Genre).append(" ");
+            s.append(Genre).append(",");
         }
 
-        s.append(Integer.valueOf(WatchLater.size()).toString()).append(" ");
+        s.append(Integer.valueOf(WatchLater.size()).toString()).append(",");
         for (String watchLater : WatchLater) {
-            s.append(watchLater).append(" ");
+            s.append(watchLater).append(",");
         }
-        s.append(FavoriteName).append(" ");
+        s.append(FavoriteName).append(",");
         s.append(subscriptionPlan.toString());
         s.append(System.lineSeparator());
         return s.toString();

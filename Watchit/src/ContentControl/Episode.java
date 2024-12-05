@@ -53,7 +53,7 @@ public class Episode extends DataObject {
   //--------------------------------------DataBase Methods-----------------------------------------//
   @Override
   public String toString() {
-    return Id.toString()+" "+SeriesName+" "+episodeTitle+" "+
+    return Id.toString()+","+SeriesName+","+episodeTitle+","+
             Integer.valueOf(episodeNumber).toString()+Integer.valueOf(duration).toString()+
             System.lineSeparator()+ DateFormat.getInstance().format(releaseDate) +System.lineSeparator();
   }

@@ -19,7 +19,7 @@ public class WatchRecord extends DataObject {
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
-        return UserId.toString()+" "+Rating.toString()+" "+ ContentTitle+System.lineSeparator()+
+        return UserId.toString()+","+Rating.toString()+","+ ContentTitle+System.lineSeparator()+
                 DateFormat.getInstance().format(DateOfWatching.toString())+System.lineSeparator();
     }
     @Override
