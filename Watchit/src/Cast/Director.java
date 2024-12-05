@@ -1,6 +1,4 @@
 package Cast;
-
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,17 +12,6 @@ public class Director extends CastMember {
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(CastMemberId.toString()+" ");
-        sb.append(firstName + " " + lastName+" "+gender+" "+nationality+" "+socialMediaLink+" ");
-        sb.append(Integer.valueOf(Contents.size()).toString()+" ");
-        for (int i = 0; i < Contents.size(); i++) {
-            sb.append(Contents.get(i)+" ");
-        }
-        sb.deleteCharAt(sb.length()-1);
-        sb.append(System.lineSeparator());
-        sb.append(DateFormat.getInstance().format(dateOfBirth));
-        sb.append(System.lineSeparator());
-        return sb.toString();
+        return super.toString();
     }
 }

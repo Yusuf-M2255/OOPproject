@@ -87,6 +87,18 @@ public class DataObjectController <T> {
     }
 
     /**
+     * @param nameList list of names the input you search
+     * @param op check the function getId in the module (watchRecordData -> WatchRecord)
+     * @return List of module Type
+     */
+    public List<T> getDataByString(List<String> nameList,int op){
+        List<T>SearchedData = new ArrayList<>();
+        for(var name : nameList)
+            data.stream().filter(item -> ((DataObject)item).getName(op).equals(name)).forEach(SearchedData::add);
+        return SearchedData;
+    }
+
+    /**
      * Data By full obj
      * @param obj the obj you search
      * @return that Obj

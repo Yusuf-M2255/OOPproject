@@ -1,7 +1,11 @@
 package Cast;
+import ContentControl.Content;
+import ContentControl.Movie;
+import DataBase.DataBase;
 import DataBase.DataObject;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +34,7 @@ public class CastMember extends DataObject {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.Contents = Contents;
+        this.Contents =Contents;
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
         CastMemberId = Id;
@@ -40,13 +44,21 @@ public class CastMember extends DataObject {
         Contents.add(Content);
    }
    //--------------------------------------DataBase Methods-----------------------------------------//
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof CastMember castMember){
+            return castMember.firstName.equals(firstName)&&castMember.lastName.equals(lastName)&&castMember.dateOfBirth.equals(dateOfBirth)&&castMember.gender.equals(gender)&&castMember.nationality.equals(nationality);
+        }
+        return false;
+    }
    @Override
    public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CastMemberId.toString()+" "+firstName + " " + lastName+" "+gender+" "+nationality+" "+socialMediaLink+" ");
-        sb.append(Integer.valueOf(Contents.size()).toString()+" ");
-        for (int i = 0; i < Contents.size(); i++) {
-            sb.append(Contents.get(i)+" ");
+        sb.append(CastMemberId.toString()).append(" ").append(firstName).append(" ").append(lastName).append(" ").append(gender).append(" ").append(nationality).append(" ").append(socialMediaLink).append(" ");
+        sb.append(Integer.valueOf(Contents.size()).toString()).append(" ");
+        for (var item : Contents) {
+            sb.append(item);
+            sb.append(" ");
         }
         sb.deleteCharAt(sb.length()-1);
         sb.append(System.lineSeparator());
