@@ -3,25 +3,27 @@ package Subscription;
 import DataBase.DataObject;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CreditCard extends DataObject {
     //attributes
     private final String cardNumber;
-    private final String expiryDate;
+    private final Calendar expiryDate;
     private final String cvv;
     private Float balance;
     //constructors
 
     public CreditCard() {
         cardNumber = "";
-        expiryDate = null;
+        expiryDate = Calendar.getInstance();
         cvv = "";
         balance = 0.F;
     }
-    public CreditCard(String cardNumber, String cvv, float balance,String expiryDate) {
+    public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
         this.cardNumber = cardNumber;
-        this.expiryDate = expiryDate;
+        this.expiryDate = Calendar.getInstance();
+        this.expiryDate.setTime(expiryDate);
         this.cvv = cvv;
         this.balance = balance;
     }
@@ -38,8 +40,8 @@ public class CreditCard extends DataObject {
         return cardNumber;
     }
 
-    public String getExpiryDate() {
-        return expiryDate;
+    public Date getExpiryDate() {
+        return expiryDate.getTime();
     }
     public String getCvv() {
         return cvv;
@@ -63,7 +65,7 @@ public class CreditCard extends DataObject {
     }
 
     @Override
-    public String getDate(){
-        return expiryDate;
+    public Date getDate(){
+        return expiryDate.getTime();
     }
 }

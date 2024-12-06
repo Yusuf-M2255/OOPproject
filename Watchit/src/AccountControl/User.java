@@ -104,7 +104,7 @@ public class User extends Account {
         System.out.print("\n");
     }
     @Override
-    public String getDate(){
+    public Date getDate(){
         return subscriptionPlan.getEndDate();
     }
 }
