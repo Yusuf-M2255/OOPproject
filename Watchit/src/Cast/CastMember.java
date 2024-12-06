@@ -19,7 +19,7 @@ public class CastMember extends DataObject {
     public List<String> Contents;
     public String nationality;
     public String socialMediaLink;
-    public CastMember(String firstName, String lastName, String gender, String nationality, String socialMediaLink,List<String>Contents, Date dateOfBirth) {
+    public CastMember(String firstName, String lastName, String gender, String nationality, String socialMediaLink, Date dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
