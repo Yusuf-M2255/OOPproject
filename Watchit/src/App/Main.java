@@ -7,6 +7,7 @@ public class Main {
         DataBase.getInstance();
         tmp t = new tmp();
         t.LoginDisplay();
+        DataBase.getInstance().Save();
         t.DisplayMain();
         DataBase.getInstance().Save();
     }

@@ -216,7 +216,7 @@ public class DataBase {
                 System.out.println("Sorry, " + j + " is an Invalid Input, Try Again");
         }while(!j.equals("-1"));
         System.out.print("Enter your Favorite Name (This name will be used to recover your Password if you forgot it): ");
-        String FavoriteName = input.next();
+        String FavoriteName = input.nextLine();
         System.out.println("Choose your Plan : ");
         for (i = 0 ;i<3;i++) {
             System.out.println((i + 1) + "- " + Subscription.Plans[i] + "   |   " + Subscription.Prices[i] + "EGP/Year   |   " + Subscription.Descriptions[i]);
@@ -236,7 +236,11 @@ public class DataBase {
         }while (true);
         do
         {
-            String CreditNumber, cvv, ExpireDate;
+            String CreditNumber, cvv, CardHolderName, CardType;
+            System.out.print("Enter The Card Type: ");
+            CardType = sc.nextLine();
+            System.out.print("Enter the card owner name: ");
+            CardHolderName = sc.nextLine();
             System.out.print("Enter your credit card number: ");
             CreditNumber = sc.nextLine();
             Calendar cal;
@@ -254,7 +258,7 @@ public class DataBase {
             }while (true);
             System.out.print("Enter your credit card CVV: ");
             cvv = sc.nextLine();
-            CreditCard credit = new CreditCard(CreditNumber, cvv, "Master","123", cal.getTime());
+            CreditCard credit = new CreditCard(CreditNumber, CardHolderName, CardType, cvv, cal.getTime());
             if (DataBase.getInstance().creditData.getDataByObject(credit) != null)
             {
                 System.out.println("Credit Card Accepted");
