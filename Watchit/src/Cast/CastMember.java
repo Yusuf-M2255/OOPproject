@@ -38,7 +38,7 @@ public class CastMember extends DataObject {
         this.nationality = nationality;
         this.socialMediaLink = socialMediaLink;
         CastMemberId = Id;
-        cnt = Id+1;
+        cnt = Math.max(cnt,Id+1);
     }
    public void joinContent(String Content){
         Contents.add(Content);

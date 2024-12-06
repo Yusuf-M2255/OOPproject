@@ -22,12 +22,11 @@ public class Account extends DataObject {
         this.password = password;
         this.FavoriteName = FavoriteName;
         this.ID = cnt++;
-
     }
     public Account(String userName,String firstName,String lastName,String email,String password,String FavoriteName,Long id) {
         this(userName, firstName, lastName, email, password, FavoriteName);
         ID=id;
-        cnt = id+1;
+        cnt = Math.max(cnt,id+1);
     }
     public String getFavoriteName(){ return this.FavoriteName;}
     public String getUserName() {
