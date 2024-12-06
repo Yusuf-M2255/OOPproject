@@ -240,8 +240,13 @@ public class DataBase {
             System.out.print("Enter your credit card number: ");
             CreditNumber = sc.nextLine();
             System.out.print("Enter your credit card expiration date (YY/MM): ");
-            Calendar cal = Calendar.getInstance();
-            cal.set(Integer.parseInt(sc.next()),Integer.parseInt(sc.next()),0);
+            try {
+                Calendar cal = Calendar.getInstance();
+                String[] YYMM = sc.nextLine().split("/");
+                cal.set(Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
+            }catch (NumberFormatException e){
+                e.printStackTrace();;
+            }
             System.out.print("Enter your credit card CVV: ");
             cvv = sc.nextLine();
             CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, cal.getTime());
