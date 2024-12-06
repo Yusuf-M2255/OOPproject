@@ -30,7 +30,7 @@ public class Content extends DataObject {
         this.budget = budget;
         this.revenue = revenue;
         Rate_Sum = 0;
-        for(WatchRecord Record: DataBase.getInstance().watchRecordData.getDataByString(contentTitle,0)){
+        for(WatchRecord Record: DataBase.watchRecordData.getDataByString(contentTitle,0)){
             Rate_Sum += Record.Rating;
             RateCounter++;
         }
@@ -55,18 +55,18 @@ public class Content extends DataObject {
         }
     }
 
-    public void AddRate(int UserID, float rate) {
-        DataBase.getInstance().watchRecordData.addData(new WatchRecord((long) UserID,rate, contentTitle, new Date()));
+    public void AddRate(int UserID, float rate)  {
+        DataBase.watchRecordData.addData(new WatchRecord((long) UserID,rate, contentTitle, new Date()));
         RateCounter++;
         Rate_Sum += rate;
     }
 
     public void EditRate(int UserID, String contentTitle, float rate){
-        WatchRecord WatchRecordTemp = DataBase.getInstance().watchRecordData.removeData(contentTitle+","+Long.valueOf((long)UserID).toString(),1).get(0);
+        WatchRecord WatchRecordTemp = DataBase.watchRecordData.removeData(contentTitle+","+Long.valueOf((long)UserID).toString(),1).get(0);
         Rate_Sum -= WatchRecordTemp.Rating;
         WatchRecordTemp.Rating = (Float) rate;
         Rate_Sum += rate;
-        DataBase.getInstance().watchRecordData.addData(WatchRecordTemp);
+        DataBase.watchRecordData.addData(WatchRecordTemp);
     }
     public float TotalRate(){
         return (Rate_Sum/RateCounter);
