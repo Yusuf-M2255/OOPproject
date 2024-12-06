@@ -1,7 +1,6 @@
 package Subscription;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CreditCard{
@@ -49,6 +48,6 @@ public class CreditCard{
     }
     @Override
     public String toString() {
-        return cardNumber + "," + cardHolderName + "," + type + "," + cvv + "\n" +DateFormat.getInstance().format(expiryDate)+"\n";
+        return cardNumber + "," + cardHolderName + "," + type + "," + cvv + System.lineSeparator() +DateFormat.getInstance().format(expiryDate)+System.lineSeparator();
     }
 }
