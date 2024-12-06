@@ -1,7 +1,6 @@
 package Subscription;
 
 import DataBase.DataObject;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,7 +43,7 @@ public class CreditCard extends DataObject {
 
             int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
             cal.setTime(other.expiryDate);
-            return other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
+            return other.type.equals(type)&& other.CardHolderName.equals(CardHolderName)&&other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
                     &&cal.get(Calendar.YEAR)==year&&cal.get(Calendar.MONTH)==month;
         }
         return false;
