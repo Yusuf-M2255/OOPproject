@@ -55,7 +55,7 @@ public class CreditCard extends DataObject {
             CreditCard other = (CreditCard) obj;
             Calendar cal = Calendar.getInstance();
             cal.setTime(expiryDate);
-            System.out.println(cal.get(Calendar.YEAR));
+            
             int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
             cal.setTime(other.expiryDate);
             return other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
