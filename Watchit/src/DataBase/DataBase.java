@@ -240,11 +240,11 @@ public class DataBase {
             System.out.print("Enter your credit card number: ");
             CreditNumber = sc.nextLine();
             System.out.print("Enter your credit card expiration date (YY/MM): ");
-            Date d = new Date();
-            ExpireDate = sc.nextLine();
+            Calendar cal = Calendar.getInstance();
+            cal.set(Integer.parseInt(sc.next()),Integer.parseInt(sc.next()),0);
             System.out.print("Enter your credit card CVV: ");
             cvv = sc.nextLine();
-            CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, ExpireDate);
+            CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, cal.getTime());
             if (DataBase.getInstance().creditData.getDataByObject(credit) != null)
             {
                 System.out.println("Credit Card Accepted");

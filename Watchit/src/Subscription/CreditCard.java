@@ -9,21 +9,20 @@ import java.util.Date;
 public class CreditCard extends DataObject {
     //attributes
     private final String cardNumber;
-    private final Calendar expiryDate;
+    private final Date expiryDate;
     private final String cvv;
     private Float balance;
     //constructors
 
     public CreditCard() {
         cardNumber = "";
-        expiryDate = Calendar.getInstance();
+        expiryDate = null;
         cvv = "";
         balance = 0.F;
     }
     public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
         this.cardNumber = cardNumber;
-        this.expiryDate = Calendar.getInstance();
-        this.expiryDate.setTime(expiryDate);
+        this.expiryDate =expiryDate;
         this.cvv = cvv;
         this.balance = balance;
     }
@@ -41,7 +40,7 @@ public class CreditCard extends DataObject {
     }
 
     public Date getExpiryDate() {
-        return expiryDate.getTime();
+        return expiryDate;
     }
     public String getCvv() {
         return cvv;
@@ -52,9 +51,15 @@ public class CreditCard extends DataObject {
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
+
         if (obj instanceof CreditCard) {
             CreditCard other = (CreditCard) obj;
-            return other.balance.equals(balance)&&other.expiryDate.equals(expiryDate)&&other.cardNumber.equals(cardNumber);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(expiryDate);
+            int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
+            cal.setTime(other.expiryDate);
+            return other.balance.equals(balance)&&other.cardNumber.equals(cardNumber)
+                    &&cal.get(Calendar.YEAR)==year&&cal.get(Calendar.MONTH)==month;
         }
         return false;
     }
@@ -66,6 +71,6 @@ public class CreditCard extends DataObject {
 
     @Override
     public Date getDate(){
-        return expiryDate.getTime();
+        return expiryDate;
     }
 }
