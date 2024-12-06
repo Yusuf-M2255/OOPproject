@@ -43,7 +43,7 @@ public class DataBase {
     public DataObjectController<CastMember>castMemberData;
 
     //Watch Data
-    public DataObjectController<WatchRecord>watchRecordData;
+    public static DataObjectController<WatchRecord>watchRecordData;
 
     //Credit Card Data
     public DataObjectController<CreditCard> creditData;
@@ -62,8 +62,6 @@ public class DataBase {
         // Loading Cast
         DirectorsData = new DataObjectController<Director>("./Directors.txt","nslw5SWoSnd",'D');
         castMemberData = new DataObjectController<CastMember>("./CastMembers.txt","nslw5SWoSnd",'C');
-        //Loading Watch Record
-        watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslfSnd",'W');
         // Loading Credit Cards
         creditData = new DataObjectController<CreditCard>("./creditCard.txt","nsw4SWnd",'R');
     }
@@ -75,6 +73,8 @@ public class DataBase {
      */
     public static DataBase getInstance() {
         if(dataBase == null) {
+            //Loading Watch Record
+            watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslfSnd",'W');
             dataBase = new DataBase();
             return dataBase;
         }

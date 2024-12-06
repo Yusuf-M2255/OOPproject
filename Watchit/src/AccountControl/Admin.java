@@ -21,8 +21,7 @@ public class Admin extends Account {
         data.removeData(userID,0);
     }
     public void addMovie(Movie movie){
-        DataObjectController<Movie> data = DataBase.getInstance().moviesData;
-        data.addData(movie);
+        DataBase.getInstance().moviesData.addData(movie);
     }
     public void addSeries(Series series){
         DataObjectController<Series> data = DataBase.getInstance().seriesData;
