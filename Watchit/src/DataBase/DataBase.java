@@ -65,7 +65,7 @@ public class DataBase {
         //Loading Watch Record
         watchRecordData = new DataObjectController<WatchRecord>("./watchRecord.txt","nslfSnd",'W');
         // Loading Credit Cards
-        creditData = new DataObjectController<CreditCard>("./creditCard.txt","nsSSfnd",'R');
+        creditData = new DataObjectController<CreditCard>("./creditCard.txt","nsw4SWnd",'R');
     }
 
     /**
@@ -254,7 +254,7 @@ public class DataBase {
             }while (true);
             System.out.print("Enter your credit card CVV: ");
             cvv = sc.nextLine();
-            CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, cal.getTime());
+            CreditCard credit = new CreditCard(CreditNumber, cvv, "Master","123", cal.getTime());
             if (DataBase.getInstance().creditData.getDataByObject(credit) != null)
             {
                 System.out.println("Credit Card Accepted");

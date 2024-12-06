@@ -11,26 +11,15 @@ public class CreditCard extends DataObject {
     private final String cardNumber;
     private final Date expiryDate;
     private final String cvv;
-    private Float balance;
-    //constructors
+    private final String type;
+    private final String CardHolderName;
 
-    public CreditCard(String cardNumber, String cvv,Date expiryDate) {
+    public CreditCard(String cardNumber,String CardHolderName,String type, String cvv,Date expiryDate) {
         this.cardNumber = cardNumber;
         this.expiryDate =expiryDate;
+        this.type = type;
+        this.CardHolderName=CardHolderName;
         this.cvv = cvv;
-    }
-    public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
-        this.cardNumber = cardNumber;
-        this.expiryDate =expiryDate;
-        this.cvv = cvv;
-        this.balance = balance;
-    }
-    void Pay(Float amount) {
-        balance-=amount;
-    }
-
-    void addMoney(Float amount) {
-        balance+=amount;
     }
 
     //getters
@@ -44,9 +33,6 @@ public class CreditCard extends DataObject {
     public String getCvv() {
         return cvv;
     }
-    public float getBalance() {
-        return balance;
-    }
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override
     public boolean equals(Object obj) {
@@ -55,7 +41,7 @@ public class CreditCard extends DataObject {
             CreditCard other = (CreditCard) obj;
             Calendar cal = Calendar.getInstance();
             cal.setTime(expiryDate);
-            
+
             int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
             cal.setTime(other.expiryDate);
             return other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
@@ -66,7 +52,7 @@ public class CreditCard extends DataObject {
 
     @Override
     public String toString() {
-        return cardNumber + ","+ cvv +","+ balance.toString() + System.lineSeparator()+ DateFormat.getInstance().format(expiryDate) +System.lineSeparator();
+        return cardNumber +","+ CardHolderName+","+ type+","+cvv+System.lineSeparator()+ DateFormat.getInstance().format(expiryDate)+System.lineSeparator();
     }
 
     @Override

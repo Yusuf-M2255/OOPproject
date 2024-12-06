@@ -38,7 +38,7 @@ public class InstanceCreator<T> {
             Episode newEpisode = new Episode(re.longs.get(0),re.strings.get(0),re.strings.get(1),re.integers.get(0),re.integers.get(1),re.dates.get(1));
             data.add((T)newEpisode);
         } else {
-            CreditCard newCreditCard = new CreditCard(re.strings.get(0),re.strings.get(1),re.floats.get(0),re.dates.get(0));
+            CreditCard newCreditCard = new CreditCard(re.strings.get(0),re.strings.get(1),re.strings.get(2),re.strings.get(3),re.dates.get(0));
             data.add((T)newCreditCard);
         }
     }
