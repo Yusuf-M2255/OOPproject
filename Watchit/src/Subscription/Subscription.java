@@ -7,13 +7,13 @@ public class Subscription {
     //attributes
     private final long userID;
     private  final Date startDate;
-    private final Date endDate;
+    private final String endDate;
     public final Integer Type;
     public final static String[] Plans = {"Basic","Standard","Premium"};
     public final static Long[] Prices = {(long)1000,(long)1750,(long)3000};
     public final static String[] Descriptions = {"1 Screen / Ads","3 Screen / Ads","3 Screen / No Ads"};
     // constructors
-    public Subscription(long userID, Integer Type, Date startDate, Date endDate){
+    public Subscription(long userID, Integer Type, Date startDate, String endDate){
         this.userID = userID;
         this.Type = Type;
         this.startDate = startDate;
@@ -26,10 +26,10 @@ public class Subscription {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
         calendar.add(Calendar.YEAR, 1);
-        this.endDate = new Date(calendar.getTime().getTime());
+        this.endDate = new Date(calendar.getTime().getTime()).toString();
     }
     public boolean isExpired(){
-        return endDate.compareTo(new Date()) < 0;
+        return endDate.compareTo(new Date().toString()) < 0;
     }
     public Long getUserID() {
         return userID;
@@ -39,7 +39,7 @@ public class Subscription {
     public Date getStartDate() {
         return startDate;
     }
-    public Date getEndDate() {return endDate;}
+    public String getEndDate() {return endDate;}
     public String getDescription() {return Descriptions[Type];}
     //--------------------------------------DataBase Methods-----------------------------------------//
     @Override

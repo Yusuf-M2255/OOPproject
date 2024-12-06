@@ -165,7 +165,7 @@ public class DataBase {
             String c;
             if(!accountsData.getDataByString(Email,4).isEmpty()) {
                 do {
-                    System.out.println("User already exists if you want to go back enter y, else if you want to try again enter n.");
+                    System.out.println("Email already exists if you want to go back enter y, else if you want to try another email enter n.");
                     c = input.nextLine();
                     if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
                         break;
@@ -176,58 +176,28 @@ public class DataBase {
                     return false;
                 }
             }else if(!Email.matches(EmailRegex)) {
-                do {
-                    System.out.println("Invalid Email. if you want to go back enter y, else if you want to try again enter n.");
-                    c = input.nextLine();
-                    if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
-                        break;
-                    else
-                        System.out.println("Sorry, Invalid Input, Try Again");
-                } while (true);
-                if (c.charAt(0) == 'y' || c.charAt(0) == 'Y') {
-                    return false;
-                }
+                System.out.println("Invalid Email, Please Try Again");
             }
             System.out.print("Enter Email: ");
             Email = input.nextLine();
         }
-        System.out.print("Enter Password: ");
-        Password = input.nextLine();
-        while (!Password.matches(PasswordRegex)){
-            String c;
-            do {
-                System.out.println("Password is Invalid, it should have at least One Capital Letter, One small letter, one number, one special character, and a total of at least 8 characters");
-                System.out.println("if you want to go back enter y, else if you want to try again enter n.");
-                c = input.nextLine();
-                if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
-                    break;
-                else
-                    System.out.println("Sorry, Invalid Input, Try Again");
-            } while (true);
-            if(c.charAt(0) == 'y' || c.charAt(0) == 'Y'){
-                return false;
-            }
+        do{
             System.out.print("Enter Password: ");
             Password = input.nextLine();
-        }
-        System.out.print("reEnter Password: ");
-        String Password1 = input.nextLine();
-        String c;
-        while(!Password.equals(Password1)){
-            do {
-                System.out.println("Passwords doesn't match if you want to go back enter Y, else if you want to try again enter N.");
-                c = sc.nextLine();
-                if ((c.charAt(0) == 'y' || c.charAt(0) == 'Y' || c.charAt(0) == 'n' || c.charAt(0) == 'N') && c.length() == 1)
-                    break;
-                else
-                    System.out.println("Sorry, Invalid Input, Try Again");
-            }while (true);
-            if(c.charAt(0) == 'y' || c.charAt(0) =='Y'){
-                return false;
-            }
+            if (!Password.matches(PasswordRegex))
+                System.out.println("Password is Invalid, it should have at least One Capital Letter, One small letter, one number, one special character, and a total of at least 8 characters");
+            else
+                break;
+        }while (true);
+        do
+        {
             System.out.print("reEnter Password: ");
-            Password1 = input.nextLine();
-        }
+            String Password1 = input.nextLine();
+            if(!Password.equals(Password1))
+                System.out.println("Passwords doesn't match, please try again.");
+            else
+                break;
+        }while (true);
         int i = 0;
         String j;
         for(String genre : genres)
@@ -263,6 +233,25 @@ public class DataBase {
             }
             else
                 System.out.println("Sorry, Invalid Input, Try Again");
+        }while (true);
+        do
+        {
+            String CreditNumber, cvv, ExpireDate;
+            System.out.print("Enter your credit card number: ");
+            CreditNumber = sc.nextLine();
+            System.out.print("Enter your credit card expiration date (YY/MM): ");
+            Date d = new Date();
+            ExpireDate = sc.nextLine();
+            System.out.print("Enter your credit card CVV: ");
+            cvv = sc.nextLine();
+            CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, ExpireDate);
+            if (DataBase.getInstance().creditData.getDataByObject(credit) != null)
+            {
+                System.out.println("Credit Card Accepted");
+                break;
+            }
+            else
+                System.out.println("Sorry, Invalid Credit Card, Please Try Again");
         }while (true);
         DataBase.getInstance().usersData.addData(new User(UserName,FirstName,LastName,Email,Password,new Subscription(Account.cnt+1,Type),fav,new ArrayList<>(),new ArrayList<>(),FavoriteName));
         DataBase.getInstance().CurrentUser = DataBase.getInstance().usersData.getDataByString(Email,4).get(0);

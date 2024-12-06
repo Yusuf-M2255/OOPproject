@@ -12,7 +12,7 @@ public class DataObject {
 
     public Long getId(int op) {return null;}
 
-    public Date getDate() {return null;}
+    public String getDate() {return null;}
 
     public void DisplayLine(){}
 

@@ -241,7 +241,7 @@ public class DataObjectController <T> {
         Date newDate = new Date();
         int i = 0;
         while(i<data.size()){
-            if(((DataObject)(data.get(i))).getDate().compareTo(newDate)<0)
+            if(((DataObject)(data.get(i))).getDate().compareTo(newDate.toString())<0)
                 data.remove(i);
             else
                 i++;

@@ -8,7 +8,7 @@ import java.util.Date;
 public class CreditCard extends DataObject {
     //attributes
     private final String cardNumber;
-    private final Date expiryDate;
+    private final String expiryDate;
     private final String cvv;
     private Float balance;
     //constructors
@@ -19,7 +19,7 @@ public class CreditCard extends DataObject {
         cvv = "";
         balance = 0.F;
     }
-    public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
+    public CreditCard(String cardNumber, String cvv, float balance,String expiryDate) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cvv = cvv;
@@ -38,7 +38,7 @@ public class CreditCard extends DataObject {
         return cardNumber;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
     public String getCvv() {
@@ -63,7 +63,7 @@ public class CreditCard extends DataObject {
     }
 
     @Override
-    public Date getDate(){
+    public String getDate(){
         return expiryDate;
     }
 }
