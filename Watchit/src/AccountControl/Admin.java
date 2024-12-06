@@ -9,7 +9,8 @@ public class Admin extends Account {
         super(userName,firstName,lastName,email,password,FavoriteName);
     }
     public Admin(Long Id,String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
-        super(userName,firstName,lastName,email,password,FavoriteName,Id);
+        super(userName,firstName,lastName,email,password,FavoriteName,Math.max(Id+1,cnt));
+
     }
     public void editUser(long userID , User user){
         DataObjectController<User>data=DataBase.getInstance().usersData;
@@ -45,7 +46,7 @@ public class Admin extends Account {
             else if(plan.equals("Standard"))numOfStandard++;
             else numOfPremium++;
         }
-        revenue+=(numOfBasic* Subscription.Prices[0])+(numOfStandard*Subscription.Prices[1])+(numOfPremium*Subscription.Prices[2]);
+        revenue+=(numOfBasic* Subscription.prices[0])+(numOfStandard*Subscription.prices[1])+(numOfPremium*Subscription.prices[2]);
         return revenue;
     }
     public String plansAnalysis(){

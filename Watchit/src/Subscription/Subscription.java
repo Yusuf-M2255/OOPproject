@@ -5,45 +5,60 @@ import java.util.Date;
 
 public class Subscription {
     //attributes
-    private final long userID;
-    private  final Date startDate;
+    private final long userId;
+    private final int type;
+    private final Date startDate;
     private final Date endDate;
-    public final Integer Type;
-    public final static String[] Plans = {"Basic","Standard","Premium"};
-    public final static Long[] Prices = {(long)1000,(long)1750,(long)3000};
-    public final static String[] Descriptions = {"1 Screen / Ads","3 Screen / Ads","3 Screen / No Ads"};
+    public final static String[] plans = {"Basic","Standard","Premium"};
+    public final static int[] prices = {1000,1750,3000};
+    public final static String[] descriptions = {"1 Screen / Ads","3 Screens / Ads","5 Screens / No Ads"};
     // constructors
-    public Subscription(long userID, Integer Type, Date startDate, Date endDate){
-        this.userID = userID;
-        this.Type = Type;
+    public Subscription(long userId,int type,Date startDate, Date endDate) {
+        this.userId = userId;
+        this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    public Subscription(long userID, Integer Type){
-        this.userID = userID;
-        this.Type = Type;
+    public Subscription(long userId, int type) {
+        this.userId = userId;
+        this.type = type;
         this.startDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
-        calendar.add(Calendar.YEAR, 1);
-        this.endDate = new Date(calendar.getTime().getTime());
+        this.endDate=new Date();
+        endDate.setYear(startDate.getYear()+1);
     }
-    public boolean isExpired(){
-        return endDate.compareTo(new Date()) < 0;
+    //getters
+    public long getUserId() {
+        return userId;
     }
-    public Long getUserID() {
-        return userID;
+    public String getPlan() {
+        return plans[type];
     }
-    public String getPlan() {return Plans[Type];}
-    public Long getPrice() { return Prices[Type];}
+    public int getPrice() {
+        return prices[type];
+    }
     public Date getStartDate() {
         return startDate;
     }
-    public Date getEndDate() {return endDate;}
-    public String getDescription() {return Descriptions[Type];}
-    //--------------------------------------DataBase Methods-----------------------------------------//
-    @Override
+    public Date getEndDate() {
+        return endDate;
+    }
+    public String getDescription() {
+        return descriptions[type];
+    }
+
+
+    public static void displayPlans() {
+        for (int i = 0; i < plans.length; i++) {
+            System.out.println((i + 1) + "- " + Subscription.plans[i] + "   |   " + Subscription.prices[i] + "EGP/Year   |   " + Subscription.descriptions[i]);
+        }
+    }
+    public boolean isExpired() {
+        return endDate.before(new Date());
+    }
+    private String dateFormat(Date date) {
+        return DateFormat.getDateInstance().format(date);
+    }
     public String toString() {
-        return Type+System.lineSeparator()+ DateFormat.getInstance().format(startDate) +System.lineSeparator()+DateFormat.getInstance().format(endDate);
+        return type+"\n"+dateFormat(startDate)+"\n"+dateFormat(endDate)+"\n";
     }
 }
