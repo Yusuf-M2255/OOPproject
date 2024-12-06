@@ -243,13 +243,14 @@ public class DataBase {
             Calendar cal = Calendar.getInstance();
             try {
                 String[] YYMM = sc.nextLine().split("/");
-                cal.set(Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
+                cal.set(2000+Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
             }catch (NumberFormatException e){
                 System.out.println("Error Enter Number plz");
+
             }
             System.out.print("Enter your credit card CVV: ");
             cvv = sc.nextLine();
-            CreditCard credit = new CreditCard(CreditNumber, cvv, 1000, cal.getTime());
+            CreditCard credit = new CreditCard(CreditNumber, cvv, cal.getTime());
             if (DataBase.getInstance().creditData.getDataByObject(credit) != null)
             {
                 System.out.println("Credit Card Accepted");

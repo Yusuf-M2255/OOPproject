@@ -14,11 +14,10 @@ public class CreditCard extends DataObject {
     private Float balance;
     //constructors
 
-    public CreditCard() {
-        cardNumber = "";
-        expiryDate = null;
-        cvv = "";
-        balance = 0.F;
+    public CreditCard(String cardNumber, String cvv,Date expiryDate) {
+        this.cardNumber = cardNumber;
+        this.expiryDate =expiryDate;
+        this.cvv = cvv;
     }
     public CreditCard(String cardNumber, String cvv, float balance,Date expiryDate) {
         this.cardNumber = cardNumber;
@@ -56,9 +55,10 @@ public class CreditCard extends DataObject {
             CreditCard other = (CreditCard) obj;
             Calendar cal = Calendar.getInstance();
             cal.setTime(expiryDate);
+            System.out.println(cal.get(Calendar.YEAR));
             int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
             cal.setTime(other.expiryDate);
-            return other.balance.equals(balance)&&other.cardNumber.equals(cardNumber)
+            return other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
                     &&cal.get(Calendar.YEAR)==year&&cal.get(Calendar.MONTH)==month;
         }
         return false;
