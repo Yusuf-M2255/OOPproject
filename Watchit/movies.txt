@@ -1,3 +1,9 @@
 1,one piece,japanese,japan,oda,10000000,88888888,7,Action,Adventure,Comedy,Drama,Romance,Fantasy,Mystery,10,luffy,zoro,sanji,ussop,nami,robin,broke,franki,chopper,jinbi
 6/30/99, 12:32 AM
 88
+2,the wild robot,english,usa,chris sanders,78000000,125000000,2,Science Fiction,Animation,34,lupita nyong'o,pedro pascal,kit connor,bill nighy,,stephanie hsu,,matt berry,,ving rhames,,mark hamill,,catherine o'hara,,boone storm,,alexandra novelle,,raphael alejandro,,paul-mikel williams,,eddie park,,dee bradley baker,,randy thom,,avrielle corti,,keston john,,max mittelman
+6/30/24, 11:49 PM
+102
+3,inside out 2,english,usa,kelsey mann,200000000,1600000000,3,Adventure,Comedy,Animation,25,amy poehler,,maya hawke,,kensington tallman,,liza lapira,,tony hale,,lewis black,,phyllis smith,,ayo edebiri,,lilimar,,grace lu,,sumayyah nuriddin-green,,adèle exarchopoulos,,diane lane
+6/30/24, 12:04 AM
+96
