@@ -56,7 +56,7 @@ public class Subscription {
         return endDate.before(new Date());
     }
     private String dateFormat(Date date) {
-        return DateFormat.getDateInstance().format(date);
+        return DateFormat.getInstance().format(date);
     }
     public String toString() {
         return type+System.lineSeparator()+dateFormat(startDate)+System.lineSeparator()+dateFormat(endDate);
