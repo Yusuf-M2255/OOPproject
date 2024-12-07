@@ -218,9 +218,7 @@ public class DataBase {
         System.out.print("Enter your Favorite Name (This name will be used to recover your Password if you forgot it): ");
         String FavoriteName = input.nextLine();
         System.out.println("Choose your Plan : ");
-        for (i = 0 ;i<3;i++) {
-            System.out.println((i + 1) + "- " + Subscription.Plans[i] + "   |   " + Subscription.Prices[i] + "EGP/Year   |   " + Subscription.Descriptions[i]);
-        }
+        Subscription.displayPlans();
         int Type;
         do
         {

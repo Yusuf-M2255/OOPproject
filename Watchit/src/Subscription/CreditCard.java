@@ -1,61 +1,54 @@
 package Subscription;
 
-import DataBase.DataObject;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreditCard extends DataObject {
+public class CreditCard{
     //attributes
     private final String cardNumber;
-    private final Date expiryDate;
     private final String cvv;
     private final String type;
-    private final String CardHolderName;
-
-    public CreditCard(String cardNumber,String CardHolderName,String type, String cvv,Date expiryDate) {
+    private final String cardHolderName;
+    private final Date expiryDate;
+    //constructors
+    public CreditCard(String cardNumber, String cardHolderName, String type, String cvv, Date expiryDate) {
         this.cardNumber = cardNumber;
-        this.expiryDate =expiryDate;
-        this.type = type;
-        this.CardHolderName=CardHolderName;
         this.cvv = cvv;
+        this.type = type;
+        this.cardHolderName = cardHolderName;
+        this.expiryDate = expiryDate;
     }
-
     //getters
     public String getCardNumber() {
         return cardNumber;
     }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
     public String getCvv() {
         return cvv;
     }
-    //--------------------------------------DataBase Methods-----------------------------------------//
+    public String getType() {
+        return type;
+    }
+    public String getCardHolderName() {
+        return cardHolderName;
+    }
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
     @Override
     public boolean equals(Object obj) {
-
-        if (obj instanceof CreditCard) {
+        if(obj instanceof CreditCard) {
             CreditCard other = (CreditCard) obj;
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(expiryDate);
-
-            int year = cal.get(Calendar.YEAR),month=cal.get(Calendar.MONTH);
-            cal.setTime(other.expiryDate);
-            return other.type.equals(type)&& other.CardHolderName.equals(CardHolderName)&&other.cardNumber.equals(cardNumber)&&other.cvv.equals(cvv)
-                    &&cal.get(Calendar.YEAR)==year&&cal.get(Calendar.MONTH)==month;
+            return this.cardNumber.equals(other.cardNumber)
+                    && this.cvv.equals(other.cvv) && this.type.equals(other.type)
+                    && this.cardHolderName.equals(other.cardHolderName)
+                    && this.expiryDate.getMonth() == other.expiryDate.getMonth()
+                    && this.expiryDate.getYear() == other.expiryDate.getYear();
         }
         return false;
     }
-
     @Override
     public String toString() {
-        return cardNumber +","+ CardHolderName+","+ type+","+cvv+System.lineSeparator()+ DateFormat.getInstance().format(expiryDate)+System.lineSeparator();
-    }
-
-    @Override
-    public Date getDate(){
-        return expiryDate;
+        return cardNumber + "," + cardHolderName + "," + type + "," + cvv + "\n" +DateFormat.getInstance().format(expiryDate)+"\n";
     }
 }

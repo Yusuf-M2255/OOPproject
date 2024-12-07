@@ -45,7 +45,7 @@ public class Admin extends Account {
             else if(plan.equals("Standard"))numOfStandard++;
             else numOfPremium++;
         }
-        revenue+=(numOfBasic* Subscription.Prices[0])+(numOfStandard*Subscription.Prices[1])+(numOfPremium*Subscription.Prices[2]);
+        revenue+=(numOfBasic* Subscription.prices[0])+(numOfStandard*Subscription.prices[1])+(numOfPremium*Subscription.prices[2]);
         return revenue;
     }
     public String plansAnalysis(){
