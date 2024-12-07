@@ -1,5 +1,8 @@
 package Engines;
+import java.util.*;
 
+import Cast.CastMember;
+import Cast.Director;
 import ContentControl.Movie;
 import ContentControl.Series;
 import DataBase.DataBase;
@@ -9,6 +12,7 @@ import java.util.Scanner;
 public class SearchEngine {
     public void Search()
     {
+        Map <Long, Integer> vis = new HashMap<Long, Integer>();
         String choice;
         Scanner input = new Scanner(System.in);
         do
@@ -51,19 +55,26 @@ public class SearchEngine {
                 choice = input.nextLine();
                 if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                 {
-                    if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
+                    for (CastMember cast : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2))
                     {
-                        for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
+                        if (!cast.Contents.isEmpty())
                         {
-                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                            for (String content : cast.Contents)
                             {
-                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
-                                    System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
+                                if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                                {
+                                    for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
+                                    {
+                                        if (!vis.containsKey(movie.contentID))
+                                        {
+                                            System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
+                                            vis.put(movie.contentID, 1);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    else
-                        System.out.println("No Data Found");
                 }
                 else
                     System.out.println("No Data Found");
@@ -74,19 +85,26 @@ public class SearchEngine {
                 choice = input.nextLine();
                 if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                 {
-                    if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
+                    for (Director director : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2))
                     {
-                        for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
+                        if (!director.Contents.isEmpty())
                         {
-                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                            for (String content : director.Contents)
                             {
-                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
-                                    System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
+                                if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                                {
+                                    for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
+                                    {
+                                        if (!vis.containsKey(movie.contentID))
+                                        {
+                                            System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
+                                            vis.put(movie.contentID, 1);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    else
-                        System.out.println("No Data Found");
                 }
                 else
                     System.out.println("No Data Found");
@@ -122,19 +140,26 @@ public class SearchEngine {
                 choice = input.nextLine();
                 if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                 {
-                    if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
+                    for (CastMember cast : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2))
                     {
-                        for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
+                        if (!cast.Contents.isEmpty())
                         {
-                            if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                            for (String content : cast.Contents)
                             {
-                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
-                                    System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
+                                if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                                {
+                                    for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
+                                    {
+                                        if (!vis.containsKey(series.contentID))
+                                        {
+                                            System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
+                                            vis.put(series.contentID, 1);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    else
-                        System.out.println("No Data Found");
                 }
                 else
                     System.out.println("No Data Found");
@@ -145,19 +170,26 @@ public class SearchEngine {
                 choice = input.nextLine();
                 if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                 {
-                    if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
+                    for (Director director : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2))
                     {
-                        for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
+                        if (!director.Contents.isEmpty())
                         {
-                            if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                            for (String content : director.Contents)
                             {
-                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
-                                    System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
+                                if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
+                                {
+                                    for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
+                                    {
+                                        if (!vis.containsKey(series.contentID))
+                                        {
+                                            System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
+                                            vis.put(series.contentID, 1);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    else
-                        System.out.println("No Data Found");
                 }
                 else
                     System.out.println("No Data Found");
