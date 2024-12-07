@@ -59,6 +59,6 @@ public class Subscription {
         return DateFormat.getDateInstance().format(date);
     }
     public String toString() {
-        return type+"\n"+dateFormat(startDate)+"\n"+dateFormat(endDate)+"\n";
+        return type+System.lineSeparator()+dateFormat(startDate)+System.lineSeparator()+dateFormat(endDate)+System.lineSeparator();
     }
 }
