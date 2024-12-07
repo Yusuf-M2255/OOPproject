@@ -5,6 +5,8 @@ import Cast.Director;
 import ContentControl.*;
 import DataBase.DataBase;
 import Engines.RecommendationEngine;
+import Engines.SearchEngine;
+
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -97,6 +99,7 @@ public class tmp {
 
     public void DisplayMain()
     {
+        SearchEngine searchEngine = new SearchEngine();
         if (!DataBase.getInstance().adminsData.getDataByString(DataBase.getInstance().CurrentUser.getEmail(), 4).isEmpty())
         {
             Account acc = DataBase.getInstance().CurrentUser;
@@ -359,58 +362,7 @@ public class tmp {
                         {
                             do
                             {
-                                System.out.print("Enter The Name Of The Movie Or The Series Or An Actor Or a Director: ");
-                                choice = input.nextLine();
-                                if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
-                                {
-                                    for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0))
-                                        System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                                }
-                                else if (!DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
-                                {
-                                    for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0))
-                                        System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                                }
-                                else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
-                                {
-                                    if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents.isEmpty())
-                                    {
-                                        for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents)
-                                        {
-                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0).isEmpty())
-                                            {
-                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0))
-                                                    System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                                            }
-                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0).isEmpty())
-                                            {
-                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0))
-                                                    System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
-                                {
-                                    if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents.isEmpty())
-                                    {
-                                        for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents)
-                                        {
-                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0).isEmpty())
-                                            {
-                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0))
-                                                    System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                                            }
-                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0).isEmpty())
-                                            {
-                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0))
-                                                    System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                    System.out.println("No Data Found");
+                                searchEngine.Search();
                                 do
                                 {
                                     System.out.print("If you want to delete one of the shown enter d, If you want to search again enter s, If you want to Exit enter e: ");
@@ -694,49 +646,49 @@ public class tmp {
                             {
                                 System.out.print("Enter The Name Of The Movie Or The Series Or An Actor Or a Director: ");
                                 choice = input.nextLine();
-                                if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
+                                if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                                 {
-                                    for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0))
+                                    for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 2))
                                         System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                                 }
-                                else if (!DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
+                                else if (!DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                                 {
-                                    for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0))
+                                    for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 2))
                                         System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                                 }
-                                else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
+                                else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                                 {
-                                    if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents.isEmpty())
+                                    if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
                                     {
-                                        for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents)
+                                        for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
                                         {
-                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0).isEmpty())
+                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
                                             {
-                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0))
+                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
                                                     System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                                             }
-                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0).isEmpty())
+                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
                                             {
-                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0))
+                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
                                                     System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                                             }
                                         }
                                     }
                                 }
-                                else if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
+                                else if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
                                 {
-                                    if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents.isEmpty())
+                                    if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
                                     {
-                                        for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents)
+                                        for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
                                         {
-                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0).isEmpty())
+                                            if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
                                             {
-                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0))
+                                                for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
                                                     System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                                             }
-                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0).isEmpty())
+                                            else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
                                             {
-                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0))
+                                                for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
                                                     System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                                             }
                                         }
@@ -865,58 +817,7 @@ public class tmp {
                     }
                     else if (choice.equals("s") || choice.equals("S"))
                     {
-                        System.out.print("Enter The Name Of The Movie Or The Series Or An Actor Or a Director: ");
-                        choice = input.nextLine();
-                        if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
-                        {
-                            for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 2))
-                                System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                        }
-                        else if (!DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
-                        {
-                            for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 2))
-                                System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                        }
-                        else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
-                        {
-                            if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
-                            {
-                                for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
-                                {
-                                    if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
-                                    {
-                                        for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
-                                            System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                                    }
-                                    else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
-                                    {
-                                        for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
-                                            System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                                    }
-                                }
-                            }
-                        }
-                        else if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).isEmpty())
-                        {
-                            if (!DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents.isEmpty())
-                            {
-                                for (String content : DataBase.getInstance().DirectorsData.getDataThatContains(choice.toLowerCase(), 2).getFirst().Contents)
-                                {
-                                    if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2).isEmpty())
-                                    {
-                                        for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 2))
-                                            System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
-                                    }
-                                    else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2).isEmpty())
-                                    {
-                                        for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 2))
-                                            System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                            System.out.println("No Data Found");
+                        searchEngine.Search();
                     }
                     else
                         System.out.println("Invalid input, Please try again");
