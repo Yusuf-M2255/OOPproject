@@ -9,7 +9,8 @@ public class Admin extends Account {
         super(userName,firstName,lastName,email,password,FavoriteName);
     }
     public Admin(Long Id,String userName,String firstName,String lastName,String email,String password,String FavoriteName) {
-        super(userName,firstName,lastName,email,password,FavoriteName,Id);
+        super(userName,firstName,lastName,email,password,FavoriteName,Math.max(Id+1,cnt));
+
     }
     public void editUser(long userID , User user){
         DataObjectController<User>data=DataBase.getInstance().usersData;
