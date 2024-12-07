@@ -1,0 +1,6 @@
+2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,2,one piece,one piece red
+12/31/77, 8:14 PM
+3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,2,one piece,one piece red
+11/30/72, 8:14 PM
+4,Nami,Neko,Female,Japanese,NamiN@insta.com,1,one piece
+1/31/79, 8:15 PM

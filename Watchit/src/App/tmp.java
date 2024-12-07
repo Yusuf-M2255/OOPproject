@@ -1,10 +1,11 @@
 package App;
 import AccountControl.*;
+import Cast.CastMember;
+import Cast.Director;
 import ContentControl.*;
 import DataBase.DataBase;
 import Engines.RecommendationEngine;
-
-import java.awt.*;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -149,9 +150,49 @@ public class tmp {
                         System.out.print("Enter movie's country: ");
                         String country = input.nextLine();
                         country = country.toLowerCase();
-                        System.out.print("Enter movie's director: ");
-                        String director = input.nextLine();
-                        director = director.toLowerCase();
+                        System.out.println("Movie's director: ");
+                        String directorFirstName, directorLastName, directorGender, directorNationality, directorSocialMediaLink;
+                        Date directorDateOfBirth;
+                        System.out.print("Enter The Director's First Name: ");
+                        directorFirstName = input.nextLine();
+                        directorFirstName = directorFirstName.toLowerCase();
+                        System.out.print("Enter The Director's Last Name: ");
+                        directorLastName = input.nextLine();
+                        directorLastName = directorLastName.toLowerCase();
+                        String directorName = (directorFirstName + " " + directorLastName);
+                        if (!DataBase.getInstance().DirectorsData.getDataByString(directorName, 2).isEmpty())
+                        {
+                            DataBase.getInstance().DirectorsData.getDataByString(directorName, 2).getFirst().joinContent(title);
+                        }
+                        else
+                        {
+                            Calendar cal;
+                            do {
+                                System.out.print("Enter The director's Date Of Birth (MM/YYYY): ");
+                                cal = Calendar.getInstance();
+                                try {
+                                    String[] YYMM = input.nextLine().split("/");
+                                    cal.set(Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
+                                    break;
+                                }catch (NumberFormatException e){
+                                    System.out.println("Invalid Date, Please Try Again");
+                                }
+                            }while (true);
+                            directorDateOfBirth = cal.getTime();
+                            System.out.print("Enter The director's Gender: ");
+                            directorGender = input.nextLine();
+                            directorGender.toLowerCase();
+                            System.out.print("Enter The director's Nationality: ");
+                            directorNationality = input.nextLine();
+                            directorNationality.toLowerCase();
+                            System.out.print("Enter The director's Social Media Link: ");
+                            directorSocialMediaLink = input.nextLine();
+                            directorSocialMediaLink.toLowerCase();
+                            List<String> directorContent = new ArrayList<>();
+                            directorContent.add(title);
+                            Director director = new Director(directorFirstName, directorLastName, directorGender, directorNationality, directorSocialMediaLink, directorDateOfBirth, directorContent);
+                            DataBase.getInstance().DirectorsData.addData(director);
+                        }
                         Long budgetLong;
                         do
                         {
@@ -240,12 +281,63 @@ public class tmp {
                                 System.out.println("Sorry, " + j + " is an Invalid Input, Try Again");
                         }while(!j.equals("-1"));
                         List<String> castMembers = new ArrayList<>();
-                        System.out.println("Enter The Cast Member Name and Enter -1 when you are done");
+                        System.out.println("Add an actor: ");
                         do {
-                            j = input.nextLine();
-                            if (!j.equals("-1"))
-                                castMembers.add(j.toLowerCase());
-                        }while(!j.equals("-1"));
+                            String actorFirstName, actorLastName, actorGender, actorNationality, actorSocialMediaLink;
+                            Date actorDateOfBirth;
+                            System.out.print("Enter The Actor's First Name: ");
+                            actorFirstName = input.nextLine();
+                            actorFirstName = actorFirstName.toLowerCase();
+                            System.out.print("Enter The Actor's Last Name: ");
+                            actorLastName = input.nextLine();
+                            actorLastName = actorLastName.toLowerCase();
+                            String actorName = (actorFirstName + " " + actorLastName);
+                            if (!DataBase.getInstance().castMemberData.getDataByString(actorName, 2).isEmpty())
+                            {
+                                DataBase.getInstance().castMemberData.getDataByString(actorName, 2).getFirst().joinContent(title);
+                            }
+                            else
+                            {
+                                Calendar cal;
+                                do {
+                                    System.out.print("Enter The Actor's Date Of Birth (MM/YYYY): ");
+                                    cal = Calendar.getInstance();
+                                    try {
+                                        String[] YYMM = input.nextLine().split("/");
+                                        cal.set(Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
+                                        break;
+                                    }catch (NumberFormatException e){
+                                        System.out.println("Invalid Date, Please Try Again");
+                                    }
+                                }while (true);
+                                actorDateOfBirth = cal.getTime();
+                                System.out.print("Enter The Actor's Gender: ");
+                                actorGender = input.nextLine();
+                                actorGender.toLowerCase();
+                                System.out.print("Enter The Actor's Nationality: ");
+                                actorNationality = input.nextLine();
+                                actorNationality.toLowerCase();
+                                System.out.print("Enter The Actor's Social Media Link: ");
+                                actorSocialMediaLink = input.nextLine();
+                                actorSocialMediaLink.toLowerCase();
+                                List<String> actorContent = new ArrayList<>();
+                                actorContent.add(title);
+                                CastMember actor = new CastMember(actorFirstName, actorLastName, actorGender, actorNationality, actorSocialMediaLink, actorDateOfBirth, actorContent);
+                                DataBase.getInstance().castMemberData.addData(actor);
+                            }
+                            castMembers.add(actorFirstName + " " + actorLastName);
+                            do {
+                                System.out.print("Do you want to add another actor ? (y/n): ");
+                                choice = input.nextLine();
+                                choice = choice.toLowerCase();
+                                if (choice.equals("y") || choice.equals("n"))
+                                    break;
+                                else
+                                    System.out.println("Sorry, " + choice + " is an Invalid Input, Try Again");
+                            }while (true);
+                            if (choice.equals("n"))
+                                break;
+                        }while (true);
                         Calendar cal;
                         do
                         {
@@ -259,7 +351,7 @@ public class tmp {
                                 System.out.println("Invalid Date, Please Try Again");
                             }
                         }while (true);
-                        Movie movie = new Movie(title,language,country,director,budgetInt,revenueInt,durationInt,moviesGenres,castMembers,cal.getTime());
+                        Movie movie = new Movie(title,language,country,directorName,budgetInt,revenueInt,durationInt,moviesGenres,castMembers,cal.getTime());
                         admin.addMovie(movie);
                         DataBase.getInstance().Save();
                     }
@@ -340,7 +432,7 @@ public class tmp {
                     }
                     else if (choice.equals("s") || choice.equals("S"))
                     {
-                        System.out.println("Enter The Name Of The Movie Or The Series: ");
+                        System.out.print("Enter The Name Of The Movie Or The Series Or An Actor Or a Director: ");
                         choice = input.nextLine();
                         if (!DataBase.getInstance().moviesData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
                         {
@@ -352,20 +444,20 @@ public class tmp {
                             for (Series series : DataBase.getInstance().seriesData.getDataThatContains(choice.toLowerCase(), 0))
                                 System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                         }
-                        else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice, 0).isEmpty())
+                        else if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).isEmpty())
                         {
-                            if (!DataBase.getInstance().castMemberData.getDataThatContains(choice, 0).getFirst().Contents.isEmpty())
+                            if (!DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents.isEmpty())
                             {
-                                for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice, 0).getFirst().Contents)
+                                for (String content : DataBase.getInstance().castMemberData.getDataThatContains(choice.toLowerCase(), 0).getFirst().Contents)
                                 {
-                                    if (!DataBase.getInstance().moviesData.getDataThatContains(content.toLowerCase(), 0).isEmpty())
+                                    if (!DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0).isEmpty())
                                     {
-                                        for (Movie movie : DataBase.getInstance().moviesData.getDataThatContains(content.toLowerCase(), 0))
+                                        for (Movie movie : DataBase.getInstance().moviesData.getDataByString(content.toLowerCase(), 0))
                                             System.out.println("Name: " + movie.contentTitle + ", ID: " + movie.contentID);
                                     }
-                                    else if (!DataBase.getInstance().seriesData.getDataThatContains(content.toLowerCase(), 0).isEmpty())
+                                    else if (!DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0).isEmpty())
                                     {
-                                        for (Series series : DataBase.getInstance().seriesData.getDataThatContains(content.toLowerCase(), 0))
+                                        for (Series series : DataBase.getInstance().seriesData.getDataByString(content.toLowerCase(), 0))
                                             System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                                     }
                                 }

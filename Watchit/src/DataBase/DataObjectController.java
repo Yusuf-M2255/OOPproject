@@ -86,7 +86,7 @@ public class DataObjectController <T> {
      */
     public List<T> getDataByString(String name,int op){
         List<T>SearchedData = new ArrayList<>();
-        data.stream().filter(item -> ((DataObject)item).getName(op).equals(name)).forEach(SearchedData::add);
+        data.stream().filter(item -> ((DataObject)item).getName(op).toLowerCase().equals(name)).forEach(SearchedData::add);
         return SearchedData;
     }
 
