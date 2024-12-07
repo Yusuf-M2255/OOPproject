@@ -1,2 +1,4 @@
-1,Oda,Ichiro,Male,Japanese,Oda@insta.com,2,one piece,one piece red
+1,Oda,Ichiro,Male,Japanese,Oda@insta.com,1,one piece
 10/31/76, 8:12 PM
+5,mahmoud,khater,Male,Egyption,-Khater-,1,Once An ACMer
+12/31/70, 11:04 PM

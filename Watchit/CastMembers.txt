@@ -1,6 +1,14 @@
-2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,2,one piece,one piece red
+2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,1,one piece
 12/31/77, 8:14 PM
-3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,2,one piece,one piece red
+3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,1,one piece
 11/30/72, 8:14 PM
 4,Nami,Neko,Female,Japanese,NamiN@insta.com,1,one piece
 1/31/79, 8:15 PM
+6,yehia,joonyu,Male,Egyption,Joonyou,1,Once An ACMer
+12/31/73, 11:06 PM
+7,amany,panda,Female,Egyption,Moga,1,Once An ACMer
+12/31/68, 11:07 PM
+8,kareem,wisdom,Male,Egyption,WisdomCasual,1,Once An ACMer
+12/31/69, 11:08 PM
+9,hesham,3ami,Male,Egyption,Hesham,1,Once An ACMer
+8/31/77, 11:08 PM
