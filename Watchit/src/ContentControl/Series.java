@@ -37,8 +37,11 @@ public class Series extends Content{
     public void setLastAirDate(Date lastAireDate) {
         this.lastAireDate = lastAireDate;
     }
-    public Integer isOnGoing() {
-        return onGoing;
+    public String isOnGoing() {
+        if (this.onGoing == 0)
+            return "No";
+        else
+            return "Yes";
     }
     public void setOnGoing(Integer onGoing) {
         this.onGoing = onGoing;
