@@ -36,7 +36,12 @@ public class Admin extends Account {
         DataObjectController<Series> data = DataBase.getInstance().seriesData;
         data.removeData(series,0);
     }
-    // episode is not done yet
+    public void addEpisode(Episode episode){
+        DataBase.getInstance().episodesData.addData(episode);
+    }
+    public void deleteEpisode(String episode){
+        DataBase.getInstance().episodesData.removeData(episode,0);
+    }
     public long calculateRevenue(){
         DataObjectController<User>data=DataBase.getInstance().usersData;
         long revenue = 0, numOfBasic = 0 , numOfStandard = 0, numOfPremium = 0;
