@@ -25,22 +25,19 @@ public class Admin extends Account {
         DataBase.getInstance().moviesData.addData(movie);
     }
     public void addSeries(Series series){
-        DataObjectController<Series> data = DataBase.getInstance().seriesData;
-        data.addData(series);
+        DataBase.getInstance().seriesData.addData(series);
     }
-    public void deleteMovie(String movie){
-        DataObjectController<Movie> data = DataBase.getInstance().moviesData;
-        data.removeData(movie,0);
+    public void deleteMovie(Movie movie){
+        DataBase.getInstance().moviesData.removeData(movie);
     }
-    public void deleteSeries(String series){
-        DataObjectController<Series> data = DataBase.getInstance().seriesData;
-        data.removeData(series,0);
+    public void deleteSeries(Series series){
+        DataBase.getInstance().seriesData.removeData(series);
     }
     public void addEpisode(Episode episode){
         DataBase.getInstance().episodesData.addData(episode);
     }
-    public void deleteEpisode(String episode){
-        DataBase.getInstance().episodesData.removeData(episode,0);
+    public void deleteEpisode(Episode episode){
+        DataBase.getInstance().episodesData.removeData(episode);
     }
     public long calculateRevenue(){
         DataObjectController<User>data=DataBase.getInstance().usersData;

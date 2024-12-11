@@ -19,26 +19,27 @@ public class tmp {
         return Long.parseLong(s);
     }
 
-    public void LoginDisplay()
+    public boolean LoginDisplay()
     {
+        InputChecker inputChecker = new InputChecker();
+        String[] validInput;
         Scanner input = new Scanner(System.in);
-        String c;
+        String choice;
         boolean check;
         do {
-            do {
-                System.out.print("Do you have an account? \n (Y/N) ");
-                c = input.nextLine();
-                if ((c.charAt(0) == 'Y' || c.charAt(0) == 'y' || c.charAt(0) == 'N' || c.charAt(0) == 'n') && c.length() == 1)
-                    break;
-                else
-                    System.out.println("Invalid input, Please try again");
-            }while (true);
-            if (c.charAt(0) == 'Y' || c.charAt(0) == 'y')
+            System.out.println("To Login enter (l)");
+            System.out.println("To Register enter (r)");
+            System.out.println("To close the program enter (c)");
+            validInput = new String[]{"l", "r", "c"};
+            choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+            if (choice.equals("l"))
                 check = DataBase.getInstance().Login();
-            else
+            else if (choice.equals("r"))
                 check = DataBase.getInstance().Register();
+            else
+                return false;
             if (check)
-                break;
+                return true;
         }while (true);
     }
 
@@ -121,9 +122,10 @@ public class tmp {
             {
                 System.out.println("To Administrate movies enter (am)");
                 System.out.println("To Administrate series enter (as)");
-                System.out.println("To Administrate users enter (aa)");
+                System.out.println("To Administrate episodes enter (ae)");
+                System.out.println("To Administrate users enter (au)");
                 System.out.println("To Logout (lo)");
-                validInput = new String[]{"am", "as", "aa", "lo"};
+                validInput = new String[]{"am", "as", "ae", "au", "lo"};
                 choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                 if (choice.equals("am"))
                 {
@@ -232,25 +234,44 @@ public class tmp {
                             Movie movie = new Movie(title,language,country,directorNameCapital,budgetInt,revenueInt,durationInt,moviesGenres,castMembers,cal.getTime());
                             admin.addMovie(movie);
                             DataBase.getInstance().Save();
+                            System.out.println("Movie Added");
                         }
                         else if (choice.equals("rm"))
                         {
                             do
                             {
-                                searchEngine.SearchMovie();
-                                validInput = new String[]{"d", "s", "e"};
-                                choice = inputChecker.GetValidChoice("If you want to delete one of the shown enter d, If you want to search again enter s, If you want to Exit enter e: ", validInput);
-                                if (choice.equals("d")  || choice.equals("e"))
+                                boolean search = searchEngine.SearchMovie();
+                                if (!search)
+                                {
+                                    System.out.println("No Data Found");
+                                    System.out.println("To try again enter (t)");
+                                    System.out.println("To go back enter (ba)");
+                                    validInput = new String[]{"t", "ba"};
+                                    choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                                    if (choice.equals("t"))
+                                        continue;
+                                    else
+                                        break;
+                                }
+                                System.out.println("To delete one of the shown movies enter (d)");
+                                System.out.println("To Search again enter (s)");
+                                System.out.println("To Go Back enter (ba)");
+                                validInput = new String[]{"d", "s", "ba"};
+                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                if (choice.equals("d")  || choice.equals("ba"))
                                     break;
                             }while (true);
                             if (choice.equals("d"))
                             {
                                 Long movieID = inputChecker.GetValidNumber("Enter The ID Of The Movie You Want To Delete: ", 10);
                                 if (DataBase.getInstance().moviesData.getDataById(movieID) != null)
-                                    DataBase.getInstance().moviesData.removeData(DataBase.getInstance().moviesData.getDataById(movieID));
+                                {
+                                    admin.deleteMovie(DataBase.getInstance().moviesData.getDataById(movieID));
+                                    DataBase.getInstance().Save();
+                                    System.out.println("Movie Deleted");
+                                }
                                 else
                                     System.out.println("No Movie Found");
-                                DataBase.getInstance().Save();
                             }
                         }
                         else if (choice.equals("ba"))
@@ -388,34 +409,184 @@ public class tmp {
                             Series series = new Series(title,language,country,directorNameCapital,budgetInt,revenueInt,numberOfEpisodesInt,onGoing,seriesGenres,castMembers,date.getTime(),air.getTime());
                             admin.addSeries(series);
                             DataBase.getInstance().Save();
+                            System.out.println("Series Added");
                         }
                         else if (choice.equals("rs"))
                         {
                             do
                             {
-                                searchEngine.SearchSeries();
-                                validInput = new String[]{"d", "s", "e"};
-                                choice = inputChecker.GetValidChoice("If you want to delete one of the shown enter d, If you want to search again enter s, If you want to Exit enter e: ", validInput);
-                                if (choice.equals("d")  || choice.equals("e"))
+                                boolean search = searchEngine.SearchSeries();
+                                if (!search)
+                                {
+                                    System.out.println("No Data Found");
+                                    System.out.println("To try again enter (t)");
+                                    System.out.println("To go back enter (ba)");
+                                    validInput = new String[]{"t", "ba"};
+                                    choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                                    if (choice.equals("t"))
+                                        continue;
+                                    else
+                                        break;
+                                }
+                                System.out.println("To delete one of the shown series enter (d)");
+                                System.out.println("To Search again enter (s)");
+                                System.out.println("To Go Back enter (ba)");
+                                validInput = new String[]{"d", "s", "ba"};
+                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                if (choice.equals("d")  || choice.equals("ba"))
                                     break;
                             }while (true);
                             if (choice.equals("d"))
                             {
-                                Long movieID = inputChecker.GetValidNumber("Enter The ID Of The Series You Want To Delete: ", 10);
-                                if (DataBase.getInstance().seriesData.getDataById(movieID) != null)
-                                    DataBase.getInstance().seriesData.removeData(DataBase.getInstance().seriesData.getDataById(movieID));
+                                Long seriesID = inputChecker.GetValidNumber("Enter The ID Of The Series You Want To Delete: ", 10);
+                                if (DataBase.getInstance().seriesData.getDataById(seriesID) != null)
+                                {
+                                    admin.deleteSeries(DataBase.getInstance().seriesData.getDataById(seriesID));
+                                    DataBase.getInstance().Save();
+                                    System.out.println("Series deleted");
+                                }
                                 else
-                                    System.out.println("No Movie Found");
-                                DataBase.getInstance().Save();
+                                    System.out.println("No Series Found");
                             }
                         }
                         else if (choice.equals("ba"))
                             break;
                     }while (true);
                 }
-                else if (choice.equals("aa"))
+                else if (choice.equals("ae"))
                 {
+                    do
+                    {
+                        System.out.println("To add episode enter (ae)");
+                        System.out.println("To remove episode enter (re)");
+                        System.out.println("To Go Back enter (ba)");
+                        validInput = new String[]{"ae", "re", "ba"};
+                        choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                        if (choice.equals("ae"))
+                        {
+                            String sTitle;
+                            do {
 
+                                System.out.print("Enter the series title: ");
+                                sTitle = input.nextLine();
+                                sTitle = sTitle.toLowerCase();
+                                if (DataBase.getInstance().seriesData.getDataByString(sTitle, 2).isEmpty())
+                                    System.out.println("Series Does Not Exist");
+                                else
+                                    break;
+                            }while (true);
+                            do
+                            {
+                                System.out.print("Enter episode title: ");
+                                String eTitle = input.nextLine();
+                                Long eNumber = inputChecker.GetValidNumber("Enter the episode number: ", 4);
+                                int episodeNumber = eNumber.intValue();
+                                Long eDuration = inputChecker.GetValidNumber("Enter the episode duration: ", 3);
+                                int episodeDuration = eDuration.intValue();
+                                Calendar date;
+                                do
+                                {
+                                    System.out.print("Enter episode release date (MM/YYYY): ");
+                                    date = Calendar.getInstance();
+                                    String[] YYMM;
+                                    try {
+                                        YYMM = input.nextLine().split("/");
+                                        date.set(Integer.parseInt(YYMM[0]), Integer.parseInt(YYMM[1]), 0);
+                                    }catch (NumberFormatException e){
+                                        System.out.println("Invalid Date, Please Try Again");
+                                        continue;
+                                    }
+                                    if ((YYMM[1].length() == 4 && ((YYMM[1].charAt(0) == '1' && YYMM[1].charAt(1) == '9') || (YYMM[1].charAt(0) == '2' && YYMM[1].charAt(1) == '0'))) && ((YYMM[0].length() == 2 && YYMM[0].charAt(0) == '0') || YYMM[0].length() == 1 || YYMM[0].equals("10") || YYMM[0].equals("11") || YYMM[0].equals("12")))
+                                        break;
+                                    else
+                                        System.out.println("Sorry, " + YYMM[0] + "/" + YYMM[1] + " is an Invalid Date, Try Again");
+                                }while (true);
+                                Episode episode = new Episode(sTitle, eTitle, episodeNumber, episodeDuration, date.getTime());
+                                admin.addEpisode(episode);
+                                DataBase.getInstance().Save();
+                                System.out.println("Episode Added");
+                                validInput = new String[]{"y", "n"};
+                                choice = inputChecker.GetValidChoice("Do you want to add another episode ? (y/n): ", validInput);
+                                if (choice.equals("n"))
+                                    break;
+                            }while (true);
+                        }
+                        else if (choice.equals("re"))
+                        {
+                            do
+                            {
+                                System.out.println("Search for the series that contain the episode you want to delete");
+                                boolean search = searchEngine.SearchSeries();
+                                if (!search)
+                                {
+                                    System.out.println("No Data Found");
+                                    System.out.println("To try again enter (t)");
+                                    System.out.println("To go back enter (ba)");
+                                    validInput = new String[]{"t", "ba"};
+                                    choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                                    if (choice.equals("t"))
+                                        continue;
+                                    else
+                                        break;
+                                }
+                                System.out.println("To delete an episode from one of the shown series enter (d)");
+                                System.out.println("To Search again enter (s)");
+                                System.out.println("To Go Back (ba)");
+                                validInput = new String[]{"d", "s", "ba"};
+                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                if (choice.equals("d")  || choice.equals("ba"))
+                                    break;
+                            }while (true);
+                            if (choice.equals("d"))
+                            {
+                                Long seriesID = inputChecker.GetValidNumber("Enter the id of the series you want to delete from: ", 10);
+                                DisplaySeries(DataBase.getInstance().seriesData.getDataById(seriesID));
+                                Long episodeID = inputChecker.GetValidNumber("Enter The ID Of The Episode You Want To Delete: ", 10);
+                                if (DataBase.getInstance().episodesData.getDataById(episodeID) != null)
+                                {
+                                    admin.deleteEpisode(DataBase.getInstance().episodesData.getDataById(episodeID));
+                                    DataBase.getInstance().Save();
+                                    System.out.println("Episode deleted");
+                                }
+                                else
+                                    System.out.println("Episode Not Found");
+                            }
+                        }
+                        else if (choice.equals("ba"))
+                            break;
+                    }while (true);
+                }
+                else if (choice.equals("au"))
+                {
+                    do
+                    {
+                        System.out.println("To display users enter (du)");
+                        System.out.println("To remove user enter (ru)");
+                        System.out.println("To Go Back (ba)");
+                        validInput = new String[]{"du", "ru", "ba"};
+                        choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                        if (choice.equals("du"))
+                        {
+                            User user = new User();
+                            user.DisplayHeadLine();
+                            for (User u : DataBase.getInstance().usersData.getData())
+                                u.DisplayLine();
+                        }
+                        else  if (choice.equals("ru"))
+                        {
+                            Long id = inputChecker.GetValidNumber("Enter the id of the user you want to remove: ", 10);
+                            if (DataBase.getInstance().usersData.getDataById(id) != null)
+                            {
+                                DataBase.getInstance().usersData.removeData(DataBase.getInstance().usersData.getDataById(id));
+                                DataBase.getInstance().Save();
+                                System.out.println("User Removed");
+                            }
+                            else
+                                System.out.println("No User Found");
+                        }
+                        else
+                            break;
+                    } while (true);
                 }
                 else
                     break;
@@ -430,7 +601,6 @@ public class tmp {
                 User user = (User)a;
                 RecommendationEngine RecommendatoinEngineMovies = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().moviesData.getData().toArray(new Movie[0]));
                 RecommendationEngine RecommendatoinEngineSeries = new RecommendationEngine(user.getFavoriteGenres(), DataBase.getInstance().seriesData.getData().toArray(new Series[0]));
-                Scanner input = new Scanner(System.in);
                 String choice;
                 System.out.println("Recommended Movies: ");
                 for (var movie : RecommendatoinEngineMovies.getMovieBasedRecommendations())
@@ -442,54 +612,142 @@ public class tmp {
                 {
                     System.out.println("Name: " + series.contentTitle + ", ID: " + series.contentID);
                 }
-                do
+                System.out.println("To watch one of the shown movies/series enter (w)");
+                System.out.println("To search for another movie/series enter (s)");
+                System.out.println("To logout enter (lo)");
+                validInput = new String[]{"w", "s", "lo"};
+                choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                if (choice.equals("w"))
                 {
-                    System.out.print("Enter W if you want to watch from the shown Movies/series, If you want to search for another movie/series enter S:");
-                    choice = input.nextLine();
-                    if (choice.equals("w") || choice.equals("W"))
+                    do
                     {
-                        do
+                        Long id = inputChecker.GetValidNumber("Enter The ID Of The Movie Or The Series You Want to Watch: ", 10);
+                        if (DataBase.getInstance().moviesData.getDataById(id) != null)
                         {
-                            System.out.print("Enter The ID Of The Movie Or The Series You Want to Watch: ");
-                            choice = input.nextLine();
-                            boolean check = true;
-                            for (char i : choice.toCharArray())
+                            DisplayMovie(DataBase.getInstance().moviesData.getDataById(id));
+                            do
                             {
-                                if (i < '0' || i > '9')
+                                System.out.println("To watch the movie enter (w)");
+                                System.out.println("To go back enter (ba)");
+                                validInput = new String[]{"w", "ba"};
+                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                if (choice.equals("w"))
                                 {
-                                    check = false;
+
+                                }
+                                else
+                                    break;
+                            }while (true);
+                            break;
+                        }
+                        else if (DataBase.getInstance().seriesData.getDataById(id) != null)
+                        {
+                            DisplaySeries(DataBase.getInstance().seriesData.getDataById(id));
+                            do {
+                                System.out.println("To watch an episode enter (w)");
+                                System.out.println("To go back enter (ba)");
+                                validInput = new String[]{"w", "ba"};
+                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                if (choice.equals("w")) {
+
+                                } else
+                                    break;
+                            }while (true);
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("No movies nor series found");
+                            System.out.println("To try again enter (t)");
+                            System.out.println("To go back enter (ba)");
+                            validInput = new String[]{"t", "ba"};
+                            choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                            if (choice.equals("ba"))
+                                break;
+                        }
+                    }while (true);
+                }
+                else if (choice.equals("s"))
+                {
+                    do
+                    {
+                        boolean search = searchEngine.Search();
+                        if (!search)
+                        {
+                            System.out.println("No Data Found");
+                            System.out.println("To try again enter (t)");
+                            System.out.println("To go back enter (ba)");
+                            validInput = new String[]{"t", "ba"};
+                            choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                            if (choice.equals("t"))
+                                continue;
+                            else
+                                break;
+                        }
+                        System.out.println("To watch one of the shown movies/series enter (w)");
+                        System.out.println("To search again movie/series enter (s)");
+                        System.out.println("To go back enter (ba)");
+                        validInput = new String[]{"w", "s", "ba"};
+                        choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                        if (choice.equals("w"))
+                        {
+                            do
+                            {
+                                Long id = inputChecker.GetValidNumber("Enter The ID Of The Movie Or The Series You Want to Watch: ", 10);
+                                if (DataBase.getInstance().moviesData.getDataById(id) != null)
+                                {
+                                    DisplayMovie(DataBase.getInstance().moviesData.getDataById(id));
+                                    do
+                                    {
+                                        System.out.println("To watch the movie enter (w)");
+                                        System.out.println("To go back enter (ba)");
+                                        validInput = new String[]{"w", "ba"};
+                                        choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                        if (choice.equals("w"))
+                                        {
+
+                                        }
+                                        else
+                                            break;
+                                    }while (true);
                                     break;
                                 }
-                            }
-                            if (check)
-                            {
-                                Long l = stol(choice);
-                                if (DataBase.getInstance().moviesData.getDataById(l) != null)
+                                else if (DataBase.getInstance().seriesData.getDataById(id) != null)
                                 {
-                                    DisplayMovie(DataBase.getInstance().moviesData.getDataById(l));
-                                    break;
-                                }
-                                else if (DataBase.getInstance().seriesData.getDataById(l) != null)
-                                {
-                                    DisplaySeries(DataBase.getInstance().seriesData.getDataById(l));
+                                    DisplaySeries(DataBase.getInstance().seriesData.getDataById(id));
+                                    do {
+                                        System.out.println("To watch an episode enter (w)");
+                                        System.out.println("To go back enter (ba)");
+                                        validInput = new String[]{"w", "ba"};
+                                        choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+                                        if (choice.equals("w"))
+                                        {
+
+                                        }
+                                        else
+                                            break;
+                                    }while (true);
                                     break;
                                 }
                                 else
-                                    System.out.println("Invalid input, Please try again");
-                            }
-                            else
-                                System.out.println("Invalid input, Please try again");
-                        }while (true);
-                    }
-                    else if (choice.equals("s") || choice.equals("S"))
-                    {
-                        searchEngine.Search();
-                    }
-                    else
-                        System.out.println("Invalid input, Please try again");
-                }while(true);
+                                {
+                                    System.out.println("No movies nor series found");
+                                    System.out.println("To try again enter (t)");
+                                    System.out.println("To go back enter (ba)");
+                                    validInput = new String[]{"t", "ba"};
+                                    choice = inputChecker.GetValidChoice("Choose what you want to do: ", validInput);
+                                    if (choice.equals("ba"))
+                                        break;
+                                }
+                            }while (true);
+                        }
+                        else if (choice.equals("ba"))
+                            break;
+                    }while (true);
+                }
+                else
+                    break;
             }while (true);
-
         }
     }
 }

@@ -6,9 +6,14 @@ public class Main {
         System.out.println("                                                                                             Welcome To WatchIt Lite");
         DataBase.getInstance();
         tmp t = new tmp();
-        t.LoginDisplay();
-        DataBase.getInstance().Save();
-        t.DisplayMain();
-        DataBase.getInstance().Save();
+        do
+        {
+            boolean check = t.LoginDisplay();
+            if (!check)
+                break;
+            DataBase.getInstance().Save();
+            t.DisplayMain();
+            DataBase.getInstance().Save();
+        }while (true);
     }
 }

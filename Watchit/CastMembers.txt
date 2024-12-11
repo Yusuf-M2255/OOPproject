@@ -1,6 +1,6 @@
-2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,1,one piece
+2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,2,one piece,One Piece
 12/31/77, 8:14 PM
-3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,1,one piece
+3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,2,one piece,One Piece
 11/30/72, 8:14 PM
 4,Nami,Neko,Female,Japanese,NamiN@insta.com,1,one piece
 1/31/79, 8:15 PM
@@ -24,3 +24,7 @@
 2/28/74, 10:08 PM
 17,lewis,black,male,USA,https://en.wikipedia.org/wiki/Lewis_Black,1,inside out 2
 4/30/73, 10:09 PM
+18,nami ,neko,female,Japanese,Nami@insta.com,1,One Piece
+7/31/78, 5:09 PM
+19,sanji,jerma,male,japanese,sanji@insta.com,1,One Piece
+10/31/75, 5:10 PM
