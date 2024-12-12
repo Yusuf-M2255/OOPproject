@@ -55,7 +55,7 @@ public class Content extends DataObject {
         }
     }
 
-    public void AddRate(int UserID, float rate)  {
+    public void AddRate(Long UserID, float rate)  {
         DataBase.watchRecordData.addData(new WatchRecord((long) UserID,rate, contentTitle, new Date()));
         RateCounter++;
         Rate_Sum += rate;
