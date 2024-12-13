@@ -99,6 +99,45 @@ public class tmp {
         }
     }
 
+    private void RateMovie(User user, Long id){
+        String[] validInput = new String[]{"y", "n"};
+        InputChecker inputChecker = new InputChecker();
+        String choice = inputChecker.GetValidChoice("Do you want to rate this movie? (y/n): ", validInput);
+        if(choice.equals("y")) {
+            float rate = inputChecker.GetValidRate("How do you rate this movie (0->10): ");
+            DataBase.getInstance().moviesData.getDataById(id).AddRate(user.getId(0), rate);
+        }
+        System.out.println("Thank you for your rating");
+    }
+
+    void RateSeries(User user, Long id){
+        InputChecker inputChecker = new InputChecker();
+        String[] validInput = new String[]{"y", "n"};
+        String choice = inputChecker.GetValidChoice("Do you want to rate this series? (y/n): ", validInput);
+        if(choice.equals("y")) {
+            float rate = inputChecker.GetValidRate("How do you rate this series (0->10): ");
+            DataBase.getInstance().seriesData.getDataById(id).AddRate(user.getId(0), rate);
+        }
+        System.out.println("Thank you for your rating");
+    }
+
+    void ChooseEpisode(User user, Long id){
+        InputChecker inputChecker = new InputChecker();
+        do {
+            Long episodeId = inputChecker.GetValidNumber("Enter The ID Of The Episode You Want to Watch: ", 10);
+            DisplayEpisode(DataBase.getInstance().episodesData.getDataById(episodeId));
+            System.out.println("To watch this episode enter (w)");
+            System.out.println("To go back enter (ba)");
+            String[] validInput = new String[]{"w", "ba"};
+            String choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
+            if(choice.equals("w")){
+                RateSeries(user, id);
+            }
+            else
+                break;
+        }while(true);
+    }
+
     public void DisplayMain()
     {
         InputChecker inputChecker = new InputChecker();
@@ -633,7 +672,7 @@ public class tmp {
                                 choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                 if (choice.equals("w"))
                                 {
-
+                                    RateMovie(user, id);
                                 }
                                 else
                                     break;
@@ -649,7 +688,7 @@ public class tmp {
                                 validInput = new String[]{"w", "ba"};
                                 choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                 if (choice.equals("w")) {
-
+                                    ChooseEpisode(user, id);
                                 } else
                                     break;
                             }while (true);
@@ -705,12 +744,7 @@ public class tmp {
                                         choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                         if (choice.equals("w")) {
                                             // rate movie
-                                            validInput = new String[]{"y", "n"};
-                                            choice = inputChecker.GetValidChoice("Do you want to rate this movie? (y/n): ", validInput);
-                                            if(choice.equals("y")) {
-                                                float rate = inputChecker.GetValidRate("How do you rate this movie (0->10): ");
-                                                DataBase.getInstance().moviesData.getDataById(id).AddRate(user.getId(0), rate);
-                                            }
+                                            RateMovie(user, id);
                                         }
                                         else
                                             break;
@@ -727,25 +761,7 @@ public class tmp {
                                         choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                         if (choice.equals("w")){
                                             // Choose episode
-                                            do {
-                                                Long episodeId = inputChecker.GetValidNumber("Enter The ID Of The Episode You Want to Watch: ", 10);
-                                                DisplayEpisode(DataBase.getInstance().episodesData.getDataById(episodeId));
-                                                System.out.println("To watch this episode enter (w)");
-                                                System.out.println("To go back enter (ba)");
-                                                validInput = new String[]{"w", "ba"};
-                                                choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
-                                                if(choice.equals("w")){
-                                                    // rate episode
-                                                    validInput = new String[]{"y", "n"};
-                                                    choice = inputChecker.GetValidChoice("Do you want to rate this series? (y/n): ", validInput);
-                                                    if(choice.equals("y")) {
-                                                        float rate = inputChecker.GetValidRate("How do you rate this series (0->10): ");
-                                                        DataBase.getInstance().seriesData.getDataById(id).AddRate(user.getId(0), rate);
-                                                    }
-                                                }
-                                                else
-                                                    break;
-                                            }while(true);
+                                            ChooseEpisode(user, id);
                                         }
                                         else
                                             break;

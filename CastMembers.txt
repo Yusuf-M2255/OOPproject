@@ -1,0 +1,30 @@
+2,Luffy,Mogiwara,Male,Japanese,LuffyM@insta.com,2,one piece,One Piece
+12/31/77, 8:14 PM
+3,Zoro,Roronoa,Male,Japanese,zoroR@insta.com,2,one piece,One Piece
+11/30/72, 8:14 PM
+4,Nami,Neko,Female,Japanese,NamiN@insta.com,1,one piece
+1/31/79, 8:15 PM
+6,yehia,joonyu,Male,Egyption,Joonyou,1,Once An ACMer
+12/31/73, 11:06 PM
+7,amany,panda,Female,Egyption,Moga,1,Once An ACMer
+12/31/68, 11:07 PM
+8,kareem,wisdom,Male,Egyption,WisdomCasual,1,Once An ACMer
+12/31/69, 11:08 PM
+9,hesham,3ami,Male,Egyption,Hesham,1,Once An ACMer
+8/31/77, 11:08 PM
+11,pedro,pascal,Female,Mexico,https://www.imdb.com/name/nm2143282/?ref_=ttfc_fc_cl_t1,1,the wild robot
+12/31/71, 9:46 PM
+12,kit,connor,Male,American,https://www.imdb.com/name/nm0050959/?ref_=ttfc_fc_cl_t2,1,the wild robot
+7/31/68, 9:51 PM
+13,stephanie,hsu,Female,USA,https://en.wikipedia.org/wiki/Stephanie_Hsu,1,the wild robot
+10/31/76, 9:53 PM
+15,amy,poehler,Female,USA,https://en.wikipedia.org/wiki/Amy_Poehler,1,inside out 2
+3/31/74, 10:05 PM
+16,tony,hale,male,USA,https://en.wikipedia.org/wiki/Tony_Hale,1,inside out 2
+2/28/74, 10:08 PM
+17,lewis,black,male,USA,https://en.wikipedia.org/wiki/Lewis_Black,1,inside out 2
+4/30/73, 10:09 PM
+18,nami ,neko,female,Japanese,Nami@insta.com,1,One Piece
+7/31/78, 5:09 PM
+19,sanji,jerma,male,japanese,sanji@insta.com,1,One Piece
+10/31/75, 5:10 PM

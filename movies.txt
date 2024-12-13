@@ -1,0 +1,9 @@
+2,Once An ACMer,Arabic,Egypt,mahmoud khater,0,0,5,Action,Adventure,Comedy,Drama,Mystery,4,Yehia Joonyu,Amany Panda,Kareem Wisdom,Hesham 3ami
+6/30/05, 11:10 PM
+999
+3,the wild robot,english,usa,chris sanders,78000000,125000000,2,Science Fiction,Animation,3,Pedro Pascal,Kit Connor,Stephanie Hsu
+6/30/24, 9:56 PM
+102
+4,inside out 2,English,USA,kelsey mann,200000000,16000000,3,Adventure,Animation,Comedy,3,Amy Poehler,tony Hale,Lewis Black
+6/30/24, 10:10 PM
+96

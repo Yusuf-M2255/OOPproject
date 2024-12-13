@@ -1,0 +1,8 @@
+1,Oda,Ichiro,Male,Japanese,Oda@insta.com,2,one piece,One Piece
+10/31/76, 8:12 PM
+5,mahmoud,khater,Male,Egyption,-Khater-,1,Once An ACMer
+12/31/70, 11:04 PM
+10,chris,sanders,Male,American,https://www.instagram.com/chrissandersart/,1,the wild robot
+6/30/66, 9:33 PM
+14,kelsey,mann,Female,USA,https://en.wikipedia.org/wiki/Kelsey_Mann,1,inside out 2
+2/29/68, 9:58 PM
