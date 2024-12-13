@@ -705,18 +705,10 @@ public class tmp {
                                         choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                         if (choice.equals("w")) {
                                             // rate movie
-                                            System.out.print("Do you want to rate this movie? (y/n): ");
                                             validInput = new String[]{"y", "n"};
-                                            choice = inputChecker.GetValidChoice("", validInput);
+                                            choice = inputChecker.GetValidChoice("Do you want to rate this movie? (y/n): ", validInput);
                                             if(choice.equals("y")) {
-                                                float rate;
-                                                do {
-                                                    System.out.println("How do you rate this movie (0->10): ");
-                                                    Scanner scanner = new Scanner(System.in);
-                                                    rate = scanner.nextFloat();
-                                                    if(rate < 0 || rate > 10)
-                                                        System.out.println("Invalid rate!");
-                                                } while (rate >= 0 && rate <= 10);
+                                                float rate = inputChecker.GetValidRate("How do you rate this movie (0->10): ");
                                                 DataBase.getInstance().moviesData.getDataById(id).AddRate(user.getId(0), rate);
                                             }
                                         }
@@ -744,19 +736,11 @@ public class tmp {
                                                 choice = inputChecker.GetValidChoice("Chose what you want to do: ", validInput);
                                                 if(choice.equals("w")){
                                                     // rate episode
-                                                    System.out.print("Do you want to rate this episode? (y/n): ");
                                                     validInput = new String[]{"y", "n"};
-                                                    choice = inputChecker.GetValidChoice("", validInput);
+                                                    choice = inputChecker.GetValidChoice("Do you want to rate this series? (y/n): ", validInput);
                                                     if(choice.equals("y")) {
-                                                        float rate;
-                                                        do {
-                                                            System.out.println("How do you rate this episode (0->10): ");
-                                                            Scanner scanner = new Scanner(System.in);
-                                                            rate = scanner.nextFloat();
-                                                            if(rate < 0 || rate > 10)
-                                                                System.out.println("Invalid rate!");
-                                                        } while (rate >= 0 && rate <= 10);
-                                                        DataBase.getInstance().moviesData.getDataById(id).AddRate(user.getId(0), rate);
+                                                        float rate = inputChecker.GetValidRate("How do you rate this series (0->10): ");
+                                                        DataBase.getInstance().seriesData.getDataById(id).AddRate(user.getId(0), rate);
                                                     }
                                                 }
                                                 else

@@ -80,6 +80,30 @@ public class InputChecker {
         }while (true);
     }
 
+    public float GetValidRate(String ask){
+        Scanner input = new Scanner(System.in);
+        do {
+            System.out.print(ask);
+            String s = input.nextLine();
+            boolean check = true;
+            for (char i : s.toCharArray())
+            {
+                if ((i < '0' || i > '9') && i != '.')
+                {
+                    check = false;
+                    break;
+                }
+            }
+            if (check)
+            {
+                float rate =  Float.parseFloat(s);
+                if(rate >= 0 && rate <= 10)
+                    return rate;
+            }
+            System.out.println("Sorry, " + s + " is an Invalid input, Please try again");
+        }while(true);
+    }
+
     public CastMember InputActor (String actorFirstName, String actorLastName, String movieTitle)
     {
         String actorGender, actorNationality, actorSocialMediaLink;
