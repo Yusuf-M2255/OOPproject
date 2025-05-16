@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>search (1).png</file>
+        <file>message.png</file>
+        <file>more.png</file>
+        <file>status.png</file>
+    </qresource>
+</RCC>
